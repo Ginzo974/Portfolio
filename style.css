@@ -654,6 +654,64 @@ html:not(.is-inspect) .work-row:focus-visible .yr svg { opacity: 1; transform: n
 .peek-track { display: flex; flex-direction: column; height: 100%; transform: translateY(calc(var(--pi, 0) * -100%)); transition: transform var(--dur-3) var(--ease); }
 .peek-track > img { flex: none; display: block; width: 100%; height: 100%; object-fit: cover; }
 
+/* ============ Travaux en grille (édition brand) ============
+   work-list--grid (brand/index.html) : les mêmes boutons .work-row (ouverture,
+   clavier, entrée, mode Inspecter), posés en cartes. Trois colonnes calées sur
+   la grille de 12 (4 colonnes chacune), deux sous 1101 px, une sous 761 px.
+   Couverture 4:5, puis numéro, titre et « type · année ». Survol et focus : le
+   visuel grossit à peine, le titre s'élargit (--tw) et passe en accent ; sa
+   taille suit la carte (cqi) pour qu'à 118 il tienne encore sur sa ligne. */
+.work-head:has(+ .work-list--grid) { display: none; }
+.work-list--grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-group) var(--col-gap); border-top: 0; }
+.work-list--grid > li { min-width: 0; }
+.work-list--grid .work-row {
+  display: flex; flex-direction: column; align-items: stretch; gap: var(--s-4); height: 100%;
+  padding: 0; border: 0; border-radius: var(--r-md);
+  container-type: inline-size;
+}
+.work-list--grid .work-row::before { display: none; }
+.work-list--grid .card-cover { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; }
+.work-list--grid .card-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-3) var(--ease); }
+/* filet au-dessus du visuel, comme les vignettes : bord lisible quand la couverture a la couleur du fond */
+.work-list--grid .card-cover::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--line); pointer-events: none; }
+.work-list--grid .card-txt { display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; row-gap: var(--s-2); align-items: start; }
+.work-list--grid .work-row .n { grid-column: 1; grid-row: 1; align-self: start; padding-top: .55em; color: var(--ink-3); }
+/* 11,6 : largeur du plus long titre (« Du logo à la scène ») à la chasse 118, par pixel de corps, avec une marge */
+.work-list--grid .work-row .ttl { grid-column: 2 / -1; grid-row: 1; font-size: min(clamp(26px, 2.5vw, 40px), calc((100cqi - 32px) / 11.6)); }
+.work-list--grid .work-row .ttl:not([data-wrap]) { white-space: normal; }
+.work-list--grid .work-row .meta { grid-column: 2; grid-row: 2; color: var(--ink-2); transition: color var(--dur-2) var(--ease); }
+.work-list--grid .live-tag { grid-column: 3; grid-row: 2; margin: 0 0 0 var(--s-3); align-self: center; }
+/* focus clavier : l'anneau du site autour de la carte, et l'état survolé */
+html:not(.is-inspect) .work-list--grid .work-row:focus-visible { outline: 2px solid var(--accent-t); outline-offset: 6px; }
+html:not(.is-inspect) .work-list--grid .work-row:focus-visible .ttl { --tw: 118; color: var(--accent-t); transform: none; }
+html:not(.is-inspect) .work-list--grid .work-row:focus-visible .n { color: var(--accent-t); }
+html:not(.is-inspect) .work-list--grid .work-row:focus-visible .live-tag { color: var(--ink-2); }
+html:not(.is-inspect) .work-list--grid .work-row:focus-visible .live-tag > span { background: var(--accent-t); }
+html:not(.is-inspect) .work-list--grid .work-row:focus-visible .card-cover img { transform: scale(1.04); }
+@media (hover: hover) {
+  html:not(.lenis-scrolling):not(.is-inspect) .work-list--grid .work-row:hover .ttl { --tw: 118; color: var(--accent-t); transform: none; }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-list--grid .work-row:hover .n { color: var(--accent-t); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-list--grid .work-row:hover .live-tag { color: var(--ink-2); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-list--grid .work-row:hover .live-tag > span { background: var(--accent-t); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-list--grid .work-row:hover .card-cover img { transform: scale(1.04); }
+}
+/* au doigt : pendant l'appui, le titre passe en accent (pas de bande bleue) */
+@media (hover: none) {
+  .work-list--grid .work-row:active .ttl, .work-list--grid .work-row:active .n { color: var(--accent-t); }
+  .work-list--grid .work-row:active .live-tag { color: var(--ink-2); }
+}
+/* entrée : la couverture se découvre de haut en bas, juste après sa carte */
+.js .work-list--grid .card-cover { clip-path: inset(0 0 100% 0 round var(--r-md)); transition: clip-path var(--dur-4) var(--ease) calc(var(--d, 0ms) + 150ms); }
+.js .work-list--grid .work-row.is-in .card-cover { clip-path: inset(0 round var(--r-md)); }
+@media (max-width: 1100px) {
+  .work-list--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .work-list--grid { grid-template-columns: minmax(0, 1fr); gap: var(--block); }
+  .work-list--grid .work-row { gap: var(--s-3); }
+  .work-list--grid .card-txt { grid-template-columns: 30px minmax(0, 1fr) auto; }
+}
+
 /* ============ Fiche projet ============ */
 .case { position: fixed; inset: 0; z-index: 80; }
 .case[hidden] { display: none; }
@@ -1841,6 +1899,8 @@ html.is-fitting .mail-txt { --wb: 100 !important; }
   .hero-meta::after, .eyebrow::after { transform: scaleX(1) !important; }
   .name-photo { clip-path: none !important; }
   .work-row .thumb { clip-path: none !important; transform: none !important; }
+  .work-list--grid .card-cover { clip-path: none !important; }
+  .work-list--grid .card-cover img { transform: none !important; }
   .case-gallery .g-item, .case-next img { opacity: 1 !important; transform: none !important; }
   .name-photo img { --ps: 1 !important; }
 }
@@ -1920,6 +1980,17 @@ html.is-fitting .mail-txt { --wb: 100 !important; }
   .work-head:has(+ .work-list--thumbs) { display: none; }
   .work-list--thumbs .work-row { grid-template-columns: 8mm minmax(0, 1fr) 94mm; grid-template-rows: none; }
   .work-list--thumbs .work-row > .meta { margin: 0; }
+  /* grille (édition brand) : la même liste que la version au doigt, sans couvertures */
+  .work-head:has(+ .work-list--grid) { display: none !important; }
+  .work-list--grid { display: block; border-top: 1px solid var(--ink); }
+  .work-list--grid .card-cover { display: none; }
+  .work-list--grid .work-row { display: grid; grid-template-columns: 8mm minmax(0, 1fr) 94mm auto; border-bottom: 1px solid var(--line); border-radius: 0; height: auto; container-type: normal; }
+  .work-list--grid .card-txt { display: contents; }
+  .work-list--grid .card-txt > * { grid-column: auto !important; grid-row: auto !important; }
+  .work-list--grid .work-row .n { padding: 0; align-self: baseline; color: var(--ink-2); }
+  .work-list--grid .work-row .ttl { font-size: 12pt; }
+  .work-list--grid .work-row .meta { margin: 0; color: var(--ink-2); }
+  .work-list--grid .live-tag { margin: 0; }
 
   /* méthode : la note et les trois contextes à gauche, le code généré à droite */
   .method .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 70mm; grid-template-rows: auto auto 1fr; column-gap: 6mm; align-items: start; }

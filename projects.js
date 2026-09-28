@@ -7,7 +7,8 @@
    animée (anim) a son image fixe (poster) : c’est elle qu’on voit d’abord, et
    la seule en mouvement réduit.
    À tenir à jour avec index.html, section Travaux : le titre (« Huit projets »),
-   la note et la liste de secours du noscript. */
+   la note et la liste de secours du noscript ; de même pour
+   brand/index.html (« Neuf projets »). only : projet réservé à une édition. */
   // image : nom de fichier sans largeur, dimensions de la plus grande, largeurs disponibles, alternative
   const im = (src, w, h, widths, alt, more) => Object.assign({ src, w, h, widths, alt }, more);
   const D = [800, 1600], M = [390, 780];
@@ -306,7 +307,46 @@ window.PROJECTS = [
       { layout: 'full', caption: 'L’affichage', items: [
         im('11-affichage', 1600, 1200, D, "Panneau d’affichage extérieur orange : « HMMMM... MEOOW! » et le chat noir qui regarde par-dessus le bord.")] }
     ]
+  },
+  {
+    id: 'les-dieux',
+    only: 'brand',
+    title: 'LES DIEUX',
+    kind: 'Rebranding et packaging',
+    role: 'Logo · Packaging',
+    year: '2025',
+    tools: 'Photoshop, Illustrator, Figma',
+    link: 'https://www.behance.net/gallery/216527627/REBRANDING-LES-DIEUX',
+    linkLabel: 'Voir sur Behance',
+    cover: { w: 800, tint: '#004f7f' },
+    hero: { type: 'image', ...im('01-logo', 1600, 900, D, "Logo Les Dieux : le nom en lettres blanches hautes et étroites, avec une sardine à côté de « Les », dans une couronne de sardines bleu clair, sur un fond bleu à motif de colonnes grecques, de rameaux et d’étoiles.") },
+    pitch: "Un rebranding pour Les Dieux, une marque de sardines en boîte : un nouveau logo autour d’une sardine, et des boîtes plus modernes pour ses trois recettes. Un projet d’école, en première année de mastère à l’ESD.",
+    facts: [['Contexte', 'Projet d’école, 1re année de mastère à l’ESD'], ['Gamme', 'Naturel, à l’olive, au piment'], ['Livrables', 'Logo, déclinaisons, packaging'], ['Outils', 'Photoshop, Illustrator, Figma']],
+    cols: [
+      ['Le brief', "La marque veut se redonner une image en renouant avec ses origines grecques et son attachement à la mer. La demande : un nouveau logo centré sur une sardine, et des boîtes modernes pour ses trois recettes phares, au naturel, à l’olive et au piment."],
+      ['Ce que montre le projet', "Le logo, un nom en lettres hautes et étroites dans une couronne de sardines, décliné en trois couleurs : jaune, bleu clair et rouge. Puis les trois boîtes, bleue pour la sardine au naturel, verte pour l’olive, rouge pour le piment."],
+      ['Les choix de design', "Un motif bleu sur bleu de colonnes grecques, de rameaux, d’étoiles et de volutes sert de fond au logo et recouvre le couvercle des boîtes. La sardine est partout : dans le nom, et en couronne autour de lui."]
+    ],
+    gallery: [
+      { layout: 'inset', caption: 'Le brief', items: [
+        im('02-brief', 1600, 938, D, "Panneau « Le brief » sur fond bleu : « Les Dieux souhaitent se redonner une nouvelle image de marque en renouant avec leurs origines grecques et leur attachement à la mer. À travers la création d’un nouveau logo, centré sur une sardine emblématique, et des designs de boîtes modernes pour leurs trois recettes phares : “naturel”, “à l’olive” et “au piment”. La marque ambitionne de réaffirmer son authenticité, sa filière de pêche locale, et son engagement en faveur de la modernité et de la tradition. »")] },
+      { layout: 'full', caption: 'Le logo en trois couleurs', items: [
+        im('03-logos', 1600, 558, D, "Le logo Les Dieux en trois versions sur fond bleu nuit : le nom en blanc dans une couronne de sardines jaune, puis bleu clair, puis rouge.")] },
+      { head: 'Les boîtes' },
+      { layout: 'full', caption: 'La sardine au naturel', items: [
+        im('04-boite-naturel', 1600, 828, D, "Boîte de sardines bleue, inclinée sur un fond bleu : couvercle au motif grec, anneau d’ouverture bleu clair, logo Les Dieux au centre, mentions « La sardine » et « Au naturel. »")] },
+      { layout: 'pair', caption: 'À l’olive, puis au piment', items: [
+        im('05-boite-olive', 960, 720, [800, 960], "Boîte de sardines verte sur un fond jaune, avec un anneau d’ouverture et un logo dorés, et les mentions « La sardine » et « À l’olive. »"),
+        im('06-boite-piment', 960, 720, [800, 960], "Boîte de sardines rouge sur un fond rouge foncé, avec le logo Les Dieux et les mentions « La sardine » et « Au piment. »")] }
+    ]
   }
 ];
+
+/* Ordre par édition (data-edition sur <html>, main.js). Sans ordre, l’édition
+   montre les projets sans « only » et ceux réservés à l’édition, dans
+   l’ordre ci-dessus. Édition « brand » : /brand/index.html. */
+window.PROJECT_ORDER = {
+  brand: ['lco', 'pop-mart-bumi', 'meoow', 'les-dieux', 'one-piece', 'livre-blanc', 'lezgo', 'wei', 'quasar']
+};
 
 })();

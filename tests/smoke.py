@@ -761,8 +761,8 @@ with sync_playwright() as p:
           return [Math.max(...[...document.querySelectorAll('.timeline time')].map(t => Math.abs(t.getBoundingClientRect().right - c[4].right))),
                   Math.abs(rail.left + rail.width / 2 - c[5].left), Math.abs(document.querySelector('.kit-table').getBoundingClientRect().left - c[4].left),
                   document.querySelector('.cv-card').getBoundingClientRect().right <= document.querySelector('.timeline').getBoundingClientRect().left]; })()""")
-        cv = pg.evaluate("""(() => { const c = document.querySelector('.cv-card'), t = c.querySelector('a.cv-thumb'), d = [...c.querySelectorAll('a')].find(a => a.textContent.trim().startsWith('Télécharger'));   // A3: the name adds (PDF, 339 Ko) in sr-only
-          return [t.target, t.hasAttribute('download'), !!d && d.hasAttribute('download'), c.querySelector('.cv-meta').textContent.includes('PDF · 1 page · 339 Ko'), document.querySelectorAll('.chips, .kit-skills').length]; })()""")
+        cv = pg.evaluate("""(() => { const c = document.querySelector('.cv-card'), t = c.querySelector('a.cv-thumb'), d = [...c.querySelectorAll('a')].find(a => a.textContent.trim().startsWith('Télécharger'));   // A3: the name adds (PDF, 327 Ko) in sr-only
+          return [t.target, t.hasAttribute('download'), !!d && d.hasAttribute('download'), c.querySelector('.cv-meta').textContent.includes('PDF · 1 page · 327 Ko'), document.querySelectorAll('.chips, .kit-skills').length]; })()""")
         ok = got == want and g[0] <= 2 and g[1] <= 2 and g[2] <= 2 and g[3] and cv == ['_blank', False, True, True, 0]
         return ok, f'dates ok={got == want} geo(time,rail,kit dev; cv clear)={[round(x, 2) if not isinstance(x, bool) else x for x in g]} cv={cv}'
     check('P9v 1440: CV-exact dates (no-break spaces), timeline and kit on the 12-col grid, CV card links', p9v_path)

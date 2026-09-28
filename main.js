@@ -10,7 +10,15 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   const noHover = matchMedia('(hover: none)');
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const pad = n => String(n).padStart(2, '0');
-  const PROJECTS = window.PROJECTS || [];
+  /* Deux éditions, un seul code : « ux » (racine) et « brand » (/brand/, data-edition
+     sur <html>). data-root : préfixe des chemins d'images (« / » depuis /brand/).
+     Ordre : window.PROJECT_ORDER[édition] s'il existe (projects.js), sinon les
+     projets sans « only », ou réservés à cette édition, dans l'ordre du fichier. */
+  const EDITION = root.dataset.edition || 'ux';
+  const ROOT = root.dataset.root || '';
+  const ALL = window.PROJECTS || [];
+  const ORDER = (window.PROJECT_ORDER || {})[EDITION];
+  const PROJECTS = ORDER ? ORDER.map(id => ALL.find(p => p.id === id)).filter(Boolean) : ALL.filter(p => !p.only || p.only === EDITION);
   // une seule famille d'icônes : flèches de 14 × 14 au trait de 1,5 px (style.css, .ic)
   const ICON_PATHS = { out: 'M3 11 11 3M5 3h6v6', left: 'M13 7H1.5M6.5 2 1.5 7l5 5', right: 'M1 7h11.5M7.5 2l5 5-5 5', up: 'M7 13V1.5M2 6.5l5-5 5 5' };
   const icon = k => `<svg class="ic ${k}" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="${ICON_PATHS[k]}"/></svg>`;
@@ -25,14 +33,17 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   // titres affichés : « WEI & GO » et « e-sport » ne se coupent pas (espaces
   // insécables, gluon après le trait d'union). Pas dans les noms lus ni partagés
   const glue = s => s.replace(/ & /g, '\u00a0&\u00a0').replace(/-/g, '-\u2060');
-  list.classList.toggle('work-list--thumbs', touchList);
+  // grille de cartes (édition brand, classe posée dans le HTML) : ni aperçu au
+  // curseur, ni vignettes au doigt, ni ajustement des titres
+  const gridList = list.classList.contains('work-list--grid');
+  list.classList.toggle('work-list--thumbs', touchList && !gridList);
 
   /* Images des projets (projects.js) : WebP dans assets/projects/<id>/, un
      fichier par largeur (« <nom>-<largeur>.webp »). width et height donnent le
      ratio avant le chargement (pas de décalage de mise en page). */
   const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const plain = s => String(s).replace(/<[^>]*>/g, '');   // libellé HTML -> texte (aria-label)
-  const dirOf = p => `assets/projects/${p.id}/`;
+  const dirOf = p => `${ROOT}assets/projects/${p.id}/`;
   const srcsetOf = (p, m) => m.widths.map(w => `${dirOf(p)}${m.src}-${w}.webp ${w}w`).join(', ');
   const srcOf = (p, m) => `${dirOf(p)}${m.src}-${m.widths[0]}.webp`;
   // eager : le visuel du haut de la fiche, seul chargé tout de suite ; tout le reste attend le défilement
@@ -40,11 +51,25 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   // couverture en 4:5 (aperçu, vignettes, projet suivant) : décorative, le titre est écrit à côté
   const coverSet = p => [200, 400, p.cover.w].map(w => `${dirOf(p)}cover-${w}.webp ${w}w`).join(', ');
   const coverImg = (p, sizes, extra = '') => `<img src="${dirOf(p)}cover-400.webp" srcset="${coverSet(p)}" sizes="${sizes}" width="800" height="1000" alt="" decoding="async" style="background-color:${p.cover.tint}"${extra}>`;
+  const liveTag = p => p.tag === 'Live' ? '<span class="live-tag"><span aria-hidden="true"></span>en ligne</span>' : '';
+  // carte de la grille : couverture 4:5 (décorative), numéro, titre, « type · année »,
+  // et la mention « en ligne » au bout de cette ligne (le titre garde toute la largeur)
+  const card = (p, i) => `
+    <li><button class="work-row" type="button" data-i="${i}" style="--d:${(i % 3) * 80}ms">
+      <span class="card-cover" aria-hidden="true">${coverImg(p, '(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 40px), min(calc(33vw - 40px), 540px)', ' loading="lazy"')}</span>
+      <span class="card-txt">
+        <span class="n mono" aria-hidden="true">${pad(i + 1)}</span>
+        <span class="ttl">${glue(p.title)}</span>
+        <span class="meta mono"><span>${p.kind}</span><span class="sep"> · </span><span class="meta-yr">${p.year}</span></span>${liveTag(p)}
+      </span>
+      <span class="sr-only"> Ouvrir la fiche</span>
+    </button></li>`;
   // nom de la ligne : son texte visible, puis « Ouvrir la fiche » (WCAG 2.5.3)
-  if (PROJECTS.length) list.innerHTML = PROJECTS.map((p, i) => `
+  if (PROJECTS.length && gridList) list.innerHTML = PROJECTS.map(card).join('');
+  else if (PROJECTS.length) list.innerHTML = PROJECTS.map((p, i) => `
     <li><button class="work-row" type="button" data-i="${i}" style="--d:${(i % 4) * 70}ms">
       <span class="n mono" aria-hidden="true">${pad(i + 1)}</span>
-      <span class="ttl">${glue(p.title)}${p.tag === 'Live' ? '<span class="live-tag"><span aria-hidden="true"></span>en ligne</span>' : ''}</span>
+      <span class="ttl">${glue(p.title)}${liveTag(p)}</span>
       ${touchList
         ? `<span class="meta mono"><span>${p.kind}</span><span class="sep"> · </span><span class="meta-yr">${p.year}</span></span>
       <span class="thumb" aria-hidden="true">${coverImg(p, '(max-width: 760px) 56px, 96px', ' loading="lazy"')}</span>`
@@ -460,7 +485,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
      du survol tiennent dans sa colonne devient --tw-max (entier, 90 à 118 ;
      style.css). Un titre trop long même au repos garde le retour à la ligne. */
   function fitTitles() {
-    if (touchList) return;
+    if (touchList || gridList) return;
     $$('.work-row .ttl', list).forEach(t => {
       t.style.removeProperty('--tw-max');
       t.style.whiteSpace = 'nowrap';
@@ -496,7 +521,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
     return a && a.classList.contains('work-row') && a.matches(':focus-visible') ? a : null;
   };
   if (fine) {
-    $('#travaux').addEventListener('pointerenter', buildTrack, { once: true });
+    if (!gridList) $('#travaux').addEventListener('pointerenter', buildTrack, { once: true });
     // 150 ms sur une ligne (ou le focus) : le visuel du haut de sa fiche se charge, l'ouverture est immédiate
     let heroT = 0;
     list.addEventListener('pointerover', e => {
@@ -505,6 +530,9 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
       if (row) heroT = setTimeout(() => preloadHero(+row.dataset.i), 150);
     });
     list.addEventListener('focusin', e => { const row = e.target.closest('.work-row'); if (row) preloadHero(+row.dataset.i); });
+  }
+  // aperçu au curseur : liste seulement (la grille montre déjà ses couvertures)
+  if (fine && !gridList) {
     list.addEventListener('pointerover', e => {
       const row = e.target.closest('.work-row');
       if (row && row !== peekMuted) peekMuted = null;
@@ -541,7 +569,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   /* ---------- Au doigt : la ligne au centre de l'écran ----------
      La ligne qui traverse la bande centrale (8 % de la hauteur) depuis
      120 ms est mise en avant, une seule à la fois. */
-  if (touchList) {
+  if (touchList && !gridList) {
     const band = new Set();
     let focusRow = null, dwell = 0;
     const pick = () => {
