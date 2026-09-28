@@ -454,7 +454,7 @@ with sync_playwright() as p:
     ctx, pg = ctx_page(b)
     load(pg); pg.wait_for_timeout(2600)
     def p5v_live_head():
-        # live links: hover (fine pointer) and keyboard focus draw the underline; head keeps no og:url/canonical, relative og:image, reminder comment; JSON-LD has no worksFor/url
+        # live links: hover (fine pointer) and keyboard focus draw the underline; head has og:url + canonical and an absolute og:image on the Vercel domain; JSON-LD url, no worksFor
         pg.locator('.live a').nth(0).hover(); pg.wait_for_timeout(600)
         hov = pg.evaluate("getComputedStyle(document.querySelectorAll('.live a')[0]).backgroundSize")
         pg.mouse.move(600, 300); pg.wait_for_timeout(100)
@@ -462,10 +462,10 @@ with sync_playwright() as p:
         foc = pg.evaluate("[document.activeElement.getAttribute('href'), getComputedStyle(document.activeElement).backgroundSize]")
         head = pg.evaluate("""(() => { const j = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent);
           return [!!document.querySelector('meta[property="og:url"], link[rel=canonical]'), document.querySelector('meta[property="og:image"]').content,
-                  'worksFor' in j || 'url' in j, document.head.innerHTML.includes('URL absolue de og:image')]; })()""")
-        ok = hov.startswith('100%') and foc == ['https://wei-go.fr', '100% 1px'] and head == [False, 'assets/og.jpg', False, True] and not pg.errs
+                  'worksFor' in j, j.url]; })()""")
+        ok = hov.startswith('100%') and foc == ['https://wei-go.fr', '100% 1px'] and head == [True, 'https://portfolio-quentin-louis.vercel.app/assets/og.jpg', False, 'https://portfolio-quentin-louis.vercel.app/'] and not pg.errs
         return ok, f'hover={hov} focus={foc} head(ogurl/canon, og:image, worksFor/url, comment)={head}'
-    check('P5v desktop: live link underline on hover and focus; head stays domain-free', p5v_live_head)
+    check('P5v desktop: live link underline on hover and focus; head points to the Vercel domain', p5v_live_head)
     ctx.close()
     def p5v_assets():
         # share card and icons: sizes, weight, opaque apple-touch-icon (iOS fills transparency with black)
