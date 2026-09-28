@@ -1,0 +1,1966 @@
+/* ============ Polices ============ */
+/* Auto-hébergées (licence OFL, fichiers et licences dans assets/fonts) : aucune requête
+   vers Google, rien qu’un bloqueur de pisteurs puisse couper, l’axe wdth partout. */
+@font-face { font-family: "Anybody"; src: url("assets/fonts/anybody-latin.woff2") format("woff2"); font-weight: 100 900; font-stretch: 50% 150%; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Anybody"; src: url("assets/fonts/anybody-latin-ext.woff2") format("woff2"); font-weight: 100 900; font-stretch: 50% 150%; font-style: normal; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Martian Mono"; src: url("assets/fonts/martian-mono-latin.woff2") format("woff2"); font-weight: 300 700; font-stretch: 75% 112.5%; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Martian Mono"; src: url("assets/fonts/martian-mono-latin-ext.woff2") format("woff2"); font-weight: 300 700; font-stretch: 75% 112.5%; font-style: normal; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+/* ============ Tokens ============ */
+/* « × » (1080 × 1920) : celui d'Anybody est un petit carré à mi-hauteur qui se
+   lit comme une puce ; ce seul caractère vient d'une police système. Même nom
+   de famille, déclaré après les fichiers d’Anybody : il passe devant pour U+00D7 seulement
+   (le mode Inspecter affiche toujours « Anybody ») ; sans police locale, rendu d'avant */
+@font-face { font-family: "Anybody"; src: local("Arial"), local("Helvetica Neue"), local("Helvetica"), local("Roboto"); font-weight: 100 900; font-stretch: 50% 150%; font-style: normal; unicode-range: U+00D7; }
+/* Largeur animée par les transitions CSS : entière, pour ne pas relancer
+   la mise en page de la police à chaque fraction de largeur */
+@property --tw { syntax: '<integer>'; inherits: false; initial-value: 100; }
+/* Survol des contrôles : libellé des boutons (Anybody, entier) et pastilles
+   mono (Martian Mono, 87,5 au repos) */
+@property --bw { syntax: '<integer>'; inherits: true; initial-value: 100; }
+@property --mw { syntax: '<number>'; inherits: true; initial-value: 87.5; }
+/* Largeurs liées au scroll : titres de section et ÉCRIVEZ-MOI */
+@property --swd { syntax: '<integer>'; inherits: true; initial-value: 86; }
+@property --wb { syntax: '<integer>'; inherits: true; initial-value: 100; }
+/* Couleurs du thème déclarées comme <color> (valeurs typées, lisibles en JS).
+   Le changement de thème est un fondu de toute la page (View Transitions, main.js) */
+@property --paper { syntax: '<color>'; inherits: true; initial-value: #09090b; }
+@property --paper-2 { syntax: '<color>'; inherits: true; initial-value: #121318; }
+@property --paper-3 { syntax: '<color>'; inherits: true; initial-value: #1c1e26; }
+@property --ink { syntax: '<color>'; inherits: true; initial-value: #eef1fb; }
+@property --ink-2 { syntax: '<color>'; inherits: true; initial-value: #9ba3bb; }
+@property --ink-3 { syntax: '<color>'; inherits: true; initial-value: #848ba2; }
+@property --ink-4 { syntax: '<color>'; inherits: true; initial-value: #5d647a; }
+@property --line { syntax: '<color>'; inherits: true; initial-value: rgba(238, 241, 251, .12); }
+@property --accent-t { syntax: '<color>'; inherits: true; initial-value: #7384ff; }
+@property --spec { syntax: '<color>'; inherits: true; initial-value: #7384ff; }
+
+/* Palette reprise du CV : bleu #233df4, marine #14244d. Noir par défaut. */
+:root {
+  --paper: #09090b;
+  --paper-2: #121318;
+  --paper-3: #1c1e26;
+  --ink: #eef1fb;
+  --ink-2: #9ba3bb;
+  --ink-3: #848ba2;       /* texte discret : AA sur les trois fonds */
+  --ink-4: #5d647a;       /* traits et repères seulement, jamais du texte */
+  --line: rgba(238, 241, 251, .12);
+  --accent: #233df4;      /* aplats, boutons */
+  --accent-t: #7384ff;    /* texte et traits accent sur fond noir */
+  --on-accent: #fff;
+  --spec: var(--accent-t);
+  --code-bg: #0c1233;
+
+  --r-2xs: 2px;          /* détails : poignées, repères de code */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  /* Typographie. Mono : deux tailles, micro (étiquettes, touches ; 11,5 px au
+     téléphone) et libellés. Anybody : --t-*, plus bas. Graisses : 400 texte,
+     600 UI, 700 h3, 780 titres et liste, 850 pour le nom et ÉCRIVEZ-MOI */
+  --mono-xs: 11px;
+  --mono-s: 12px;
+
+  /* Espacement : une seule échelle. Composants : --s-1 à --s-6 ; lignes sous
+     filet : --s-3 (tableaux denses) ou --gap-row ; groupes dans un bloc :
+     --gap-group ; titre de section -> contenu : --head-gap ; sous-blocs d'une
+     section : --block ; entre sections : --section */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --gap-row: clamp(16px, 1.6vw, 24px);
+  --gap-group: clamp(24px, 3vw, 48px);
+  /* hauteurs des contrôles : pastilles, petits contrôles, cibles, boutons */
+  --h-xs: 24px;
+  --h-s: 32px;
+  --h-m: 44px;
+  --h-l: 48px;
+  /* mouvement : couleur et opacité / survol avec déplacement / panneaux,
+     aperçu, voile, fiche / révélations, nom, titres */
+  --dur-1: .15s;
+  --dur-2: .3s;
+  --dur-3: .6s;
+  --dur-4: 1.1s;
+  /* tailles Anybody, exactes à 1440 px : UI 15, corps 17, intros 19, chapeaux 24,
+     accroche du contact 29 ; les titres d'affichage gardent leurs tailles. Après
+     l'espacement : le mode Inspecter lit 24 px comme --s-5, pas comme --t-lead */
+  --t-ui: 15px;
+  --t-body: 17px;
+  --t-intro: clamp(17px, 1.32vw, 19px);
+  --t-lead: clamp(20px, 1.667vw, 24px);
+  --t-kicker: clamp(20px, 2.014vw, 29px);
+
+  --gutter: clamp(16px, 2.2vw, 32px);
+  /* marges latérales : jamais sous l'encoche d'un téléphone tenu à l'horizontale */
+  --pad-l: max(var(--gutter), env(safe-area-inset-left, 0px));
+  --pad-r: max(var(--gutter), env(safe-area-inset-right, 0px));
+  --col-gap: clamp(12px, 1.6vw, 24px);
+  --max: 1680px;
+  --section: clamp(96px, 11vw, 176px);   /* espace entre sections */
+  --head-gap: clamp(40px, 5vw, 80px);    /* titre de section -> contenu */
+  --block: max(48px, calc(var(--section) / 2));   /* sous-blocs d'une section */
+  --topbar: 60px;
+  /* place prise par la barre du haut : sa hauteur, plus l'encoche d'un téléphone en portrait
+     (la barre descend sous la zone sûre, son contenu garde --topbar) */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --top-h: calc(var(--topbar) + var(--safe-t));
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+
+  --f-sans: "Anybody", ui-sans-serif, system-ui, sans-serif;
+  --f-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --paper: #f4f6ff;
+  --paper-2: #e9effd;
+  --paper-3: #dce4fa;
+  --ink: #14244d;
+  --ink-2: #434f78;
+  --ink-3: #58648b;
+  --ink-4: #8b96b6;
+  --line: rgba(20, 36, 77, .14);
+  --accent-t: #233df4;
+  --spec: #233df4;
+  --code-bg: #14244d;
+  color-scheme: light;
+}
+
+/* ============ Base ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; scrollbar-gutter: stable; -webkit-tap-highlight-color: transparent; }
+/* un élément atteint au clavier s'arrête sous la barre du haut (et, au téléphone,
+   au-dessus de la barre du bas). Les sauts d'ancre passent par goTo() : non concernés */
+html { scroll-padding-top: calc(var(--top-h) + var(--s-3)); }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: var(--t-body);
+  line-height: 1.5;
+  font-variation-settings: "wdth" 100;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+img { display: block; max-width: 100%; height: auto; }
+/* <picture> (WebP, JPEG en secours) ne fait pas de boîte : les règles des images restent celles de l'<img> */
+picture { display: contents; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; letter-spacing: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+/* code : la police mono du site (sinon la monospace du système, et sa taille réduite) */
+code { font: inherit; }
+pre, kbd, samp { font-family: inherit; font-size: inherit; }
+h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; padding: 0; }
+ol, ul { list-style: none; }
+::selection { background: var(--accent); color: var(--on-accent); }
+:focus-visible { outline: 2px solid var(--accent-t); outline-offset: 3px; border-radius: var(--r-xs); }
+/* cibles de focus posées par le script (section atteinte par un lien, titre de la fiche) : pas d'anneau */
+[tabindex="-1"]:focus-visible { outline: none; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* textes propres à l'appareil : au doigt (.only-touch) ou à la souris (.only-fine) */
+/* !important : ces utilitaires l'emportent sur le display du composant (kbd de la fiche…) */
+@media (hover: hover) { .only-touch { display: none !important; } }
+@media (hover: none) { .only-fine { display: none !important; } }
+
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad-r) 0 var(--pad-l); }
+.grid12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); }
+.mono {
+  font-family: var(--f-mono);
+  font-size: var(--mono-s);
+  line-height: 1.6;
+  letter-spacing: -.01em;
+  font-variation-settings: "wdth" 87.5;
+}
+.skip { position: absolute; left: 16px; top: -60px; z-index: 100; padding: var(--s-3) var(--s-4); border-radius: var(--r-sm); background: var(--accent); color: #fff; transition: top var(--dur-2) var(--ease); }
+.skip:focus { top: 12px; }
+.skip + .skip { left: calc(16px + var(--s-2)); }   /* second lien d'évitement : décalé, pour qu'on voie qu'il en suit un autre */
+
+/* ============ Icônes ============
+   Une seule famille : flèches de 14 × 14 (main.js, icon()), trait de 1,5 px à toutes
+   les tailles. 10 px dans le texte mono, 14 px dans les pastilles de 32 px, 16 px
+   dans les boutons de 48 px. Toujours aria-hidden : le texte dit où va le lien */
+.ic, svg.out, svg.down, .cv-dl svg { flex: none; }
+.ic path, svg.out path, svg.down path, .cv-dl svg path { fill: none; stroke: currentColor; stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.ic { display: inline-block; width: 10px; height: 10px; vertical-align: -.02em; }
+
+/* ============ Boutons ============ */
+/* Au survol ou au focus, le libellé s'élargit (axe wdth) et la flèche avance
+   de 3 px dans son sens. Le bouton garde la largeur de son état survolé
+   (min-width posé par main.js) : rien ne bouge autour. */
+/* hauteur minimale, libellé qui peut passer à la ligne : rien ne déborde quand
+   l'espacement du texte est forcé (WCAG 1.4.12) */
+.btn {
+  --h: var(--h-l);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  min-height: var(--h); padding: var(--s-1) var(--s-5); border-radius: var(--r-pill);
+  font-weight: 600; font-size: var(--t-ui); line-height: 1.25; letter-spacing: -.005em; white-space: normal;
+  overflow: hidden; isolation: isolate;
+  transition: color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), scale var(--dur-1) var(--ease);
+}
+.btn .lbl { font-variation-settings: "wdth" var(--bw); transition: --bw var(--dur-2) var(--ease); }
+.btn svg { width: 16px; height: 16px; flex: none; transition: transform var(--dur-2) var(--ease); }
+.btn--sm svg { width: 14px; height: 14px; }
+.btn:focus-visible .lbl { --bw: 112; }
+.btn:focus-visible svg.down { transform: translateY(3px); }
+.btn:focus-visible svg.right { transform: translateX(3px); }
+.btn:focus-visible svg.out { transform: translate(2px, -2px); }
+.btn::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  transform: translateY(101%); transition: transform var(--dur-3) var(--ease);
+}
+.btn--accent { background: var(--accent); color: #fff; }
+.btn--accent::before { background: var(--ink); }
+.btn--ghost { border: 1px solid var(--line); }
+.btn--ghost::before { background: var(--paper-3); }
+.btn--sm { --h: var(--h-s); padding: var(--s-1) var(--s-3); }
+@media (hover: hover) {
+  .btn--accent:hover { color: var(--paper); }
+  .btn:hover::before { transform: none; }
+  .btn:hover .lbl { --bw: 112; }
+  .btn:hover svg.down { transform: translateY(3px); }
+  .btn:hover svg.right { transform: translateX(3px); }
+  .btn:hover svg.out { transform: translate(2px, -2px); }
+}
+/* mesure de la largeur survolée (lockWidths, main.js) : .is-measure pose
+   l'état survolé, .is-still coupe les transitions le temps de la mesure et
+   du retour au repos, pour qu'aucune ne se lance */
+.is-measure { --mw: 100; }
+.is-measure .lbl { --bw: 112; }
+.is-still, .is-still .lbl { transition: none !important; }
+/* au doigt : un appui court et net, rien ne reste allumé après le tap */
+@media (hover: none) {
+  .btn:active { scale: .97; }
+  .btn:active .lbl { --bw: 106; }
+  .btn:active::before { transform: none; transition-duration: var(--dur-1); }
+}
+
+/* ============ Top bar ============ */
+.topbar { position: fixed; inset: 0 0 auto; z-index: 50; height: var(--top-h); padding-top: var(--safe-t); transition: transform var(--dur-3) var(--ease); }
+/* fiche ouverte : la barre du haut remonte (toutes largeurs), rien de l'interface
+   ne se voit au-dessus de la fiche. - 4 px : la barre de progression (2 px sous la barre) part aussi */
+.no-scroll .topbar { transform: translateY(calc(-100% - 4px)); }
+.topbar::before {
+  content: ""; position: absolute; inset: 0;
+  background: color-mix(in oklab, var(--paper) 80%, transparent);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  border-bottom: 1px solid var(--line);
+  opacity: 0; transition: opacity var(--dur-2) var(--ease);
+}
+.is-scrolled .topbar::before { opacity: 1; }
+/* sans script, rien ne pose is-scrolled : fond de barre toujours opaque, le texte ne passe jamais dessous à nu */
+html:not(.js) .topbar::before { opacity: 1; }
+.progress {
+  position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--accent-t); transform-origin: 0 50%; transform: scaleX(var(--p, 0));
+  opacity: 0; transition: opacity var(--dur-2) var(--ease);
+}
+.is-scrolled .progress { opacity: 1; }
+.topbar-in { position: relative; height: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.brand { justify-self: start; display: inline-flex; align-items: center; gap: var(--s-2); white-space: nowrap; font-weight: 780; font-size: var(--t-ui); letter-spacing: -.01em; font-variation-settings: "wdth" 112; }
+.brand-mark { width: 22px; height: 22px; border-radius: calc(var(--r-sm) - 2px); background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 780; font-variation-settings: "wdth" 120; transition: transform var(--dur-3) var(--ease); }
+
+.nav { position: relative; display: flex; gap: 2px; padding: 3px; border-radius: var(--r-pill); }
+/* liens en liste (RGAA 9.3) : la liste reprend la rangée et l'écart de la barre */
+.nav-list { display: flex; gap: inherit; margin: 0; padding: 0; list-style: none; }
+.nav-list > li { display: flex; }
+.nav a {
+  position: relative; z-index: 1;
+  font-family: var(--f-mono); font-size: var(--mono-s); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5;
+  /* pilule : 3 + 26 + 3 = --h-s */
+  display: flex; align-items: center; height: calc(var(--h-s) - 6px); padding: 0 var(--s-3); border-radius: var(--r-pill); color: var(--ink-2);
+  transition: color var(--dur-2) var(--ease);
+}
+.nav a.is-active { color: var(--ink); }
+/* pastille : glisse d’un lien à l’autre (bords gauche et droit, élément absolu sans
+   enfant : seule sa boîte se recalcule), coins arrondis par la découpe (clip-path) */
+.nav-ind {
+  position: absolute; top: 3px; bottom: 3px; left: 0; right: 100%;
+  background: var(--paper-3); opacity: 0;
+  clip-path: inset(0 0 0 0 round var(--r-pill));
+  transition: left var(--dur-3) var(--ease-in-out), right var(--dur-3) var(--ease-in-out), clip-path var(--dur-3) var(--ease-in-out), opacity var(--dur-2) var(--ease-in-out);
+}
+.tools { justify-self: end; display: flex; align-items: center; gap: var(--s-2); }
+
+.inspect-btn {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  height: var(--h-s); padding: 0 var(--s-1) 0 var(--s-3);   /* la touche (24 px) à 4 px du bord : même centre que la pilule */
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  font-family: var(--f-mono); font-size: var(--mono-s); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5;
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
+}
+.inspect-btn .dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--ink-4); transition: all var(--dur-2) var(--ease); }
+.inspect-btn kbd, .case-bar kbd, .keys kbd, .foot-keys kbd {
+  font-family: inherit; font-size: var(--mono-xs); letter-spacing: -.01em;
+  min-width: var(--h-xs); height: var(--h-xs); padding: 0 var(--s-2);
+  display: inline-grid; place-items: center;
+  border-radius: var(--r-xs); background: var(--paper-2); color: var(--ink-2);
+}
+.inspect-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.inspect-btn[aria-pressed="true"] .dot { background: #fff; border-color: #fff; }
+.inspect-btn[aria-pressed="true"] kbd { background: rgba(255,255,255,.18); color: #fff; }   /* 4,88:1, même voile que la pastille au doigt */
+
+.theme-btn { width: var(--h-s); height: var(--h-s); border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: border-color var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease); }
+.theme-btn span { width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(90deg, var(--ink) 50%, transparent 50%); border: 1.5px solid var(--ink); transition: transform var(--dur-3) var(--ease-in-out); }
+@media (hover: hover) {
+  .brand:hover .brand-mark { transform: rotate(-90deg); }
+  .nav a:hover { color: var(--ink); }
+  .inspect-btn:hover, .theme-btn:hover { border-color: var(--ink-4); }
+  .theme-btn:hover span { transform: rotate(180deg); }
+}
+/* fenêtre étroite à la souris (320 px : zoom à 400 %) : « Inspecter » réduit à sa
+   pastille, un rond de 32 px comme le thème, pour que les trois outils restent dans
+   l'écran. Le libellé reste lu (nom accessible), le title sert d'infobulle */
+@media (max-width: 460px) {
+  .inspect-btn { position: relative; width: var(--h-s); padding: 0; justify-content: center; }
+  .inspect-btn .lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .inspect-btn kbd { display: none; }
+}
+
+/* Barre de navigation mobile */
+.dock { display: none; }
+
+/* ============ Hero ============ */
+.hero {
+  position: relative;
+  /* écrans hauts (tablette en portrait) : le hero s'arrête à la hauteur de sa composition */
+  min-height: min(100svh, calc(31vw + 540px));
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: calc(var(--top-h) + var(--s-5)) 0 var(--gap-group);
+}
+.hero-meta {
+  position: relative;
+  display: flex; justify-content: space-between; gap: var(--s-4); flex-wrap: wrap;
+  color: var(--ink-2);
+  padding-bottom: var(--s-3);
+  margin-bottom: var(--gap-row);
+}
+/* filet sous les métadonnées : tracé depuis la gauche à l'entrée */
+.hero-meta::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--line); transform-origin: 0 50%; }
+.js .hero-meta > * { opacity: 0; }
+.js .hero-meta::after { transform: scaleX(0); }
+.is-named .hero-meta > * { opacity: 1; transition: opacity var(--dur-2) var(--ease); }
+.is-named .hero-meta::after { transform: scaleX(1); transition: transform var(--dur-4) var(--ease); }
+.status { display: inline-flex; align-items: center; gap: var(--s-2); color: var(--ink); }
+.status > span { width: 7px; height: 7px; border-radius: var(--r-2xs); transform: rotate(45deg); background: var(--accent-t); animation: none; }
+
+.hero .wrap, .contact .wrap { container-type: inline-size; }
+/* Le nom est caché jusqu'à son entrée : le texte avant découpage et le passage
+   de la police de secours à Anybody ne se voient pas. La fiche candidat,
+   l'accroche et les boutons s'affichent dès la première image, sans attendre
+   main.js ni la police (ce sont eux que le visiteur lit en premier). */
+.js .hero .name { visibility: hidden; }
+.is-named .hero .name { visibility: visible; }
+.name {
+  font-weight: 850;
+  font-size: var(--fs, 15vw);           /* ajusté en JS pour remplir la largeur */
+  font-size: var(--fs, 21.68cqi);       /* avant le JS : même rapport (ajusté sur l'encre), mesuré dans Edge */
+  line-height: .8;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  user-select: none;
+}
+.name-lines { display: block; }   /* les deux lignes visuelles, cachées aux lecteurs d'écran */
+.name-line {
+  display: flex; align-items: baseline; white-space: nowrap;
+  position: relative; overflow: hidden;       /* repère des centres de lettres (JS) */
+  padding: .06em 0 .09em; margin: -.06em 0 -.09em;  /* laisse respirer la queue du Q */
+  contain: layout paint;
+  will-change: transform;
+}
+.name-line + .name-line { margin-top: -.07em; }
+/* ligne de base de LOUIS -> filet de la fiche candidat : --gap-row, comme du filet
+   des métadonnées aux capitales (.215em : ce que la boîte garde sous la ligne de base) */
+.name-line--2 { margin-bottom: calc(var(--gap-row) - .215em); }
+/* alignement optique (main.js) : QUENTIN est ajusté sur son dessin, la ligne recule
+   de l'approche du Q et déborde de celle du N ; .05em de plus à droite, que la ligne
+   garde visibles, pour l'étirement au curseur. LOUIS partage la taille : seule
+   l'approche du S sort de la colonne. Valeurs par défaut : mesures d'Anybody 850 */
+.name-line--1 { padding-right: .05em; margin-left: calc(-1 * var(--lsb, .02em)); margin-right: calc(-1 * var(--rsb, .03em) - .05em); }
+.name-line--2 { margin-right: calc(-1 * var(--rsb2, .0135em)); max-width: var(--l1w, none); }
+.name-word { display: flex; }
+.name .ch { display: inline-block; font-variation-settings: "wdth" var(--w, 100); }
+/* Entrée (depuis is-named) : QUENTIN à 80 ms, LOUIS à 380 ms, 35 ms entre deux lettres.
+   Départ à 100% + .3em : aucun bout de lettre ne dépasse sous le masque. */
+.name-line--1 { --d0: 80ms; }
+.name-line--2 { --d0: 380ms; }
+.js .name .ch { transform: translateY(calc(100% + .3em)); }
+.is-named .name .ch { transform: none; transition: transform var(--dur-4) var(--ease) calc(var(--d0) + var(--i) * 35ms); }
+
+/* La photo occupe l'espace libre à gauche de LOUIS, à la hauteur des capitales :
+   LOUIS garde la même largeur de repos que QUENTIN. Image panoramique (3,25:1, fond
+   prolongé sans raccord) : le bandeau, moins large, ne coupe que du fond, jamais la tête. */
+.name-photo {
+  position: relative; flex: 1 1 auto; min-width: 0;
+  height: var(--cap, .7em);
+  margin-right: .1em;
+  --ph-r: clamp(6px, .06em, 16px);
+  border-radius: var(--ph-r); overflow: hidden;
+  background: #e7edfe;   /* fond de la photo */
+  container-type: size;
+}
+/* thème clair : le fond de la photo (#e7edfe) touche presque la page, un filet dessine le bandeau.
+   Posé au-dessus de l'image (une ombre intérieure du bandeau passerait dessous) */
+:root[data-theme="light"] .name-photo::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--line); pointer-events: none; }
+.js .name-photo { clip-path: inset(0 0 0 100% round var(--ph-r)); }
+.is-named .name-photo { clip-path: inset(0 0 0 0 round var(--ph-r)); transition: clip-path var(--dur-4) var(--ease) var(--dur-2); }
+.name-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%;
+  transform: scale(var(--ps, 1)); transform-origin: 50% 60%;
+}
+/* bandeau plus étiré que l'image (téléphone à l'horizontale) : image entière, même fond autour */
+@container (min-aspect-ratio: 13 / 4) {
+  .name-photo img { object-fit: contain; object-position: 50% 100%; }
+}
+.js .name-photo img { --ps: 1.12; }
+.is-named .name-photo img { --ps: 1; transition: transform 1.6s var(--ease) var(--dur-2); }
+.name-photo-tag {
+  position: absolute; left: .7rem; bottom: .6rem;
+  display: inline-flex; align-items: center; height: var(--h-xs);
+  font-size: var(--mono-xs); line-height: 1; color: #14244d; letter-spacing: -.01em; text-transform: none; font-weight: 500;
+  padding: 0 var(--s-2); border-radius: var(--r-pill); background: rgba(255,255,255,.72);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+/* bandeau bas (téléphone à l'horizontale) : l'étiquette cacherait le visage */
+@container (max-height: 80px) {
+  .name-photo-tag { display: none; }
+}
+
+.meta-clocks { display: inline-flex; gap: var(--s-2); align-items: baseline; }
+.meta-clocks b { font-weight: 500; color: var(--ink); }
+.meta-clocks .meta-sep { color: var(--ink-3); }
+
+/* Fiche candidat : les réponses au premier tri d'un recruteur, sous le nom */
+.brief { row-gap: var(--s-3); margin-top: 0; }   /* écart au nom : marge du bas de LOUIS */
+.brief-cell { grid-column: span var(--span, 2); border-top: 1px solid var(--line); padding-top: var(--s-3); }
+.brief-cell:nth-child(2), .brief-cell:nth-child(3) { --span: 3; }   /* les deux réponses les plus longues ; Formation reste en colonne 9, comme les boutons */
+.brief dt { color: var(--ink-3); font-size: var(--mono-s); }
+.brief dd { margin-top: var(--s-1); font-size: var(--t-ui); font-weight: 600; font-variation-settings: "wdth" 100; line-height: 1.35; color: var(--ink); }
+
+.hero-foot { margin-top: var(--gap-group); align-items: end; row-gap: var(--s-5); }   /* serré : à 1440 × 900, tout le hero tient dans l'écran */
+.lede {
+  grid-column: 1 / span 7;
+  font-size: var(--t-lead);
+  line-height: 1.25;
+  letter-spacing: 0;
+  font-weight: 400;
+  font-variation-settings: "wdth" 96;
+  max-width: 31em;   /* 7 colonnes, 70 signes par ligne au plus (1440 px et plus larges) */
+  text-wrap: pretty;
+}
+/* écrans peu hauts (1366 × 768, 1536 × 864) : les boutons et « En ligne » restent dans le premier écran */
+@media (min-width: 761px) and (max-height: 800px) {
+  .hero-foot { margin-top: var(--gap-row); }
+}
+/* fiche candidat de 761 à 1439 px : chaque réponse tient sur une ligne. Jusqu'à
+   1100 px, Poste et Disponibilité sur une rangée, les trois autres dessous (cinq
+   cellules d'une rangée y couperaient trois réponses) ; l'accroche prend alors
+   8 colonnes, comme les boutons, une ligne de moins. Plus large, la chasse se
+   resserre juste assez pour les cinq cellules d'une rangée (1101 px : 157 px dans 160) */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .brief-cell:nth-child(n) { --span: 4; }   /* :nth-child(n) : passe devant la règle des colonnes 2 et 3 */
+  .brief-cell:nth-child(-n+2) { --span: 6; }
+  .lede { grid-column: 1 / span 8; }
+}
+@media (min-width: 1101px) and (max-width: 1439px) {
+  .brief dd { font-variation-settings: "wdth" 88; }
+}
+/* colonne de droite calée sur la grille : colonnes 9 à 12 */
+.hero-side { grid-column: 9 / -1; display: grid; gap: var(--s-4); align-self: end; }
+.cta-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--col-gap); justify-self: stretch; }
+.cta-row .btn { justify-content: space-between; }
+/* les trois sites en ligne, à un clic */
+.live { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-3); color: var(--ink-3); }
+.live-list { display: flex; flex-wrap: wrap; gap: inherit; margin: 0; padding: 0; list-style: none; }
+.live-list > li { display: flex; }   /* le lien reste un élément flex : sa largeur verrouillée (lockWidths, main.js) s'applique */
+.live a { color: var(--ink); font-variation-settings: "wdth" var(--mw); background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size var(--dur-2) var(--ease), --mw var(--dur-2) var(--ease); }
+.live .ic { margin-left: var(--s-1); }   /* à la place de l'espace : la rangée tient sur une ligne (4 colonnes à 1366 px) */
+.live a:focus-visible { background-size: 100% 1px; --mw: 100; }
+@media (hover: hover) { .live a:hover { background-size: 100% 1px; --mw: 100; } }
+
+/* ============ Sections ============ */
+main > section { position: relative; }
+.work, .method, .path { padding-top: var(--section); }
+.sec-head { align-items: end; row-gap: var(--s-4); margin-bottom: var(--head-gap); }
+.eyebrow { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--s-3); color: var(--ink-2); }
+.eyebrow b { font-weight: 500; color: var(--accent-t); }
+.eyebrow::after { content: ""; flex: 1; height: 1px; background: var(--line); transform-origin: 0 50%; transform: scaleX(1); }   /* scaleX(1) plutôt que none : pas de nouvelle mise en page */
+.js .eyebrow::after { transform: scaleX(0); transition: transform var(--dur-4) var(--ease) var(--dur-1); }
+.js .eyebrow.is-in::after { transform: scaleX(1); }
+.sec-title {
+  grid-column: 1 / span 8;
+  align-self: start;   /* note plus haute que le titre : le titre reste à 16 px du sur-titre */
+  font-size: clamp(44px, 6.6vw, 112px);
+  line-height: .9;
+  letter-spacing: -.035em;
+  font-weight: 780;
+  font-variation-settings: "wdth" 86;
+}
+.sec-note {
+  grid-column: 9 / -1; padding-bottom: .5em;   /* .5em : ligne de base côte à côte avec le titre */
+  font-family: var(--f-sans); font-size: var(--t-intro); line-height: 1.45; font-weight: 400;
+  font-variation-settings: "wdth" 100; letter-spacing: 0;
+  color: var(--ink-2); max-width: none;
+  text-wrap: balance;   /* calée sur la grille : des lignes de longueur égale, jamais un mot seul */
+}
+/* 1101 à 1279 px : le titre cède une colonne, la note garde des lignes de 40 signes et plus */
+@media (min-width: 1101px) and (max-width: 1279px) {
+  .sec-title { grid-column: 1 / span 7; }
+  .sec-note { grid-column: 8 / -1; }
+}
+
+/* ============ Travaux ============ */
+.work-head, .work-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: center; }
+.work-head { color: var(--ink-3); padding-bottom: var(--s-3); }
+.work-head span:nth-child(1), .work-row .n { grid-column: 1; }
+.work-head span:nth-child(2), .work-row .ttl { grid-column: 2 / span 6; }
+.work-head span:nth-child(3), .work-row .kind { grid-column: 8 / span 2; }
+.work-head span:nth-child(4), .work-row .role { grid-column: 10 / span 2; }
+.work-head span:nth-child(5), .work-row .yr { grid-column: 12; text-align: right; }
+.work-list { border-top: 1px solid var(--ink); }
+.work-list:empty { display: none; }   /* sans JS : seule la liste statique (noscript) s'affiche */
+.work-list--static a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
+/* liste de secours posée par main.js ou par le garde du <head> : visible sans l'entrée animée */
+.js .work-list--static .work-row { opacity: 1; transform: none; }
+.work-row {
+  position: relative; width: 100%; text-align: left;
+  padding: clamp(18px, 2vw, 28px) 0;   /* seule exception à l'échelle : la liste respire plus que --gap-row */
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+}
+.work-row::before {
+  content: ""; position: absolute; inset: 0 calc(var(--pad-r) * -1) 0 calc(var(--pad-l) * -1); z-index: -1;
+  background: var(--accent);
+  transform: scaleY(0); transform-origin: 50% 0;
+  transition: transform var(--dur-3) var(--ease);
+}
+/* la bande entre et sort par le bord que la souris a franchi (data-from, main.js) */
+.work-row[data-from="bottom"]::before { transform-origin: 50% 100%; }
+.work-row .n, .work-row .kind, .work-row .role, .work-row .yr { color: var(--ink-2); transition: color var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease); }
+.work-row .ttl {
+  font-size: clamp(28px, 3.8vw, 64px);
+  line-height: 1; font-weight: 780; letter-spacing: -.03em;
+  --tw: 90; font-variation-settings: "wdth" var(--tw);
+  text-wrap: balance;
+  transition: --tw var(--dur-3) var(--ease), color var(--dur-2) var(--ease), transform var(--dur-3) var(--ease);
+}
+/* à la souris, un titre reste sur une ligne : sa chasse au survol est bornée
+   par --tw-max (main.js), la liste ne bouge pas (data-wrap : trop long au repos) */
+@media screen and (hover: hover) and (min-width: 761px) {
+  .work-list:not(.work-list--thumbs) .ttl:not([data-wrap]) { white-space: nowrap; }
+}
+/* seule mention sur un titre : le site est en ligne */
+.live-tag {
+  display: inline-flex; align-items: center; gap: var(--s-2); vertical-align: top; margin: .3em 0 0 .6em;
+  font-style: normal; font-family: var(--f-mono); font-size: var(--mono-xs); font-weight: 400; letter-spacing: -.01em;
+  font-variation-settings: "wdth" 87.5; color: var(--ink-2);
+  transition: color var(--dur-2) var(--ease);
+}
+.live-tag > span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-t); transition: background-color var(--dur-2) var(--ease); }
+.work-row .yr { position: relative; transition: color var(--dur-2) var(--ease), padding var(--dur-3) var(--ease); }
+.work-row .yr svg { position: absolute; right: 0; top: 50%; translate: 0 -50%; width: 14px; height: 14px; opacity: 0; transform: translateX(-10px); transition: opacity var(--dur-2) var(--ease), transform var(--dur-3) var(--ease); }
+/* focus clavier : exactement l'état survolé. En mode Inspecter, ni bande ni
+   aperçu : la liste garde ses couleurs et l'anneau de focus ordinaire. */
+html:not(.is-inspect) .work-row:focus-visible::before { transform: scaleY(1); box-shadow: inset 0 0 0 2px rgba(255,255,255,.85); }
+/* l'anneau suit la bande pleine largeur ; transparent, il reste dessiné en contraste forcé */
+html:not(.is-inspect) .work-row:focus-visible { outline-color: transparent; }
+html:not(.is-inspect) .work-row:focus-visible .ttl, html:not(.is-inspect) .work-row:focus-visible .live-tag { color: #fff; }
+html:not(.is-inspect) .work-row:focus-visible .live-tag > span { background: #fff; }
+html:not(.is-inspect) .work-row:focus-visible .ttl { --tw: min(118, var(--tw-max, 118)); transform: translateX(.12em); }
+html:not(.is-inspect) .work-row:focus-visible .n, html:not(.is-inspect) .work-row:focus-visible .kind, html:not(.is-inspect) .work-row:focus-visible .role, html:not(.is-inspect) .work-row:focus-visible .yr { color: rgba(255,255,255,.78); }
+/* type et rôle s'effacent sous l'aperçu (colonnes 9 à 11) : liés à l'aperçu
+   (is-peeked, main.js), ils reviennent quand Échap le ferme */
+.work-row.is-peeked .kind, .work-row.is-peeked .role { opacity: 0; }
+html:not(.is-inspect) .work-row:focus-visible .yr { padding-right: var(--s-5); }
+html:not(.is-inspect) .work-row:focus-visible .yr svg { opacity: 1; transform: none; }
+/* pendant un défilement doux (Lenis), les lignes ne réagissent pas au survol :
+   la largeur animée relancerait la mise en page à chaque image du scroll */
+@media (hover: hover) {
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover::before { transform: scaleY(1); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .ttl, html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .live-tag { color: #fff; }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .live-tag > span { background: #fff; }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .ttl { --tw: min(118, var(--tw-max, 118)); transform: translateX(.12em); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .n, html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .kind, html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .role, html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .yr { color: rgba(255,255,255,.78); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .yr { padding-right: var(--s-5); }
+  html:not(.lenis-scrolling):not(.is-inspect) .work-row:hover .yr svg { opacity: 1; transform: none; }
+}
+/* Liste rendue pour le doigt (work-list--thumbs, main.js, quand le survol
+   n'existe pas) : numéro, titre, « type · année » et une vignette à droite.
+   La ligne au centre de l'écran (is-focus) passe en accent et sa vignette
+   grossit ; pendant l'appui (règles suivantes), le texte reste blanc. */
+/* rangées 1fr autour du texte : quand la vignette est plus haute, titre et
+   « type · année » restent groupés au milieu */
+.work-list--thumbs .work-row { --thumb-w: 96px; grid-template-columns: 30px 1fr var(--thumb-w); grid-template-rows: 1fr auto auto 1fr; row-gap: 0; }
+.work-list--thumbs .work-row .n { grid-column: 1; grid-row: 2; align-self: start; padding-top: .45em; }
+.work-list--thumbs .work-row .ttl { grid-column: 2; grid-row: 2; }
+.work-list--thumbs .work-row > .meta { grid-column: 2; grid-row: 3; margin-top: var(--s-2); color: var(--ink-2); transition: color var(--dur-2) var(--ease); }
+.work-list--thumbs .work-row .thumb {
+  grid-column: 3; grid-row: 1 / -1; align-self: center;
+  position: relative;
+  width: var(--thumb-w); aspect-ratio: 4 / 5; border-radius: var(--r-sm); overflow: hidden;
+}
+.work-list--thumbs .work-row .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* comme l'aperçu : un bord sur fond de même couleur (LEZGO, thème clair). Un contour
+   (outline) serait peint sous le visuel positionné : filet posé au-dessus */
+.work-list--thumbs .work-row .thumb::after, .peek-in::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--line); pointer-events: none;
+}
+.work-list--thumbs .is-focus .n, .work-list--thumbs .is-focus .live-tag { color: var(--accent-t); }
+.work-list--thumbs .is-focus .thumb { transform: scale(1.06); }
+/* au doigt : la bande bleue pendant l'appui ; pas d'en-tête de colonnes */
+@media (hover: none) {
+  .work-head { display: none; }
+  .work-row:active::before { transform: scaleY(1); transition-duration: var(--dur-1); }
+  .work-row:active .ttl, .work-row:active .n, .work-row:active > .meta, .work-row:active .live-tag { color: #fff; }
+}
+
+/* Aperçu (souris) : colonnes 9 à 11, en 4:5, face à la ligne. Largeur,
+   position et glissement vertical posés par main.js ; les visuels forment
+   une bande verticale qui défile d'un cran par ligne (--pi). */
+.peek {
+  position: fixed; left: 0; top: 0; z-index: 40;
+  aspect-ratio: 4 / 5;
+  pointer-events: none; translate: 0 -50%;
+}
+.peek-in {
+  width: 100%; height: 100%; border-radius: var(--r-md); overflow: hidden;
+  contain: paint; container-type: inline-size;
+  clip-path: inset(50% 50% 50% 50% round var(--r-md));
+  transition: clip-path var(--dur-3) var(--ease);
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,.5);   /* bord visible quand le visuel a la couleur du fond : ::after, voir les vignettes */
+}
+.peek.is-on .peek-in { clip-path: inset(0 0 0 0 round var(--r-md)); }
+/* bord de l'aperçu lisible sur la bande bleue : un filet couleur page, dans la découpe
+   (il s'ouvre avec le visuel), puis le filet des vignettes ; l'ombre, hors de la découpe,
+   arrive en fondu */
+.peek-in::after { box-shadow: inset 0 0 0 1px var(--paper), inset 0 0 0 2px var(--line); }
+.peek::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: var(--r-md);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, .6);
+  opacity: 0; transition: opacity var(--dur-1) var(--ease);
+}
+.peek.is-on::before { opacity: 1; transition: opacity var(--dur-3) var(--ease) var(--dur-1); }
+:root[data-theme="light"] .peek::before { box-shadow: 0 24px 48px -24px rgba(20, 36, 77, .25); }
+.peek-track { display: flex; flex-direction: column; height: 100%; transform: translateY(calc(var(--pi, 0) * -100%)); transition: transform var(--dur-3) var(--ease); }
+.peek-track > img { flex: none; display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* ============ Fiche projet ============ */
+.case { position: fixed; inset: 0; z-index: 80; }
+.case[hidden] { display: none; }
+/* en train de se fermer : les clics passent déjà à la page (une autre ligne peut rouvrir la fiche) */
+.case:not(.is-open) { pointer-events: none; }
+.case-scrim { position: absolute; inset: 0; background: rgba(4,5,10,.6); opacity: 0; transition: opacity var(--dur-3) var(--ease); }
+/* thème clair : voile marine (celui du CV), pas un gris sale sur le fond bleuté */
+:root[data-theme="light"] .case-scrim { background: rgba(20, 36, 77, .42); }
+.case-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; top: calc(var(--s-4) + var(--safe-t));   /* sous l'encoche en portrait */
+  background: var(--paper);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain;
+  transform: translateY(100%);
+  transition: transform var(--dur-3) var(--ease);   /* panneau : --dur-3, comme le voile */
+}
+.case.is-open .case-scrim { opacity: 1; }
+/* bord de la fiche lisible sur le voile (thème sombre : fiche et voile presque de même valeur) */
+.case-sheet { box-shadow: 0 -1px 0 var(--line); }
+/* gouttière de la barre de défilement (scrollbar-gutter: stable), hors du voile fixe :
+   peinte par la racine à la couleur du fond sous le voile (rgba(4,5,10,.6)) */
+html { transition: background-color var(--dur-3) var(--ease); }
+html:has(> body.no-scroll) { background-color: color-mix(in srgb, var(--paper) 40%, rgb(4, 5, 10)); }
+:root[data-theme="light"]:has(> body.no-scroll) { background-color: color-mix(in srgb, var(--paper) 58%, rgb(20, 36, 77)); }
+.case.is-open .case-sheet { transform: none; }
+/* barre : position, lien du site, lien de la fiche, navigation. Elle se glisse
+   vers le bas pour fermer (main.js) : pas de défilement ni de sélection au doigt. */
+.case-bar {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--pad-r) var(--s-3) var(--pad-l);
+  background: color-mix(in oklab, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-2);
+  touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab;
+}
+.case-bar.is-drag { cursor: grabbing; }
+/* progression de la lecture, posée sur le filet du bas (--cp écrit par main.js) */
+.case-bar::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: var(--accent-t); transform-origin: left; transform: scaleX(var(--cp, 0));
+}
+.case-idx { white-space: nowrap; }
+.case-kind { color: var(--ink-3); }
+.case-nav { display: flex; gap: var(--s-2); }
+.case-nav > * {
+  display: inline-flex; align-items: center; gap: var(--s-2); height: var(--h-s); padding: 0 var(--s-3);
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  font-family: var(--f-mono); font-size: var(--mono-s); letter-spacing: -.01em; font-variation-settings: "wdth" var(--mw); color: var(--ink);
+  white-space: nowrap; cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), --mw var(--dur-2) var(--ease);
+}
+/* lien du site et « Lien » : la chasse s'ouvre au survol, comme les boutons */
+.case-site:focus-visible, .case-share:focus-visible { --mw: 100; }
+.case-nav [data-step] { width: var(--h-s); padding: 0; justify-content: center; }
+.case-nav [data-step] .ic { width: 14px; height: 14px; }
+.case-site > .ic { color: var(--accent-t); }   /* la flèche ; pas le sigle Bē */
+.case-site-sm { display: none; }
+/* icône lien (ou copie, dans le playground), remplacée par une coche tracée une fois copié */
+.case-share svg, .lab-copy svg { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.case-share .i-link, .lab-copy .i-copy { transition: opacity var(--dur-1) var(--ease); }
+.case-share .i-check, .lab-copy .i-check { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset var(--dur-2) var(--ease); }
+.is-done .i-link, .is-done .i-copy { opacity: 0; }
+.is-done .i-check { stroke-dashoffset: 0; }
+.case-share-lbl { display: inline-block; min-width: 5ch; text-align: center; }   /* « Lien » puis « Copié » : même largeur */
+@media (hover: hover) {
+  .case-nav > :hover { background: var(--paper-3); border-color: var(--ink-4); }
+  .case-site:hover, .case-share:hover { --mw: 100; }
+}
+.case-body { max-width: var(--max); margin: 0 auto; padding: var(--s-6) var(--pad-r) calc(var(--section) + env(safe-area-inset-bottom, 0px)) var(--pad-l); }
+/* taille maximale et chasse de départ ; main.js resserre la chasse, puis la taille, si un mot déborde */
+.case-title {
+  font-size: clamp(52px, 10vw, 180px);
+  line-height: .86; letter-spacing: -.04em; font-weight: 780;
+  font-variation-settings: "wdth" 116;
+  text-transform: uppercase; text-wrap: balance;
+}
+.case-title .ln { display: block; overflow: hidden; padding: .2em 0 .04em; margin-top: -.2em; }   /* place pour les accents (Ô, É) sans changer l'interligne */
+.case-title .ln > span { display: block; transform: translateY(calc(100% + .3em)); transition: transform var(--dur-4) var(--ease) var(--dur-1); }
+.case-body.is-in .case-title .ln > span { transform: none; }
+/* le contenu monte en cascade ; après une flèche (.is-step), il arrive de côté, plus tôt */
+.case-body > :not(.case-title) { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease); transition-delay: calc(var(--dur-2) + var(--k, 0) * 80ms); }
+.case-body.is-step > :not(.case-title) { transform: translateX(calc(var(--dir, 1) * 3%)); transition-delay: calc(var(--dur-1) + var(--k, 0) * 60ms); }
+.case-body.is-step .case-title .ln > span { transition-delay: 50ms; }
+.case-body.is-in > :not(.case-title) { opacity: 1; transform: none; }
+.case-sub { margin-top: var(--s-4); font-size: var(--mono-s); color: var(--ink-2); }
+/* fiche technique : 4 cellules par rangée (3 colonnes de la grille chacune), 3 quand il y en a 6 ; filet au-dessus */
+.case-meta { margin-top: var(--s-6); display: grid; grid-template-columns: repeat(var(--mc, 4), minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: var(--s-4); }
+.case-meta > div { display: grid; row-gap: var(--s-1); align-content: start; border-top: 1px solid var(--line); padding-top: var(--s-3); }
+.case-meta dt { font-size: var(--mono-xs); color: var(--ink-3); }
+.case-meta dd { font-size: var(--mono-s); color: var(--ink); text-wrap: balance; overflow-wrap: anywhere; }
+.case-meta dd a { text-decoration: underline 1px var(--ink-4); text-underline-offset: .3em; transition: color var(--dur-1) var(--ease), text-decoration-color var(--dur-1) var(--ease); }
+@media (hover: hover) { .case-meta dd a:hover { color: var(--accent-t); text-decoration-color: currentColor; } }
+/* le visuel du haut : un cadre légendé comme dans Figma (nom au-dessus à gauche,
+   dimensions en dessous à droite, écrites par main.js). Image : à son ratio (--ar).
+   Site : fenêtre de navigateur sur un canevas à points, en 16:9 */
+.case-hero { position: relative; margin-top: var(--gap-group); }
+.case-hero .frame {
+  position: relative; width: 100%; aspect-ratio: var(--ar, 16 / 9);
+  border-radius: var(--r-md); overflow: hidden; outline: 1px solid color-mix(in oklab, var(--spec) 40%, transparent);
+  background: var(--paper-2);
+}
+.case-hero .frame > img, .case-hero .frame > .g-anim, .case-hero .frame > .g-anim > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.frame.is-canvas { background: radial-gradient(circle, var(--line) 1px, transparent 1.2px) 0 0 / 16px 16px, var(--paper-2); }
+.hero-desk { position: absolute; inset: clamp(24px, 4cqi, 64px); display: flex; justify-content: center; }
+.hero-desk .browser { height: 100%; aspect-ratio: 1.54; max-width: 100%; display: flex; flex-direction: column; }
+.hero-desk .browser > img { flex: 1; min-height: 0; height: auto; object-fit: cover; object-position: top; }
+.hero-mob { display: none; position: absolute; inset: 7% 0; justify-content: center; }
+.hero-mob .phone { height: 100%; aspect-ratio: .478; }
+.hero-mob .phone > img { height: 100%; object-fit: cover; object-position: top; }
+.frame-label { position: absolute; inset: 0; pointer-events: none; font-size: var(--mono-xs); line-height: 1; color: var(--spec); }
+.frame-label span { position: absolute; white-space: nowrap; }
+.frame-label span:first-child { left: 0; bottom: 100%; margin-bottom: var(--s-2); }
+.frame-size { right: 0; top: 100%; margin-top: var(--s-2); }
+/* pitch sur les colonnes 4 à 11 : l'alignement éditorial ne bouge pas d'une fiche à l'autre */
+.case-intro { margin-top: var(--block); }
+.case-intro .pitch { grid-column: 4 / span 8; font-size: var(--t-lead); line-height: 1.25; letter-spacing: -.015em; text-wrap: pretty; }
+.case-cols { margin-top: var(--block); row-gap: var(--gap-group); }
+.case-cols section { grid-column: span 4; padding-top: var(--gap-row); border-top: 1px solid var(--line); }
+.case-cols--2 section, .case-cols--4 section { grid-column: span 6; }
+.case-cols h3, .case-gallery > h3 { font-family: var(--f-mono); font-weight: 400; font-size: var(--mono-s); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5; color: var(--accent-t); margin-bottom: var(--s-3); }
+.case-cols p { font-size: var(--t-intro); line-height: 1.45; color: var(--ink-2); text-wrap: pretty; max-width: 42ch; }
+.case-cols--2 p, .case-cols--4 p { max-width: 50ch; }
+
+/* ---- Galerie : grille de 12 colonnes, une figure légendée par groupe ---- */
+.case-gallery { margin-top: var(--block); }
+.case-gallery > h3 { margin-bottom: var(--gap-row); }
+.g-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); row-gap: var(--gap-group); align-items: start; }
+.g-item { grid-column: 1 / -1; margin: 0; min-width: 0; }
+.g-inset { grid-column: 2 / span 10; }
+.g-row { display: grid; gap: var(--gap-row); }
+.g-pair .g-row { grid-template-columns: 1fr 1fr; column-gap: var(--col-gap); align-items: start; }
+.g-item img { display: block; width: 100%; height: auto; border-radius: var(--r-md); background-color: var(--paper-2); }
+.g-item figcaption { margin-top: var(--s-2); font-size: var(--mono-xs); color: var(--ink-3); letter-spacing: -.01em; text-wrap: balance; }
+/* image et texte côte à côte : légende en texte courant, en bas de la colonne */
+.g-aside { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: end; }
+.g-aside .g-row { grid-column: 1 / span 7; }
+.g-aside figcaption { grid-column: 9 / span 4; margin: 0; }
+.g-aside .g-cap { display: block; color: var(--ink-3); }
+.g-aside .g-txt { display: block; margin-top: var(--s-3); font-family: var(--f-sans); font-size: var(--t-intro); line-height: 1.45; letter-spacing: 0; color: var(--ink-2); text-wrap: pretty; }
+/* titres de chapitre : taille de la liste, chasse liée au scroll comme les titres de section */
+.g-head {
+  grid-column: 1 / -1; margin: var(--gap-group) 0 calc(var(--s-5) - var(--gap-group));   /* 24 px jusqu'à la figure qui suit */
+  font-size: clamp(28px, 3.8vw, 64px); line-height: 1; font-weight: 780; letter-spacing: -.03em;
+  font-variation-settings: "wdth" var(--swd); text-wrap: balance;
+}
+/* canevas à points : fenêtres de navigateur et téléphones */
+.g-canvas {
+  display: grid; justify-items: center; gap: var(--gap-group);
+  padding: clamp(16px, 4vw, 80px); border-radius: var(--r-md);
+  background: radial-gradient(circle, var(--line) 1px, transparent 1.2px) 0 0 / 16px 16px, var(--paper-2);
+}
+.g-browser .browser { width: 100%; max-width: 1100px; }
+.g-browser-pair .g-canvas { grid-template-columns: 1fr 1fr; align-items: start; }
+.g-browser-pair .browser { width: 100%; }
+.g-phone-row { display: flex; justify-content: center; gap: clamp(16px, 4vw, 64px); }
+.g-phone-row .phone { flex: none; width: clamp(160px, 20vw, 300px); }
+/* cadres d'appareil en CSS : aucun faux contenu d'interface */
+.browser { border-radius: var(--r-md); overflow: hidden; background: var(--paper-3); box-shadow: 0 0 0 1px var(--line), 0 30px 60px -30px rgba(0, 0, 0, .5); }
+:root[data-theme="light"] .browser { box-shadow: 0 0 0 1px var(--line), 0 30px 60px -30px rgba(20, 36, 77, .25); }
+.browser-bar { height: var(--h-s); flex: none; display: grid; grid-template-columns: 42px 1fr 42px; align-items: center; padding: 0 var(--s-3); }
+.browser-dots { display: flex; gap: 6px; }
+.browser-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-4); }
+.browser-url { justify-self: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family: var(--f-mono); font-size: var(--mono-xs); font-variation-settings: "wdth" 87.5; line-height: 1.5; color: var(--ink-3); background: var(--paper-2); border-radius: var(--r-pill); padding: 2px var(--s-3); }
+.browser > img, .g-item .browser > img { display: block; width: 100%; border-radius: 0; }
+.phone { padding: 3.2%; background: #0b0c10; border-radius: 13% / 6%; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 0 0 1px var(--line), 0 30px 60px -30px rgba(0, 0, 0, .55); }
+.phone > img, .g-item .phone > img { display: block; width: 100%; border-radius: 10% / 4.6%; background-color: #16171d; }
+/* image animée : image fixe d'abord (main.js), bouton Pause / Lecture dans l'image */
+.g-anim { position: relative; }
+.g-play {
+  position: absolute; left: var(--s-3); bottom: var(--s-3);
+  display: inline-flex; align-items: center; gap: var(--s-2); height: var(--h-s); padding: 0 var(--s-3);
+  border: 1px solid var(--line); border-radius: var(--r-pill);
+  font-family: var(--f-mono); font-size: var(--mono-xs); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5;
+  color: var(--ink); background: color-mix(in oklab, var(--paper) 88%, transparent); cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease);
+}
+.g-play-ic { width: 10px; height: 10px; fill: currentColor; }
+.g-play .i-play, .g-play.is-paused .i-pause { display: none; }
+.g-play.is-paused .i-play { display: inline; }
+@media (hover: hover) { .g-play:hover { background: var(--paper-3); } }
+/* entrée des figures au scroll (main.js, une fois) */
+.js .case-gallery .g-item { opacity: 0; transform: translateY(24px); transition: opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease); }
+.js .case-gallery .g-item.is-in { opacity: 1; transform: none; }
+.case-actions { margin-top: var(--block); }
+/* projet sans lien : les écrans se demandent par mail */
+.case-ask { margin-top: var(--block); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-5); }
+/* fin de fiche : tout le bloc est le bouton. Libellé, titre suivant à la taille de la
+   liste des travaux (il s'ouvre comme une ligne de la liste), puis sa couverture */
+.case-next {
+  margin-top: var(--block); padding-top: var(--gap-row); border-top: 1px solid var(--ink);
+  display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); align-items: end;
+  width: 100%; text-align: left;
+}
+.case-next-txt { grid-column: 1 / span 8; display: grid; justify-items: start; row-gap: var(--s-3); }
+.case-next-cover { grid-column: 10 / span 3; display: block; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; }
+.case-next-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-3) var(--ease); }
+.case-next b {
+  font-size: clamp(28px, 3.8vw, 64px); line-height: 1; font-weight: 780; letter-spacing: -.03em;
+  --tw: 90; font-variation-settings: "wdth" var(--tw); text-wrap: balance;
+  transition: --tw var(--dur-3) var(--ease), color var(--dur-2) var(--ease), transform var(--dur-3) var(--ease);
+}
+.case-next:focus-visible b { --tw: 118; color: var(--accent-t); transform: translateX(.12em); }
+.case-next:focus-visible img { transform: scale(1.04); }
+@media (hover: hover) { .case-next:hover b { --tw: 118; color: var(--accent-t); transform: translateX(.12em); } .case-next:hover img { transform: scale(1.04); } }
+.case-next-txt .mono { color: var(--ink-3); }
+/* au doigt et au téléphone : retour à la liste en bas de fiche, à portée du pouce
+   (même action que Fermer ; le focus revient à la ligne qui a ouvert la fiche) */
+.case-back { display: flex; width: 100%; margin-top: var(--gap-group); }
+@media (min-width: 761px) and (pointer: fine) { .case-back { display: none; } }
+/* fiche ouverte : html porte overflow-x: clip, c'est donc lui qui fait défiler
+   la fenêtre ; il est bloqué aussi (sans Lenis : mouvement réduit, CDN absent).
+   Même règle que .lenis.lenis-stopped de lenis.css */
+.no-scroll, html:has(> body.no-scroll) { overflow: hidden; }
+/* Ouverture depuis l'aperçu (souris, main.js) : le cadre de l'aperçu devient
+   celui de la fiche (View Transitions) pendant que la fiche monte. Pendant la
+   transition (.vt), fiche et voile sont posés ouverts sans leurs transitions ;
+   le visuel partagé ne rejoue pas l'entrée en cascade du contenu. */
+.vt .case-sheet, .vt .case-scrim, .vt .peek-in { transition: none; }
+.case-body > .case-hero.is-shared { opacity: 1; transform: none; transition: none; }
+/* le contenu entre pendant le morphing (main.js) : départs avancés, la fiche n'est jamais vide */
+.vt .case-title .ln > span { transition-delay: 50ms; }
+.vt .case-body > :not(.case-title) { transition-delay: calc(var(--dur-1) + var(--k, 0) * 60ms); }
+/* le groupe de la fiche, créé après celui du cadre, passerait devant lui */
+::view-transition-group(case-frame) { z-index: 1; animation-duration: var(--dur-3); animation-timing-function: var(--ease); overflow: clip; border-radius: var(--r-md); }
+/* 4:5 de l'aperçu vers le ratio du cadre de la fiche : les deux images remplissent le groupe, rognées */
+::view-transition-old(case-frame), ::view-transition-new(case-frame) { width: 100%; height: 100%; object-fit: cover; }
+::view-transition-new(case-sheet) { animation: vt-sheet-up var(--dur-3) var(--ease) both; }
+::view-transition-old(case-sheet) { display: none; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--dur-2); animation-timing-function: var(--ease-in-out); }   /* bascule de thème */
+@keyframes vt-sheet-up { from { transform: translateY(100%); } }
+
+/* ============ Méthode ============ */
+/* trois panneaux calés sur la grille : bords aux colonnes 4 et 9 (1 px de
+   bordure et d'écart près). Propriétés s'adapte à sa colonne (container, plus
+   bas). overflow clip et non hidden : le canevas reste collant sur mobile. */
+.lab {
+  display: grid; grid-template-columns: calc(25% + var(--col-gap) / 4) calc(41.6667% + var(--col-gap) * 5 / 12) 1fr;
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line); border-radius: var(--r-md); overflow: clip;
+}
+.lab-panel { background: var(--paper); padding: var(--s-5); position: relative; }
+.lab-label { color: var(--ink-3); font-weight: 400; margin-bottom: var(--s-4); }   /* titres h3 des panneaux, au format des libellés */
+.lab-head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin-bottom: var(--s-4); }
+.lab-head .lab-label { margin: 0; }
+/* container : la largeur du panneau vient de la grille, jamais de son contenu
+   (sinon, sous 360 px, pastilles et états l'élargissent et .lab le rogne) */
+.lab-props { display: grid; align-content: start; gap: var(--s-4); background: var(--paper-2); container-type: inline-size; }
+.lab-reset { font-size: var(--mono-xs); color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--ink-4); text-underline-offset: 3px; transition: color var(--dur-1) var(--ease); }
+@media (hover: hover) { .lab-reset:hover { color: var(--ink); text-decoration-color: currentColor; } }
+.field { display: grid; grid-template-columns: 6.4em 1fr 34px; align-items: center; gap: var(--s-3); font-family: var(--f-mono); font-size: var(--mono-s); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5; color: var(--ink-2); }   /* 6.4em : 76 px en mono 12, suit la taille mono des très grands écrans */
+.field output { text-align: right; color: var(--ink); }
+.field--seg { grid-template-columns: 6.4em 1fr; }
+/* panneau étroit : Fond et État passent sous leur libellé, les quatre états gardent de l'air */
+@container (max-width: 330px) { .field--seg { grid-template-columns: 1fr; gap: var(--s-2); } }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 24px; background: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(90deg, var(--accent-t) var(--fill, 50%), var(--ink-3) var(--fill, 50%)); border-radius: var(--r-2xs); }
+input[type="range"]::-moz-range-track { height: 2px; background: var(--ink-3); border-radius: var(--r-2xs); }
+input[type="range"]::-moz-range-progress { height: 2px; background: var(--accent-t); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); margin-top: -6px; transition: transform var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease); }
+input[type="range"]::-moz-range-thumb { width: 10px; height: 10px; border-radius: 50%; background: var(--paper); border: 2px solid var(--ink); }
+@media (hover: hover) { input[type="range"]:hover::-webkit-slider-thumb { transform: scale(1.15); } }
+input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.3); background: var(--accent); border-color: var(--accent); }
+/* choix segmenté (états, onglets du code) : --n options, --i la choisie (main.js) */
+/* colonnes égales : l'indicateur, large de 1/--n, tombe toujours sur l'option */
+.seg { position: relative; display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); padding: 2px; border-radius: var(--r-sm); background: var(--paper-3); }
+.seg button { position: relative; z-index: 1; min-width: 0; min-height: var(--h-s); padding: 0 2px; border-radius: calc(var(--r-sm) - 2px); font-size: var(--mono-xs); color: var(--ink-2); transition: color var(--dur-1) var(--ease); }
+.seg button[aria-checked="true"], .seg button[aria-selected="true"] { color: var(--ink); font-weight: 600; }   /* choisi : aussi par la graisse, pas que par la couleur */
+.seg-ind { position: absolute; top: 2px; bottom: 2px; left: 2px; width: calc((100% - 4px) / var(--n, 3)); border-radius: calc(var(--r-sm) - 2px); background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink-3), 0 1px 3px rgba(0,0,0,.2); transform: translateX(calc(var(--i, 0) * 100%)); transition: transform var(--dur-3) var(--ease-in-out); }
+/* fonds : pastilles de 22 px, l'anneau glisse vers la choisie (2 px, à 2 px du bord) */
+.swatches { --sw: 22px; --sw-gap: 12px; position: relative; display: flex; align-items: center; gap: var(--sw-gap); }
+/* bord en --ink-3 : la pastille se détache du fond à 3:1 au moins, quelle que soit sa couleur (WCAG 1.4.11) */
+.swatches button { flex: none; width: var(--sw); height: var(--sw); border-radius: 50%; background: var(--c); box-shadow: inset 0 0 0 1px var(--ink-3); }
+.swatches button:focus-visible { border-radius: 50%; outline-offset: 6px; }
+.swatches [data-fill="ink"] { --c: var(--ink); }
+.swatches [data-fill="accent"] { --c: #233df4; }
+.swatches [data-fill="navy"] { --c: #14244d; }
+.swatches [data-fill="outline"] { --c: transparent; box-shadow: inset 0 0 0 1px var(--ink-2); }
+.sw-ring {
+  position: absolute; left: -4px; top: 50%; width: calc(var(--sw) + 8px); aspect-ratio: 1; translate: 0 -50%;
+  border: 2px solid var(--accent-t); border-radius: 50%; pointer-events: none;
+  transform: translateX(calc(var(--i, 0) * (var(--sw) + var(--sw-gap)))); transition: transform var(--dur-2) var(--ease);
+}
+.sw-name { margin-left: auto; color: var(--ink); }
+
+.lab-stage { background: radial-gradient(circle, var(--line) 1px, transparent 1.2px) 0 0 / 16px 16px, var(--paper); display: flex; flex-direction: column; }
+.stage { flex: 1; min-height: 280px; display: grid; place-items: center; position: relative; }
+.stage-frame { position: absolute; left: 50%; top: calc(50% - 52px); translate: -50% 0; color: var(--accent-t); font-size: var(--mono-xs); }
+/* contraste WCAG du bouton, sous lui, comme une cote Figma (main.js) */
+.contrast { position: absolute; left: 50%; top: calc(50% + 40px); translate: -50% 0; white-space: nowrap; color: var(--ink-2); font-size: var(--mono-xs); }
+.contrast-fail { display: inline-block; padding: 2px var(--s-2); border: 1px solid var(--line); border-radius: var(--r-xs); color: var(--ink-2); }
+.demo-btn {
+  --radius: 10px; --pad-x: 26px; --w: 650; --wd: 100;
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  height: 52px; padding: 0 var(--pad-x);
+  border: 1px solid transparent; border-radius: var(--radius);
+  background: var(--bg, var(--ink)); color: var(--fg, var(--paper));
+  font-size: var(--t-ui); font-weight: var(--w);
+  font-variation-settings: "wdth" var(--wd);
+  outline: 1px dashed transparent; outline-offset: 6px;
+  transition: background-color var(--dur-2) var(--ease), color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), border-radius var(--dur-2) var(--ease), padding var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease), outline-color var(--dur-2) var(--ease);
+}
+.demo-btn[data-fill="outline"] { border-color: currentColor; }
+/* après .demo-btn : l'anneau de focus passe devant le pointillé transparent,
+   tout de suite (sans le fondu du pointillé) ; l'état Focus montre le même */
+.demo-btn:focus-visible { outline: 2px solid var(--accent-t); outline-offset: 6px; transition: background-color var(--dur-2) var(--ease), color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), border-radius var(--dur-2) var(--ease), padding var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease); }
+.demo-btn.is-focus { outline: 2px solid var(--accent-t); outline-offset: 3px; }
+.demo-btn svg { width: 16px; height: 16px; transition: transform var(--dur-2) var(--ease); }
+.demo-btn.is-hover { background: var(--accent); color: #fff; }
+.demo-btn.is-hover svg { transform: translateX(3px); }
+/* fond Bleu : le survol en bleu ne se verrait pas, il passe au marine (code généré : main.js) */
+.demo-btn[data-fill="accent"].is-hover { background: #14244d; }
+.demo-btn.is-disabled { opacity: .35; pointer-events: none; }
+@media (hover: hover) {
+  .demo-btn:hover { background: var(--accent); color: #fff; }
+  .demo-btn[data-fill="accent"]:hover { background: #14244d; }
+  .demo-btn:hover svg { transform: translateX(3px); }
+  .lab-stage:hover .demo-btn { outline-color: var(--accent-t); }
+}
+
+.lab-code { --code-fg: #e8ecfb; min-width: 0; background: var(--code-bg); color: var(--code-fg); }   /* min-width 0 : une ligne longue défile dans le panneau au lieu de l'élargir */
+/* sur le fond de code (marine en thème clair), anneau de focus clair */
+.lab-code :focus-visible { outline-color: var(--code-fg); }
+.lab-details > summary { display: flex; align-items: center; justify-content: space-between; min-height: var(--h-m); list-style: none; cursor: pointer; font-size: var(--mono-s); }
+.lab-details > summary::-webkit-details-marker { display: none; }
+@media (min-width: 761px) { .lab-details > summary { display: none; } }   /* ouvert par main.js au-dessus de 760 px */
+.lab-details > summary::after { content: ""; width: 7px; height: 7px; margin-right: var(--s-1); border: solid currentColor; border-width: 0 1.5px 1.5px 0; transform: translateY(-2px) rotate(45deg); transition: transform var(--dur-2) var(--ease); }
+.lab-details[open] > summary { margin-bottom: var(--s-3); }
+.lab-details[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+.seg--tabs { flex: 0 1 220px; background: color-mix(in oklab, var(--code-fg) 8%, transparent); }
+.seg--tabs button, .lab-code .lab-label, .lab-code .c { color: color-mix(in oklab, var(--code-fg) 58%, transparent); }   /* AA sur les deux fonds de code */
+.seg--tabs button[aria-selected="true"] { color: var(--code-fg); }
+.seg--tabs .seg-ind { background: color-mix(in oklab, var(--code-fg) 16%, transparent); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--code-fg) 55%, transparent); }
+.lab-copy { display: inline-flex; align-items: center; gap: var(--s-2); height: var(--h-s); padding: 0 var(--s-3); border: 1px solid color-mix(in oklab, var(--code-fg) 22%, transparent); border-radius: var(--r-pill); font-size: var(--mono-xs); transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease); }
+.lab-copy-lbl { display: inline-block; min-width: 6ch; }   /* « Copier » puis « Copié » : même largeur */
+@media (hover: hover) { .lab-copy:hover { background: color-mix(in oklab, var(--code-fg) 10%, transparent); border-color: color-mix(in oklab, var(--code-fg) 40%, transparent); } }
+.lab-code pre { margin: 0; max-height: 288px; overflow: auto; white-space: pre; font-size: var(--mono-s); line-height: 1.85; scrollbar-width: thin; scrollbar-color: color-mix(in oklab, var(--code-fg) 30%, transparent) transparent; }
+/* plus haut que son cadre : fondu en bas tant qu'il reste des lignes (.is-more, main.js) */
+.lab-code pre.is-more { -webkit-mask-image: linear-gradient(#000 calc(100% - 24px), transparent); mask-image: linear-gradient(#000 calc(100% - 24px), transparent); }
+.lab-code b { font-weight: 400; color: #8a99ff; display: inline-block; border-radius: var(--r-2xs); }
+.lab-code b.flash { animation: flash var(--dur-3) var(--ease); }
+@keyframes flash { 0% { background: var(--accent); color: #fff; } 100% { background: transparent; } }
+
+/* contextes d'usage : trois lignes comme celles des travaux, chacune ouvre sa fiche */
+.method-intro { margin-top: var(--block); }
+.method-note { grid-column: 1 / span 6; max-width: 66ch; font-size: var(--t-intro); line-height: 1.45; color: var(--ink-2); }
+.contexts { margin-top: var(--gap-group); border-bottom: 1px solid var(--line); }
+.contexts li { align-items: baseline; padding: var(--gap-row) 0; border-top: 1px solid var(--line); }
+.contexts .mono { grid-column: 1 / span 2; color: var(--ink-3); }
+.contexts p { grid-column: 3 / span 7; font-size: var(--t-intro); line-height: 1.45; }
+.contexts button { grid-column: 10 / span 3; justify-self: end; display: inline-flex; align-items: center; gap: var(--s-2); font-weight: 600; text-align: right; transition: color var(--dur-2) var(--ease); }
+.contexts button svg { width: 12px; height: 12px; flex: none; color: var(--accent-t); transition: transform var(--dur-2) var(--ease); }
+@media (hover: hover) {
+  .contexts button:hover { color: var(--accent-t); }
+  .contexts button:hover svg { transform: translate(2px, -2px); }
+}
+
+/* ============ Parcours ============ */
+.path-grid { align-items: start; }
+/* carte CV : nom du fichier au-dessus du cadre (comme un frame Figma), poids et actions dessous */
+.cv-card { grid-column: 1 / span 4; position: sticky; top: calc(var(--top-h) + var(--s-6)); }
+.cv-label { font-size: var(--mono-xs); color: var(--ink-3); margin-bottom: var(--s-2); }
+.cv-thumb { display: block; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); transition: transform var(--dur-4) var(--ease), box-shadow var(--dur-4) var(--ease); }
+/* thème sombre : l'aperçu blanc baisse d'un ton, pleine lumière au survol ou au focus */
+:root:not([data-theme="light"]) .cv-thumb img { filter: brightness(.88); transition: filter var(--dur-3) var(--ease); }
+:root:not([data-theme="light"]) .cv-thumb:focus-visible img { filter: none; }
+/* carte étroite (1024, téléphone) : les actions passent sous le poids du fichier */
+.cv-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-1) var(--s-3); margin-top: var(--s-3); color: var(--ink-3); }
+.cv-meta > span { white-space: nowrap; }
+.cv-acts { display: inline-flex; gap: var(--s-4); }
+.cv-acts a { display: inline-flex; align-items: center; gap: var(--s-2); color: var(--accent-t); }
+.cv-dl svg { width: 11px; height: 13px; transition: transform var(--dur-2) var(--ease); }
+@media (hover: hover) {
+  .cv-thumb:hover { transform: translateY(-6px) rotate(-1.2deg); box-shadow: 0 30px 60px -25px color-mix(in oklab, var(--accent) 70%, transparent); }
+  :root:not([data-theme="light"]) .cv-thumb:hover img { filter: none; }
+  .cv-acts a:hover { text-decoration: underline 1px; text-underline-offset: .3em; }
+  .cv-dl:hover svg { transform: translateY(2px); }
+}
+
+.timeline { grid-column: 6 / span 7; position: relative; padding-left: var(--s-6); }
+.rail { position: absolute; left: 4px; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.rail > span { position: absolute; left: 0; top: 0; width: 1px; height: 100%; background: var(--accent-t); transform-origin: 50% 0; transform: scaleY(var(--tp, 0)); }
+.timeline li { position: relative; display: grid; grid-template-columns: 104px 1fr auto; gap: var(--s-5); padding: var(--gap-row) 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+.timeline li:first-child { border-top: 1px solid var(--line); }
+.timeline li::before {
+  content: ""; position: absolute; left: calc(var(--s-6) * -1); top: calc(var(--gap-row) + 7px);   /* centré sur la première ligne */
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--ink-4);
+  transform: scale(1);   /* toujours transformé : le passage à 1.15 ne relance pas la mise en page */
+  transition: background-color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), transform var(--dur-3) var(--ease);
+}
+.timeline li.is-past::before { background: var(--accent-t); border-color: var(--accent-t); transform: scale(1.15); }
+.timeline :is(time, .when) { color: var(--ink-2); white-space: nowrap; }
+.timeline time > span { display: block; }   /* début, puis fin, comme sur le CV */
+.timeline h3 { font-size: var(--t-lead); font-weight: 700; letter-spacing: -.02em; line-height: 1.12; font-variation-settings: "wdth" 96; text-wrap: balance; }
+.timeline p { color: var(--ink-2); margin-top: var(--s-2); max-width: 52ch; text-wrap: balance; }
+.tag { display: inline-flex; align-items: center; height: var(--h-xs); padding: 0 var(--s-2); border: 1px solid var(--line); border-radius: var(--r-pill); color: var(--ink-2); white-space: nowrap; font-size: var(--mono-xs); }
+.timeline .is-move .tag { background: var(--accent); color: #fff; border-color: var(--accent); }
+.timeline .is-move h3 { color: var(--accent-t); }
+/* 1101 px et plus : la frise occupe les colonnes 5 à 12. Les dates finissent au
+   bord droit de la colonne 5, le rail suit le bord gauche de la colonne 6 et
+   chaque point est centré dessus. --c1 : une colonne sur huit (les % se
+   résolvent sur la largeur de la frise, la même pour li, rail et points). */
+@media (min-width: 1101px) {
+  .timeline { grid-column: 5 / -1; padding-left: 0; --c1: calc((100% - 7 * var(--col-gap)) / 8); }
+  .timeline li { grid-template-columns: var(--c1) 1fr auto; column-gap: calc(var(--col-gap) + var(--s-6)); }
+  .timeline :is(time, .when) { text-align: right; justify-self: end; }   /* end : vers 1101 px, « janv. 2024 » dépasse la colonne à gauche, dans l'écart, jamais sur le rail */
+  .rail { left: calc(var(--c1) + var(--col-gap)); }
+  .timeline li::before { left: calc(var(--c1) + var(--col-gap) - 4px); }
+}
+
+/* boîte à outils : un tableau de propriétés, sur les colonnes de la frise (sous-grille).
+   Libellés comme les dates (fin de la colonne 5), valeurs sur le texte des étapes
+   (colonne 6 + 32 px) ; le titre, en colonne 1, reste à l'écran le long du tableau.
+   --block, un demi-écart de section : la boîte à outils prolonge le parcours */
+.kit { margin-top: var(--block); align-items: start; }
+.kit-title { grid-column: 1 / span 4; color: var(--ink-3); padding-top: var(--s-4); font-weight: 400; }   /* h3 : titre de la boîte à outils ; padding : sa ligne de base sur celle du premier libellé */
+.kit-table { grid-column: 5 / -1; display: grid; grid-template-columns: subgrid; border-bottom: 1px solid var(--line); }
+.kit-table div { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; column-gap: var(--col-gap); border-top: 1px solid var(--line); padding: var(--s-3) 0; align-items: baseline; }
+.kit-table dt { grid-column: 1; justify-self: end; text-align: right; color: var(--ink-3); }
+.kit-table dd { grid-column: 2 / -1; padding-left: var(--s-6); max-width: calc(64ch + var(--s-6)); font-size: var(--t-body); line-height: 1.5; color: var(--ink); text-wrap: balance; }
+@media (min-width: 1101px) {
+  .kit-title { position: sticky; top: calc(var(--top-h) + var(--s-5)); align-self: start; }
+}
+
+/* ============ Contact ============ */
+.contact { padding: var(--section) 0 var(--head-gap); }
+.contact .eyebrow { margin-bottom: var(--s-4); }   /* comme dans les en-têtes : sur-titre -> titre */
+.contact-kicker { font-size: var(--t-kicker); font-weight: 400; letter-spacing: -.02em; color: var(--ink); font-variation-settings: "wdth" 96; }   /* h2 de la section Contact : le message principal, en encre */
+/* paragraphes courts : pas de mot seul en dernière ligne (« perdre. », « Essayez : ») */
+.method-note, .contact-kicker { text-wrap: pretty; }
+.contexts p { text-wrap: balance; }
+.contact-avail { margin-top: var(--s-2); color: var(--ink-3); }
+.contact-avail span { color: var(--ink); }
+.mail { display: block; width: 100%; text-align: left; margin-top: var(--s-3); }
+.mail-txt {
+  position: relative; display: flex; white-space: nowrap;   /* repère des centres de lettres (JS) */
+  font-size: var(--fs, 13vw);
+  font-size: var(--fs, 15.19cqi);
+  line-height: .8; letter-spacing: -.02em; font-weight: 850;
+  text-transform: uppercase;
+  padding-top: .16em;                      /* place pour l'accent du É */
+  /* ajusté bord à bord : l'étirement au survol peut élargir la ligne de
+     quelques pixels, que la boîte garde visibles (dans la marge de la page) */
+  padding-right: .05em; margin-right: calc(-1 * var(--rsb, .041em) - .05em);
+  margin-left: calc(-1 * var(--lsb, .03em));   /* alignement optique : l'encre du É sur le bord (main.js) */
+  /* ligne de base -> filet : --gap-group (.125em : ce que la boîte garde sous la ligne de base) */
+  margin-bottom: calc(var(--gap-group) - .125em);
+  contain: layout paint;
+}
+.mail-txt .ch { display: inline-block; font-variation-settings: "wdth" calc(var(--w, 100) * var(--wb) / 100); transition: color var(--dur-3) var(--ease); }   /* --wb : ouverture au scroll (Révélations) */
+@media (hover: hover) { .mail:hover .mail-txt .ch { color: var(--accent-t); } }
+.contact-row { display: flex; justify-content: space-between; align-items: center; gap: var(--s-5); flex-wrap: wrap; padding-top: var(--gap-row); border-top: 1px solid var(--line); }
+.mail-sub { display: flex; gap: var(--s-3); align-items: center; flex-wrap: wrap; }
+.mail-line { display: inline-flex; align-items: center; gap: var(--s-2); }
+.mail-addr { font-size: var(--mono-s); color: var(--ink); border-bottom: 1px solid var(--ink-4); padding-bottom: 2px; transition: border-color var(--dur-1) var(--ease); }
+/* « Copier » puis « Copié » : même largeur */
+.mail-copy { min-height: var(--h-s); min-width: calc(6ch + 2 * var(--s-3) + 2px); padding: 0 var(--s-3); border: 1px solid var(--line); border-radius: var(--r-pill); font-size: var(--mono-xs); color: var(--ink-2); transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease); }
+.mail-copy.is-done { color: var(--accent-t); border-color: currentColor; }
+.mail-hint { color: var(--ink-3); }
+@media (hover: hover) {
+  .mail-addr:hover { border-color: currentColor; }
+  .mail-copy:hover { color: var(--ink); border-color: var(--ink-4); }
+}
+.links { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.links a { display: inline-flex; justify-content: center; align-items: center; gap: var(--s-2); min-height: var(--h-m); padding: 0 var(--s-4); border: 1px solid var(--line); border-radius: var(--r-pill); font-variation-settings: "wdth" var(--mw); transition: background-color var(--dur-2) var(--ease), color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), --mw var(--dur-2) var(--ease); }
+.links a:focus-visible { --mw: 100; }
+@media (hover: hover) { .links a:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); --mw: 100; } }
+
+.foot { border-top: 1px solid var(--line); }
+.foot-in { display: flex; justify-content: space-between; gap: var(--s-4); padding-block: var(--gap-row); color: var(--ink-3); flex-wrap: wrap; }
+.foot a, .foot-keys { color: var(--ink-2); transition: color var(--dur-1) var(--ease); }
+.foot-keys { display: inline-flex; align-items: center; gap: var(--s-2); }
+/* au-dessus du téléphone, sur la grille : colophon en colonnes 1 à 8 (il passe à la
+   ligne dans sa colonne), raccourcis en colonne 9, « Haut de page » au bord droit */
+@media (min-width: 761px) {
+  .foot-in { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); padding-block: var(--gap-row); align-items: baseline; }
+  .foot-in > :first-child { grid-column: 1 / span 8; }
+  .foot-in > .foot-keys { grid-column: 9 / span 2; justify-self: start; white-space: nowrap; }
+  .foot-in > a { grid-column: 11 / -1; justify-self: end; white-space: nowrap; }
+}
+/* sans script (ou s'il n'a jamais démarré) : pas de commandes inertes ni de consignes
+   fausses. Le contact reste possible par le lien mailto sous le titre */
+html:not(.js):not(.booted) :is(.inspect-btn, .inspect-touch, .theme-btn, .foot-keys, .lab-props, .contexts li > button, .meta-clocks, .mail-hint, .mail-copy) { display: none; }
+html:not(.js):not(.booted) .mail { cursor: default; }
+@media (hover: hover) { .foot a:hover, .foot-keys:hover { color: var(--ink); } }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 90;
+  translate: -50% 20px; opacity: 0; pointer-events: none;
+  background: var(--ink); color: var(--paper);
+  padding: var(--s-3) var(--s-4); border-radius: var(--r-pill);
+  transition: opacity var(--dur-2) var(--ease), translate var(--dur-3) var(--ease);
+}
+.toast.is-on { opacity: 1; translate: -50% 0; }
+/* à la souris, survolé, le message reste (main.js) ; au doigt, il laisse passer les touchers */
+@media (hover: hover) { .toast.is-on { pointer-events: auto; } }
+
+/* ============ Raccourcis clavier ============
+   Fenêtre de la touche ? (souris) : sous les outils de la barre du haut, calée
+   sur le bord droit de la page. Ouverte depuis le bouton du pied de page
+   (.is-foot) : juste au-dessus du pied, calée sur le bouton (--kb, --kr : main.js).
+   Elle vit dans le pied de page (ordre de tabulation) mais garde le texte de la
+   page, pas le mono du pied. Interrupteur coupé (.is-off) : les touches
+   seules s'éteignent, Échap, flèches et Entrée restent. */
+.keys {
+  position: fixed; z-index: 75;
+  top: calc(var(--top-h) + 8px);
+  right: calc((100% - min(100%, var(--max))) / 2 + var(--pad-r));
+  width: min(320px, calc(100% - 32px));
+  padding: var(--s-3) var(--s-4) var(--s-2);
+  font-family: var(--f-sans); font-size: var(--t-body); line-height: 1.5; letter-spacing: normal; font-variation-settings: "wdth" 100; color: var(--ink);
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--r-md);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, .45);
+  transform-origin: top right;
+  opacity: 0; transform: scale(.96); visibility: hidden;
+  transition: opacity var(--dur-1) var(--ease), transform var(--dur-1) var(--ease), visibility 0s var(--dur-1);
+}
+.keys.is-foot { top: auto; bottom: var(--kb, 24px); right: var(--kr, 16px); transform-origin: bottom right; }
+.keys.is-open { opacity: 1; transform: none; visibility: visible; transition-delay: 0s; }
+.keys-title { font-weight: 400; font-size: var(--mono-xs); color: var(--ink-3); margin-bottom: var(--s-2); }
+/* une ligne trop longue passe ses touches dessous, à droite, plutôt que de couper son libellé */
+.keys-list li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--s-1) var(--s-3); padding: var(--s-2) 0; border-top: 1px solid var(--line); font-size: var(--t-ui); line-height: 1.3; color: var(--ink-2); }
+.keys-k { margin-left: auto; display: inline-flex; align-items: center; gap: var(--s-1); font-family: var(--f-mono); font-size: var(--mono-xs); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5; color: var(--ink-3); white-space: nowrap; transition: opacity var(--dur-1) var(--ease); }
+.keys kbd { background: var(--paper-3); transition: transform var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease); }
+.keys kbd.is-press { transform: translateY(1px); background: var(--accent); color: #fff; }
+.keys.is-off .is-single .keys-k { opacity: .4; }
+.keys-switch { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: var(--s-3); padding: var(--s-3) 0 var(--s-1); border-top: 1px solid var(--line); font-size: var(--t-ui); text-align: left; }
+.keys-toggle { position: relative; flex: none; width: 32px; height: 18px; border-radius: var(--r-pill); border: 1px solid var(--ink-4); transition: background-color var(--dur-1) var(--ease-in-out), border-color var(--dur-1) var(--ease-in-out); }
+.keys-toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 10px; height: 10px; border-radius: 50%; background: var(--ink-2); transition: transform var(--dur-2) var(--ease-in-out), background-color var(--dur-1) var(--ease-in-out); }
+.keys-switch[aria-checked="true"] .keys-toggle { background: var(--accent); border-color: var(--accent); }
+.keys-switch[aria-checked="true"] .keys-toggle::after { transform: translateX(14px); background: #fff; }
+
+/* ============ Révélations ============
+   États de départ seulement sous .js : sans JavaScript (ou si main.js ne
+   démarre pas), tout s'affiche directement dans son état final. */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease); transition-delay: var(--d, 0ms); }
+.js .reveal.is-in { opacity: 1; transform: none; }
+.sec-title .ln { display: block; overflow: hidden; padding-bottom: .08em; margin-bottom: -.08em; }
+.sec-title .ln > span { display: block; }
+.js .sec-title .ln > span { transform: translateY(calc(100% + .3em)); transition: transform var(--dur-4) var(--ease); transition-delay: var(--d, 0ms); }
+.js .sec-title.is-in .ln > span { transform: none; }
+.js .work-row { opacity: 0; transform: translateY(30px); transition: opacity var(--dur-4) var(--ease), transform var(--dur-4) var(--ease); transition-delay: var(--d, 0ms); }
+.js .work-row.is-in { opacity: 1; transform: none; }
+/* vignette (au doigt) : se découvre de haut en bas, juste après sa ligne */
+.js .work-row .thumb { clip-path: inset(0 0 100% 0); transition: clip-path var(--dur-4) var(--ease) calc(var(--d, 0ms) + 150ms), transform var(--dur-3) var(--ease); }
+.js .work-row.is-in .thumb { clip-path: inset(0); }
+/* Largeur liée au scroll (Edge, Chrome) : les titres de section s'ouvrent de
+   74 à 86 en entrant (à 62, les lettres se touchaient), sans dépasser leur chasse
+   de repos (jamais une ligne de plus) ; à la souris, ils se referment de 86 à 74
+   en sortant par le haut, sous la barre. ÉCRIVEZ-MOI s'ouvre de 64 à 100 et finit
+   bord à bord quand la section est entière à l'écran (toujours atteint, même en
+   bas de page). Ailleurs, et en mouvement réduit, tout reste au repos. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sec-title { font-variation-settings: "wdth" var(--swd); animation: sec-open linear both; animation-timeline: view(); animation-range: entry 25% cover 45%; }
+    .g-head { animation: sec-open linear both; animation-timeline: view(); animation-range: entry 25% cover 45%; }
+    /* ouverture puis fermeture sur la même ligne de temps : inset du haut = la barre */
+    @media (pointer: fine) {
+      .sec-title { animation-name: sec-open-close; animation-timeline: view(block var(--top-h) 0px); animation-range: normal; }
+    }
+    .contact { view-timeline: --contact block; }
+    .mail-txt { animation: mail-open linear both; animation-timeline: --contact; animation-range: entry 40% entry 100%; }
+  }
+}
+@keyframes sec-open { from { --swd: 74; } to { --swd: 86; } }
+@keyframes sec-open-close { entry 0%, entry 25% { --swd: 74; } cover 45% { --swd: 86; } exit 0% { --swd: 86; } exit 100% { --swd: 74; } }
+@keyframes mail-open { from { --wb: 64; } to { --wb: 100; } }
+/* ajustement du texte (main.js) : mesuré à pleine largeur, où qu'en soit l'animation */
+html.is-fitting .mail-txt { --wb: 100 !important; }
+
+/* ============ Mode Inspecter ============
+   Entrée par classes et transitions (un double appui repart en sens inverse) :
+   les colonnes descendent en cascade, les règles glissent de leur bord, les
+   noms des blocs apparaissent l'un après l'autre. Sortie en fondu de 200 ms,
+   plus rapide que l'entrée. Rien ne se décale dans la page. */
+.grid-overlay, .ruler, .probe, .sel-box { position: fixed; pointer-events: none; }
+.grid-overlay, .ruler { opacity: 0; transition: opacity var(--dur-1) var(--ease), transform var(--dur-2) var(--ease); }
+.is-inspect .grid-overlay, .is-inspect .ruler { opacity: 1; transform: none; transition: opacity var(--dur-1) var(--ease), transform var(--dur-2) var(--ease); }
+.grid-overlay { inset: 0; z-index: 45; }
+.grid-overlay .wrap { height: 100%; }
+.grid-overlay .grid12 > span {
+  background: color-mix(in oklab, var(--spec) 4%, transparent); border-left: 1px solid color-mix(in oklab, var(--spec) 18%, transparent); border-right: 1px solid color-mix(in oklab, var(--spec) 18%, transparent);
+  transform: scaleY(0); transform-origin: top; transition: transform var(--dur-2) var(--ease) calc(var(--c, 0) * 16ms);
+}
+.is-inspect .grid-overlay .grid12 > span { transform: scaleY(1); }
+/* règles : sous la barre du haut, d'où elles sortent ; graduées en pixels (x : fenêtre, y : page) */
+.ruler { z-index: 49; overflow: hidden; background-color: var(--paper-2); color: var(--ink-3); font-family: var(--f-mono); font-size: var(--mono-xs); line-height: 1; letter-spacing: -.01em; font-variation-settings: "wdth" 87.5; }
+.ruler-x {
+  left: 0; right: 0; top: var(--top-h); height: 18px; border-bottom: 1px solid var(--line);
+  background-image: repeating-linear-gradient(90deg, var(--ink-4) 0 1px, transparent 1px 100px), repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 10px);
+  background-size: 100% 100%, 100% 5px; background-repeat: no-repeat, repeat-x; background-position: 0 0, 0 100%;
+  transform: translateY(-100%);
+}
+.ruler-y { top: calc(var(--top-h) + 18px); bottom: 0; left: 0; width: 18px; border-right: 1px solid var(--line); transform: translateX(-100%); }
+.is-inspect .ruler-y { transition-delay: 0s, 60ms; }
+.ruler-nums span { position: absolute; top: 3px; }
+/* piste de la règle verticale : son haut est celui de la fenêtre, décalée de -(scrollY % 100) par main.js */
+.ruler-track {
+  position: absolute; left: 0; right: 0; top: calc(-1 * (var(--top-h) + 18px)); height: calc(100vh + 200px);
+  background-image: repeating-linear-gradient(180deg, var(--ink-4) 0 1px, transparent 1px 100px), repeating-linear-gradient(180deg, var(--line) 0 1px, transparent 1px 10px);
+  background-size: 100% 100%, 5px 100%; background-repeat: no-repeat, repeat-y; background-position: 0 0, 100% 0;
+}
+.ruler-track span { position: absolute; left: 3px; writing-mode: vertical-rl; transform: rotate(180deg); }
+.ruler-mark { position: absolute; left: 0; top: 0; z-index: 1; background: var(--accent); }
+.ruler-x .ruler-mark { bottom: 0; width: 1px; }
+.ruler-y .ruler-mark { right: 0; height: 1px; }
+.ruler-mark::after { content: attr(data-v); position: absolute; color: #fff; background: var(--accent); padding: 1px var(--s-1); border-radius: var(--r-xs); white-space: nowrap; }
+.ruler-x .ruler-mark::after { left: 4px; top: 3px; }
+.ruler-y .ruler-mark::after { top: 4px; left: 1px; writing-mode: vertical-rl; transform: rotate(180deg); }
+/* survol : cadre et fiche déplacés par transform (main.js), taille écrite seulement quand elle change */
+.probe { inset: 0; z-index: 70; opacity: 0; transition: opacity var(--dur-1) var(--ease); }
+.probe.is-on { opacity: 1; transition-duration: var(--dur-1); }
+.probe-box { position: absolute; left: 0; top: 0; border: 1px solid var(--spec); background: color-mix(in oklab, var(--spec) 7%, transparent); }
+.probe-box::before, .probe-box::after { content: ""; position: absolute; width: 5px; height: 5px; background: #fff; border: 1px solid var(--spec); }
+.probe-box::before { left: -3px; top: -3px; }
+.probe-box::after { right: -3px; bottom: -3px; }
+.probe-tag {
+  position: absolute; left: 0; top: 0; max-width: 320px;
+  font-family: var(--f-mono); font-size: var(--mono-xs); line-height: 1.5; letter-spacing: -.01em; font-variation-settings: "wdth" 87.5;
+  background: var(--accent); color: #fff; padding: var(--s-1) var(--s-2); border-radius: var(--r-xs);
+  white-space: pre;
+}
+.probe-tag b { font-weight: 700; }
+/* sélection : trait de 1,5 px, 8 poignées, taille en pastille dessous */
+.sel-box { left: 0; top: 0; z-index: 69; outline: 1.5px solid var(--spec); outline-offset: -1.5px; opacity: 0; transition: opacity var(--dur-1) var(--ease); }
+.sel-box.is-on { opacity: 1; transition-duration: var(--dur-1); }
+.sel-h { position: absolute; left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); width: 6px; height: 6px; translate: -50% -50%; background: #fff; border: 1px solid var(--spec); }
+.sel-size { position: absolute; left: 50%; top: calc(100% + 6px); translate: -50% 0; padding: var(--s-1); border-radius: var(--r-xs); background: var(--accent); color: #fff; font: 500 var(--mono-xs)/1 var(--f-mono); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5; white-space: nowrap; }
+/* noms des blocs : onglets posés sur le pointillé, comme le nom d'un cadre Figma */
+.is-inspect [data-spec] { outline: 1px dashed color-mix(in oklab, var(--spec) 55%, transparent); outline-offset: 0; }
+.spec-layer { position: absolute; left: 0; top: 0; z-index: 44; pointer-events: none; }
+.spec-label {
+  position: absolute; left: 0; top: 0; padding: var(--s-1); border-radius: var(--r-xs) var(--r-xs) 0 0;
+  background: var(--accent); color: #fff; font: 500 var(--mono-xs)/1 var(--f-mono); font-variation-settings: "wdth" 87.5; letter-spacing: -.01em; white-space: nowrap;
+  opacity: 0; transition: opacity var(--dur-1) var(--ease);
+}
+.is-inspect .spec-label { opacity: 1; transition: opacity var(--dur-2) var(--ease) var(--sd, 0ms); }
+.spec-label.is-side { border-radius: var(--r-xs); }   /* dans la marge de gauche, à côté du bloc */
+/* sans place libre autour du bloc : caché, montré au survol ou à la sélection du bloc (main.js) */
+.is-inspect .spec-label.is-deferred { opacity: 0; transition-delay: 0ms; }
+.is-inspect .spec-label.is-deferred.is-shown { opacity: 1; }
+.is-inspect .topbar::before { opacity: 1; }
+.is-inspect main, .is-inspect .foot { cursor: crosshair; }
+/* en mode Inspecter, les messages passent en haut */
+.toast.toast--top { top: calc(var(--top-h) + 30px); bottom: auto; width: max-content; max-width: calc(100vw - 32px); text-align: center; border-radius: var(--r-md); translate: -50% -12px; }
+.toast.toast--top.is-on { translate: -50% 0; }
+
+/* Panneau des propriétés (Dev Mode) : à droite, sous la règle, au-dessus des cadres */
+.inspect-panel {
+  position: fixed; right: 16px; top: calc(var(--top-h) + 30px); z-index: 72;
+  width: 300px; max-height: calc(100svh - var(--top-h) - 46px); overflow: auto; overscroll-behavior: contain;
+  background: var(--paper-2); border: 1px solid var(--line); border-radius: var(--r-md);
+  font-size: var(--mono-xs); line-height: 1.5; letter-spacing: -.01em; color: var(--ink-2);
+  scrollbar-width: thin; scrollbar-color: var(--paper-3) transparent;
+  opacity: 0; transform: translateX(12px); transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+}
+.inspect-panel.is-on { opacity: 1; transform: none; }
+/* il couvrirait l'élément focalisé ou sélectionné : il glisse au bord gauche
+   (--ip-dx, main.js), à la souris seulement ; au doigt, il monte du bas */
+@media (hover: hover) {
+  .inspect-panel.is-left { transform: translateX(calc(var(--ip-dx, 0px) - 12px)); }
+  .inspect-panel.is-left.is-on { transform: translateX(var(--ip-dx, 0px)); }
+}
+.ip-head { position: sticky; top: 0; z-index: 1; padding: var(--s-3) var(--s-3) var(--s-2); background: var(--paper-2); border-bottom: 1px solid var(--line); }
+.ip-grab { display: none; }
+.ip-title { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); }
+.ip-name { font-size: var(--mono-s); color: var(--ink); overflow-wrap: anywhere; }
+.ip-close { flex: none; position: relative; width: var(--h-xs); height: var(--h-xs); display: grid; place-items: center; border-radius: var(--r-xs); color: var(--ink-2); transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease); }
+.ip-close svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.4; }
+.ip-crumbs { display: flex; flex-wrap: wrap; margin-top: var(--s-1); color: var(--ink-3); }
+.ip-crumbs li + li::before { content: "/"; margin: 0 var(--s-1); color: var(--ink-4); }
+.ip-crumbs button { color: var(--ink-3); transition: color var(--dur-1) var(--ease); }
+.ip-block { padding: var(--s-3); border-bottom: 1px solid var(--line); }
+.ip-block:last-of-type { border-bottom: 0; }
+.ip-eyebrow { margin-bottom: var(--s-2); font: inherit; color: var(--ink-3); }
+.ip-fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-1); }
+.ip-fields div { display: flex; justify-content: space-between; gap: var(--s-2); padding: var(--s-1) var(--s-2); border: 1px solid var(--line); border-radius: var(--r-xs); background: var(--paper); }
+.ip-fields span, .ip-rows dt { color: var(--ink-3); }
+.ip-fields b, .ip-rows dd { font-weight: 400; color: var(--ink); }
+/* modèle de boîte : marge en pointillé, retrait en trait plein, taille du contenu au centre */
+.ip-m, .ip-p { position: relative; display: grid; grid-template-columns: 30px 1fr 30px; align-items: center; text-align: center; border-radius: var(--r-xs); }
+.ip-m { padding: 2px; border: 1px dashed var(--ink-4); }
+.ip-p { border: 1px solid var(--ink-4); background: var(--paper); }
+.ip-m > .ip-v, .ip-p > .ip-v { color: var(--ink); padding: 2px 0; }
+.ip-m > .ip-v.is-0, .ip-p > .ip-v.is-0 { color: var(--ink-3); }
+.ip-m > .t, .ip-p > .t { grid-column: 2; }
+.ip-m > .b, .ip-p > .b { grid-column: 2; grid-row: 3; }
+.ip-m > .l, .ip-p > .l { grid-column: 1; grid-row: 2; }
+.ip-m > .r, .ip-p > .r { grid-column: 3; grid-row: 2; }
+.ip-m > .ip-p, .ip-p > .ip-c { grid-column: 2; grid-row: 2; }
+.ip-cap { position: absolute; left: 5px; top: 2px; font-size: var(--mono-xs); color: var(--ink-3); }
+.ip-c { margin: 2px 0; padding: var(--s-2) var(--s-1); border-radius: var(--r-2xs); background: var(--paper-3); color: var(--ink); white-space: nowrap; }
+.ip-type { display: grid; grid-template-columns: 64px 1fr; gap: var(--s-3); align-items: center; }
+.ip-ag { display: grid; place-items: center; height: 64px; border: 1px solid var(--line); border-radius: var(--r-xs); background: var(--paper); color: var(--ink); font-size: 28px; line-height: 1; letter-spacing: 0; }
+.ip-rows div { display: flex; justify-content: space-between; gap: var(--s-2); }
+.ip-rows dd { text-align: right; overflow-wrap: anywhere; }
+.ip-colors li { display: grid; grid-template-columns: 14px auto 1fr auto; align-items: center; gap: var(--s-2); }
+.ip-colors li + li { margin-top: var(--s-1); }
+.ip-colors .ip-sw { width: 14px; height: 14px; border-radius: var(--r-2xs); box-shadow: inset 0 0 0 1px var(--line); }
+.ip-colors span { color: var(--ink-3); }
+.ip-colors b { font-weight: 400; color: var(--accent-t); overflow-wrap: anywhere; }
+.ip-colors code { font: inherit; color: var(--ink); }
+.ip-code { margin: 0; padding: var(--s-3); max-height: 220px; overflow: auto; border-radius: var(--r-xs); background: var(--code-bg); color: #dfe5ff; font: inherit; white-space: pre-wrap; overflow-wrap: anywhere; scrollbar-width: thin; }
+.ip-code > span { display: block; padding-left: 4ch; text-indent: -4ch; white-space: pre-wrap; overflow-wrap: break-word; }   /* retrait suspendu : une ligne coupée ne repart pas en colonne 0 */
+.ip-code > span:empty { min-height: 1.5em; }
+.ip-code .ip-nw { white-space: nowrap; }
+/* « Copier le CSS » toujours visible : barre collée en bas du panneau, quelle que soit sa hauteur */
+.ip-foot { position: sticky; bottom: 0; z-index: 1; padding: var(--s-3); background: var(--paper-2); border-top: 1px solid var(--line); }
+.ip-copy { position: relative; width: 100%; height: var(--h-s); border: 1px solid var(--line); border-radius: var(--r-pill); color: var(--ink); transition: border-color var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease); }
+@media (hover: hover) {
+  .ip-close:hover { background: var(--paper-3); color: var(--ink); }
+  .ip-crumbs button:hover { color: var(--ink); }
+  .ip-copy:hover { border-color: var(--ink-4); }
+}
+@media (max-width: 1199px) { .inspect-panel { width: 268px; } }
+
+/* Au doigt : bouton carré dans la barre du haut, pastille « Quitter » sous
+   la barre, panneau qui monte du bas (la barre du bas s'efface pendant ce temps) */
+.inspect-touch { width: var(--h-s); height: var(--h-s); border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); transition: background-color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease); }
+.inspect-touch svg { width: 14px; height: 14px; }
+.inspect-touch rect { fill: none; stroke: currentColor; stroke-width: 1.2; }
+.inspect-touch path { fill: var(--paper); stroke: currentColor; stroke-width: 1; transition: fill var(--dur-1) var(--ease); }
+.inspect-touch[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.inspect-touch[aria-pressed="true"] path { fill: var(--accent); }
+.inspect-chip { display: none; }
+@media (hover: none) {
+  .ruler { display: none; }
+  .inspect-chip {
+    position: fixed; left: 50%; top: calc(var(--top-h) + 10px); z-index: 52;
+    display: flex; align-items: center; gap: var(--s-3); padding: var(--s-1) var(--s-1) var(--s-1) var(--s-4); white-space: nowrap;
+    border-radius: var(--r-pill); background: var(--accent); color: #fff;
+    translate: -50% -8px; opacity: 0; visibility: hidden;
+    transition: opacity var(--dur-1) var(--ease), translate var(--dur-2) var(--ease), visibility 0s var(--dur-2);
+  }
+  .is-inspect .inspect-chip { opacity: 1; visibility: visible; translate: -50% 0; transition: opacity var(--dur-1) var(--ease), translate var(--dur-2) var(--ease); }
+  .inspect-chip button { position: relative; height: var(--h-s); padding: 0 var(--s-3); border-radius: var(--r-pill); background: rgba(255,255,255,.18); color: #fff; }
+  .inspect-chip button::after { content: ""; position: absolute; inset: -6px -4px; }   /* 44 px de haut */
+  .inspect-chip button:active { background: rgba(255,255,255,.3); }
+  .toast.toast--top { top: calc(var(--top-h) + 62px); }   /* sous la pastille */
+  .inspect-panel {
+    left: 0; right: 0; top: auto; bottom: 0; width: auto; max-height: 45svh;
+    border-width: 1px 0 0; border-radius: var(--r-lg) var(--r-lg) 0 0;
+    padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);   /* hors des encoches, à l'horizontale */
+    opacity: 1; transform: translateY(100%); transition: transform var(--dur-2) var(--ease);
+  }
+  .inspect-panel.is-on { transform: none; }
+  /* sélection : de la place sous la page, pour qu'un élément du bas remonte au-dessus du panneau (main.js) */
+  .has-sel body { padding-bottom: 45svh; }
+  /* le premier message (sélection au toucher) se pose sur le panneau, pas sur la page */
+  .has-sel .toast.toast--top { top: auto; bottom: calc(45svh + 12px); }
+  .ip-head { padding-top: var(--s-4); touch-action: none; }
+  .ip-grab { display: block; position: absolute; top: 7px; left: 50%; width: 36px; height: 4px; translate: -50% 0; border-radius: var(--r-pill); background: var(--paper-3); }
+  .ip-close::after { content: ""; position: absolute; inset: -10px; }
+  .ip-copy::after { content: ""; position: absolute; inset: -6px 0; }
+  .ip-close:active, .ip-copy:active { background: var(--paper-3); }
+}
+/* téléphone à l'horizontale : la pastille s'efface pendant une sélection (le
+   bouton de la barre et la croix du panneau font sortir), la page garde la place */
+@media (hover: none) and (orientation: landscape) and (max-height: 520px) {
+  .has-sel .inspect-chip { opacity: 0; visibility: hidden; translate: -50% -8px; transition: opacity var(--dur-1) var(--ease), translate var(--dur-2) var(--ease), visibility 0s var(--dur-2); }
+  .has-sel .toast.toast--top { top: calc(var(--top-h) + 10px); bottom: auto; }   /* à la place de la pastille */
+}
+
+/* Aperçu du mode Inspecter, une fois par session : un cadre de sélection
+   se trace autour du nom, puis la touche I du bouton s'allume */
+.cameo { position: absolute; z-index: 1; pointer-events: none; transition: opacity var(--dur-2) var(--ease); }
+.cameo-line { position: absolute; border: 0 dashed var(--spec); transition: transform var(--dur-2) var(--ease); }
+.cameo .t, .cameo .b { left: 0; right: 0; border-top-width: 1px; transform-origin: 0 50%; transform: scaleX(0); }
+.cameo .l, .cameo .r { top: 0; bottom: 0; border-left-width: 1px; transform-origin: 50% 0; transform: scaleY(0); }
+.cameo .t { top: 0; }
+.cameo .b { bottom: 0; }
+.cameo .l { left: 0; }
+.cameo .r { right: 0; }
+.cameo.is-on .cameo-line { transform: scale(1); }
+.cameo-tag {
+  /* posée sur le bord pointillé, fond de page : masque le filet des métadonnées
+     juste au-dessus au lieu de s'y superposer, et garde de l'air sous la ligne de statut */
+  position: absolute; left: 0; bottom: 100%; padding: 0 var(--s-2) var(--s-1) 0; background: var(--paper);
+  font-size: var(--mono-xs); line-height: 1; letter-spacing: 0; white-space: nowrap; color: var(--spec);
+  opacity: 0; transition: opacity var(--dur-1) var(--ease) var(--dur-1);
+}
+.cameo.is-on .cameo-tag { opacity: 1; }
+.cameo.is-out { opacity: 0; }
+.inspect-btn kbd.is-nudge { animation: nudge var(--dur-3) var(--ease); }
+/* raccourcis à une touche coupés (fenêtre ?) : le I du bouton s’éteint comme dans la fenêtre */
+.keys-off .inspect-btn kbd { opacity: .4; }
+@keyframes nudge { 50% { background: var(--accent); color: #fff; } }
+
+@media (hover: none) {
+  .inspect-btn { display: none; }
+  /* un glissement horizontal sur le nom étire les lettres, le vertical fait défiler */
+  .name, .mail { touch-action: pan-y pinch-zoom; }
+  .links a:active, .mail-copy:active, .case-nav > :active, .theme-btn:active, .inspect-touch:not([aria-pressed="true"]):active { background: var(--paper-3); }
+  .links a:active, .live a:active, .case-site:active, .case-share:active { --mw: 94; }
+  /* poignée : la fiche se glisse vers le bas */
+  .case-bar { padding-top: var(--s-4); }
+  .case-bar::before { content: ""; position: absolute; top: 6px; left: 50%; width: 36px; height: 4px; translate: -50% 0; border-radius: var(--r-pill); background: var(--paper-3); }
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1100px) {
+  .lab { grid-template-columns: 1fr 1fr; }
+  .lab-stage { grid-column: 1 / -1; grid-row: 1; }
+  .method-note { grid-column: 1 / span 9; }
+  .contexts p { grid-column: 3 / span 6; }
+  .contexts button { grid-column: 9 / span 4; }
+  .sec-title { grid-column: 1 / span 9; }
+  .sec-note { grid-column: 1 / span 6; text-wrap: pretty; }   /* sept lignes : balance n'agit plus, pretty garde deux mots en dernière ligne */
+  .hero-side { grid-column: 1 / span 8; max-width: none; }
+  .work-head span:nth-child(2), .work-row .ttl { grid-column: 2 / span 7; }
+  .work-head span:nth-child(3), .work-row .kind { grid-column: 9 / span 3; }
+  .work-head span:nth-child(4), .work-row .role { display: none; }
+  .kit-title { padding-top: 0; margin-bottom: var(--s-3); }
+  .kit-title, .kit-table { grid-column: 1 / -1; }
+  /* libellés sous la carte CV (colonnes 1 à 5), valeurs sur le texte de la frise */
+  .kit-table dt { grid-column: 1 / span 5; justify-self: start; text-align: left; }
+  .kit-table dd { grid-column: 6 / -1; }
+  /* parcours : date et étiquette sur la première ligne, le texte dessous sur toute
+     la largeur (sur trois colonnes, il ne restait que 158 px à 768 px) */
+  .timeline li { grid-template-columns: 1fr auto; column-gap: var(--s-4); row-gap: var(--s-2); }
+  .timeline li > div { grid-column: 1 / -1; }
+  .timeline .tag { grid-column: 2; grid-row: 1; justify-self: end; }
+  /* fiche : pitch sur 10 colonnes, sections en lignes (titre à gauche, texte à droite), aside empilé */
+  .case-intro .pitch { grid-column: 1 / span 10; }
+  .case-cols section, .case-cols--2 section, .case-cols--4 section { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--col-gap); }
+  .case-cols h3 { grid-column: 1 / span 4; }
+  .case-cols p { grid-column: 5 / -1; max-width: 56ch; }
+  .g-inset { grid-column: 1 / -1; }
+  .g-aside .g-row, .g-aside figcaption { grid-column: 1 / -1; }
+  .g-aside figcaption { margin-top: var(--s-3); }
+}
+@media (max-width: 760px) {
+  /* sections resserrées (72 px, sur la grille de 4 colonnes : le hero n'ajoute rien sous
+     « En ligne », 72 px jusqu'au sur-titre des Travaux). Au premier écran de 390 × 844,
+     le hero seul : les Travaux commencent au premier défilement */
+  :root { --topbar: 56px; --section: 72px; --t-body: 16px; }
+  html { scroll-padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px); }   /* barre du bas : 64 px + marge */
+  .grid12 { display: block; }
+  .topbar-in { grid-template-columns: 1fr auto; }
+  .nav { display: none; }
+  .hero { min-height: 0; padding-top: calc(var(--top-h) + var(--s-5)); padding-bottom: 0; }
+  /* les liens en ligne finissent le hero : leurs zones de 44 px passent au-dessus des Travaux */
+  .hero .live { position: relative; z-index: 1; }
+  /* infos du recruteur lisibles au doigt : statut 13 px, adresse 14 px, réponses 16 px */
+  .status { font-size: 13px; }
+  .mail-addr { font-size: 14px; }
+  /* l'adresse garde sa ligne ; « Copier » passe dessous s'il manque de place (320 px),
+     24 px plus bas : les zones de 44 px de l'adresse et du bouton ne se touchent pas */
+  .mail-line { flex-wrap: wrap; row-gap: var(--s-5); }
+  .hero-meta { flex-direction: column; gap: var(--s-1); }
+  .name-photo-tag { display: none; }
+  .brief { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3) var(--col-gap); }
+  .brief-cell { grid-column: auto; }
+  .brief-cell:first-child { grid-column: 1 / -1; }
+  /* 16 px, chasse 90 : lisibles d'abord. Dans les cellules de deux colonnes, une réponse
+     longue passe sur deux lignes (équilibrées) sous 430 px environ ; 374 px et moins : voir plus bas */
+  .brief dd { font-size: 16px; font-variation-settings: "wdth" 90; text-wrap: balance; }
+  .lede { line-height: 1.38; margin-bottom: var(--s-5); }
+  .cta-row { grid-template-columns: 1fr; }
+  .cta-row .btn { justify-content: center; }
+  .live-label { flex-basis: 100%; }   /* « En ligne » au-dessus : les trois liens tiennent sur une ligne dès 375 px au doigt (voir plus bas), 390 px à la souris */
+  .sec-head { display: block; }
+  /* 44 px dès 350 px ; en dessous, la taille suit l'écran : « Un composant, » tient
+     sur sa ligne à la chasse 86 et l'animation 74 → 86 n'ajoute jamais de ligne */
+  .sec-title { font-size: min(44px, 12.6vw); }
+  .eyebrow { margin-bottom: var(--s-4); }
+  .sec-note { margin-top: var(--s-4); padding-bottom: 0; text-wrap: pretty; }   /* sept lignes et plus : balance n'agit plus */
+  .work-head { display: none; }
+  .work-row { grid-template-columns: 30px 1fr auto; row-gap: var(--s-2); }
+  .work-row .n { grid-column: 1; grid-row: 1 / span 2; align-self: start; padding-top: .45em; }
+  .work-row .ttl { grid-column: 2 / span 2; }
+  .work-row .kind { grid-column: 2; grid-row: 2; }
+  .work-row .role { display: none; }
+  .work-row .yr { grid-column: 3; grid-row: 2; }
+  .work-list--thumbs .work-row { --thumb-w: 56px; }
+  .peek { display: none; }
+  /* playground : canevas en tête et collant sous la barre, pour voir le bouton
+     changer pendant qu'on règle les curseurs ; puis Propriétés, puis le code */
+  .lab { grid-template-columns: 1fr; }
+  /* la bande de 8 px au-dessus du canevas collant est peinte couleur page : rien ne s'y montre */
+  /* bord du bas net : les curseurs passent dessous (filet et ombre courte), jamais coupés à nu */
+  .lab-stage { position: sticky; top: calc(var(--top-h) + var(--s-2)); z-index: 2; min-height: 168px; padding-block: var(--s-3); border-bottom: 1px solid var(--line); box-shadow: 0 -8px 0 var(--paper), 0 12px 16px -12px rgba(0, 0, 0, .6); }
+  :root[data-theme="light"] .lab-stage { box-shadow: 0 -8px 0 var(--paper), 0 12px 16px -12px rgba(20, 36, 77, .18); }
+  /* son filet recouvre celui de la grille (un seul trait au repos) ; dessous, 24 px de fondu
+     couleur des Propriétés : un curseur qui passe sous le canevas s'efface, il n'est pas coupé
+     net en demi-disque. Au repos, le fondu tombe sur la marge du panneau (invisible) */
+  .lab-stage { margin-bottom: -1px; }
+  .lab-stage::after { content: ""; position: absolute; left: 0; right: 0; top: calc(100% + 1px); height: var(--s-5); background: linear-gradient(var(--paper-2) 25%, transparent); pointer-events: none; }
+  /* le code passe par-dessus le canevas collant : « Voir le code généré », les onglets
+     et Copier ne sont jamais cachés dessous (640 × 360, zoom 400 %) */
+  .lab-code { z-index: 3; }
+  .lab-stage .lab-label { margin-bottom: 0; }
+  .stage { min-height: 124px; }
+  /* un réglage atteint au clavier ou par un lien s'arrête sous le canevas collant :
+     s'ajoute au scroll-padding de html (barre du haut + 12 px), soit barre + 190 px */
+  .lab-props input, .lab-props button { scroll-margin-top: 178px; }
+  .contexts .mono { display: block; margin-bottom: var(--s-2); }
+  .contexts p { margin-bottom: var(--s-3); }
+  .cv-card { position: static; max-width: 264px; margin-bottom: var(--block); }
+  .timeline { padding-left: var(--s-5); }
+  .timeline li { gap: var(--s-2) var(--s-3); }   /* disposition : voir 1100 px */
+  .timeline li::before { left: calc(var(--s-5) * -1); }
+  .kit-table { display: block; }
+  .kit-table div { grid-template-columns: 1fr; gap: var(--s-1); }
+  .kit-table dt, .kit-table dd { grid-column: auto; padding-left: 0; }
+  .contact-row { flex-direction: column; align-items: stretch; }
+  .mail-sub { flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+  .links { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--col-gap); width: 100%; }   /* sur les colonnes de la grille */
+  .links a { display: flex; justify-content: space-between; }
+  .case-cols section { margin-bottom: var(--gap-group); }
+  /* fiche : méta en 2 × 2 ; visuel du haut bord à bord (site : un téléphone sur le canevas,
+     en 4:5), légende dessous sur une ligne : nom à gauche, dimensions à droite */
+  .case-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case-hero { margin-inline: calc(var(--pad-l) * -1) calc(var(--pad-r) * -1); }
+  .case-hero .frame { border-radius: 0; outline: none; }
+  .case-hero.is-site .frame { aspect-ratio: 4 / 5; }
+  .hero-desk { display: none; }
+  .hero-mob { display: flex; }
+  .frame-label { position: static; display: flex; justify-content: space-between; gap: var(--s-3); padding: var(--s-2) var(--pad-r) 0 var(--pad-l); }
+  .frame-label span { position: static; margin: 0 !important; }
+  /* galerie : une colonne, 24 px entre les figures */
+  .g-grid { display: flex; flex-direction: column; align-items: stretch; gap: var(--gap-group); }
+  .g-head { margin: var(--s-4) 0 0; }
+  .g-pair .g-row, .g-browser-pair .g-canvas { grid-template-columns: 1fr; }
+  .g-item img { border-radius: var(--r-sm); }
+  .g-canvas { padding: var(--s-3); gap: var(--s-4); }
+  .browser-bar { height: var(--h-xs); grid-template-columns: 30px 1fr 30px; padding: 0 var(--s-2); }
+  .browser-dots { gap: 4px; }
+  .browser-dots i { width: 6px; height: 6px; }
+  .g-aside { display: block; }
+  .g-aside figcaption { margin-top: var(--s-3); }
+  /* téléphones : une rangée qui défile, le suivant dépasse (il y a une suite) */
+  .g-phone-row { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; gap: var(--s-4); padding: var(--s-5) var(--pad-r) var(--s-5) var(--pad-l); margin-inline: calc(var(--pad-l) * -1) calc(var(--pad-r) * -1); border-radius: 0; scrollbar-width: none; }
+  .g-phone-row .phone { flex: 0 0 62vw; width: auto; scroll-snap-align: center; }
+  .case-next { grid-template-columns: 1fr 96px; column-gap: var(--s-4); }
+  .case-next-txt, .case-next-cover { grid-column: auto; }
+  .case-next-cover { border-radius: var(--r-sm); }
+  .case-kind { display: none; }
+  .foot { padding-bottom: calc(var(--h-m) + var(--s-6) + var(--s-2)); }   /* barre du bas (54 + 10) et 20 d'air */
+  /* Inspecter : grille de 4 colonnes, sans règles */
+  .ruler { display: none; }
+  .grid-overlay .grid12 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid-overlay .grid12 > span:nth-child(n+5) { display: none; }
+
+  .dock {
+    display: flex; position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); z-index: 55;
+    width: max-content; max-width: calc(100vw - 16px);   /* sa largeur de contenu : les liens ne passent à la ligne qu'au bord de l'écran */
+    translate: -50% 0; padding: var(--s-1); gap: 2px; border-radius: 28px;   /* 28 : la pilule sur une ligne, des coins arrondis sur deux */
+    background: color-mix(in oklab, var(--paper-2) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+    border: 1px solid var(--line);
+    box-shadow: 0 12px 30px -12px rgba(0,0,0,.5);
+    transition: transform var(--dur-3) var(--ease), opacity var(--dur-3) var(--ease), visibility 0s;
+  }
+  /* cibles de 44 px de haut */
+  /* espacement du texte forcé : deux lignes plutôt que hors de l'écran (WCAG 1.4.12) */
+  .dock .nav-list { min-width: 0; flex-wrap: wrap; justify-content: center; }
+  .dock a { position: relative; z-index: 1; display: inline-flex; align-items: center; min-height: var(--h-m); padding: 0 var(--s-4); border-radius: var(--r-pill); font-family: var(--f-mono); font-size: var(--mono-s); letter-spacing: -.01em; font-variation-settings: "wdth" 87.5; color: var(--ink-2); transition: color var(--dur-2) var(--ease); }
+  .dock a.is-active { color: #fff; }
+  .dock .nav-ind { top: 4px; bottom: 4px; background: var(--accent); }
+  /* en descendant, la barre s'efface (main.js) ; elle reste là tant qu'elle a le focus clavier.
+     Même chose sous une fiche ouverte et sous le panneau de l'Inspecter */
+  .dock.dock-hidden:not(:focus-within), .no-scroll .dock, .has-sel .dock { transform: translateY(calc(100% + 28px)); opacity: 0; }
+  /* sous le panneau de l'Inspecter, ses liens quittent aussi l'ordre de tabulation */
+  .has-sel .dock { visibility: hidden; transition: transform var(--dur-3) var(--ease), opacity var(--dur-3) var(--ease), visibility 0s var(--dur-3); }
+  .toast { bottom: calc(env(safe-area-inset-bottom, 0px) + 72px); }   /* au-dessus de la barre du bas */
+}
+/* moins de 560 px : la barre de la fiche tient sur une ligne, au doigt comme à
+   la souris. « Site ↗ » au lieu de « Voir le site ↗ », « Lien » réduit à son
+   icône (nom : libellé masqué + sr-only), sans la touche Échap (toujours active, listée par ?). */
+@media (max-width: 559px) {
+  .case-bar { gap: var(--s-2); }
+  .case-nav { gap: var(--s-1); }
+  .case-site-lg { display: none; }
+  /* masqué à l'écran mais gardé dans le nom accessible (« Lien », puis « Copié ») */
+  .case-share-lbl { position: absolute; width: 1px; height: 1px; min-width: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .case-site-sm { display: inline; }
+  .case-nav > .case-share { width: var(--h-s); padding: 0; justify-content: center; }
+  .case-close kbd { display: none; }
+}
+/* écrans de 320 à 374 px : marges intérieures réduites, les quatre liens de la barre
+   du bas, la barre de la fiche et la pastille de l'Inspecter restent dans l'écran en 12 px */
+/* à la souris, la gouttière de défilement retire 15 px : la fiche de 375 à 389 px a la place d'une fiche de 360 */
+@media (max-width: 389px) and (pointer: fine) { .case-nav > * { padding: 0 var(--s-2); } }
+@media (max-width: 374px) {
+  .dock a { padding: 0 var(--s-2); }
+  .case-nav > * { padding: 0 var(--s-2); }
+  /* pastille du mode Inspecter : tient dans l'écran avec « Quitter » */
+  .inspect-chip { gap: var(--s-2); padding-left: var(--s-3); }
+  /* réponses du brief plus étroites, jamais sous la chasse 84 (lisibilité) : à 320 px,
+     une réponse peut passer sur deux lignes */
+  .brief dd { font-variation-settings: "wdth" 84; }
+}
+/* 375 × 812 : 16 px de moins au-dessus du nom et sous l'intro, les deux boutons tiennent dans le premier écran */
+@media (max-width: 389px) and (max-height: 820px) and (orientation: portrait) {
+  .hero { padding-top: calc(var(--top-h) + var(--s-4)); }
+  .lede { margin-bottom: var(--s-4); }
+}
+/* téléphone en portrait peu haut (320 × 640, 360 × 740, 390 × 664 avec les barres
+   du navigateur) : les deux boutons du hero tiennent dans le premier écran.
+   Brief en liste de propriétés (libellé à gauche), sans les horloges, texte en 16 px */
+@media (max-width: 760px) and (max-height: 740px) and (orientation: portrait) {
+  .hero { padding-top: calc(var(--top-h) + var(--s-4)); }
+  .meta-clocks { display: none; }
+  .brief { display: block; }
+  .brief-cell { display: grid; grid-template-columns: 104px 1fr; column-gap: var(--s-2); align-items: baseline; padding-block: var(--s-1); }
+  .brief-cell:last-child { border-bottom: 1px solid var(--line); }
+  .brief dd { margin-top: 0; line-height: 1.25; font-variation-settings: "wdth" 84; }
+  .hero-foot { margin-top: var(--s-3); }
+  .lede { font-size: var(--t-body); line-height: 1.35; margin-bottom: var(--s-3); }
+  .cta-row { gap: var(--s-2); }
+}
+/* moins de 360 px seulement : ces barres passent en mono-xs (11,5 px) */
+@media (max-width: 359px) {
+  .dock a, .case-idx, .case-nav > *, .inspect-chip { font-size: var(--mono-xs); }
+  /* pastille de l'Inspecter : 6 px d'air de chaque côté à 320 px */
+  .inspect-chip { letter-spacing: -.02em; }
+  .inspect-chip button { padding: 0 var(--s-2); }
+  /* « type · année » sur deux lignes, sans point en bout de ligne */
+  .work-list--thumbs .meta .sep { display: none; }
+  .work-list--thumbs .meta-yr { display: block; }
+}
+/* 340 px et moins : la barre de la fiche reste sur une ligne (même hauteur pour
+   tous les projets), écarts et marges des boutons resserrés */
+@media (max-width: 340px) {
+  .case-bar { gap: var(--s-1); }
+  .case-nav > * { padding: 0 var(--s-1); }
+  /* « Voir le projet sur Behance » tient dans la fiche (320 px, à la souris comme au doigt) */
+  .case-actions .btn { padding-inline: var(--s-3); }
+  /* playground : « Copier » réduit à son icône (le libellé reste lu), les trois onglets gardent leur place */
+  .lab-copy { width: var(--h-s); padding: 0; justify-content: center; }
+  .lab-copy-lbl { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+/* Au doigt : cibles d'au moins 44 × 44 px, dessin inchangé. Zone de clic
+   invisible autour du bouton de thème et des flèches de la fiche ; le CV du
+   haut coupe ce qui dépasse (overflow du remplissage) : bordure transparente,
+   fond limité à l'intérieur, marge négative pour garder la même place. */
+@media (pointer: coarse) {
+  .theme-btn, .inspect-touch, .case-nav > * { position: relative; }
+  /* le décalage part de l'intérieur de la bordure de 1 px : 32 + 2 × (7 - 1) = 44 ;
+     12 px entre les outils du haut, pour que deux zones voisines ne se chevauchent pas */
+  .theme-btn::after, .inspect-touch::after, .case-nav > ::after { content: ""; position: absolute; inset: -7px; }
+  .g-play::after { content: ""; position: absolute; inset: -6px; }   /* bouton Pause : 44 px au doigt */
+  .tools { gap: var(--s-3); }
+  /* boutons de la fiche, 32 px de haut : 44 px ; sur les côtés, la moitié de l'écart
+     (une zone qui déborde sur le bouton voisin lui volerait ses taps) */
+  .case-nav > ::after { inset: -7px -4px; }
+  /* CV : 44 px de haut, 32 visibles (bordure transparente de 6 px, 4 sur les côtés) */
+  .tools .btn--sm { --h: var(--h-m); margin: -6px -4px; border: solid transparent; border-width: 6px 4px; background-clip: padding-box; }
+  .foot a { padding: var(--s-3) 0; }
+  .mail-copy { position: relative; }
+  .mail-copy::after { content: ""; position: absolute; inset: -7px -4px; }   /* 32 px de haut : 44 px au doigt */
+  /* liens des sites en ligne : 45 px de haut, sans chevaucher le voisin (écart de 12 px) */
+  .live a { position: relative; }
+  .live a::after { content: ""; position: absolute; inset: -13px -6px; }
+  /* playground : curseurs de 44 px de haut (piste de 2 px, poignée de 24 px),
+     segments et onglets de 44 px en mono 12, pastilles de 32 px */
+  input[type="range"] { height: 44px; }
+  input[type="range"]::-webkit-slider-thumb { width: 24px; height: 24px; margin-top: -11px; }
+  input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; }
+  .seg button, [role="tab"] { min-height: var(--h-m); font-size: var(--mono-s); }
+  .swatches { --sw: 32px; --sw-gap: 10px; }
+  .lab-reset, .lab-copy, .contexts button { position: relative; }
+  .lab-reset::after, .lab-copy::after, .contexts button::after { content: ""; position: absolute; inset: -12px -6px; }
+  .lab-reset::after { inset: -14px -6px; }   /* texte de 17 px : 45 px de haut */
+  .lab-copy::after { inset: -7px -6px; }   /* 32 px de haut : 44 px */
+  /* pastilles de 32 px : 42 × 44 (l'écart de 10 px borne la largeur, sans chevauchement) ;
+     liens du CV (19 px) : 45 × 8 px de plus sur les côtés (écart de 20 px, sans chevauchement) ;
+     adresse mail : 44 px ; logo du haut (barre de 56 px) */
+  .swatches button, .cv-acts a, .mail-addr, .brand { position: relative; }
+  .swatches button::after, .cv-acts a::after, .mail-addr::after, .brand::after { content: ""; position: absolute; }
+  .swatches button::after { inset: -6px -5px; }
+  .cv-acts { gap: 20px; }
+  .cv-acts a::after { inset: -13px -8px; }
+  .mail-addr::after, .brand::after { inset: -11px -4px; }
+  /* fil d'Ariane de l'Inspecter : 32 px de haut (WCAG 2.5.8), 4 px entre deux rangées */
+  .ip-crumbs { gap: 4px 0; }
+  .ip-crumbs button { min-height: 32px; padding: 0 6px; display: inline-flex; align-items: center; }
+}
+/* au doigt, un appui se voit : fond --paper-3 sous les liens et segments, pastille qui s'enfonce */
+@media (hover: none) {
+  .dock a:active, .foot a:active, .cv-acts a:active, [role="tab"]:active, .seg button:active { background: var(--paper-3); }
+  /* liens texte : le fond déborde un peu du mot (sans décaler la mise en page) */
+  .foot a:active, .cv-acts a:active { border-radius: var(--r-xs); box-shadow: 0 0 0 4px var(--paper-3); }
+  .swatches button { transition: scale var(--dur-1) var(--ease); }
+  .swatches button:active { scale: .92; }
+}
+/* au téléphone : 12 px entre les liens en ligne (zones de 6 px de chaque côté), ils
+   tiennent sur une ligne dès 375 px. En dessous, lez-go.fr passe à la ligne : 26 px
+   entre deux rangées, pour que la zone de 45 px d'un lien ne vole pas les taps de
+   celui du dessus. « En ligne » garde sa place (marge négative : sa rangée ne compte pas) */
+@media (pointer: coarse) and (max-width: 760px) {
+  .live { gap: 26px var(--s-3); }
+  .live-label { margin-bottom: -20px; }
+  .live a::after { inset: -13px -6px; }
+}
+/* moins de 560 px, écart de 4 px entre les boutons de la fiche : 2 px de chaque côté */
+@media (pointer: coarse) and (max-width: 559px) {
+  .case-nav > ::after { inset: -7px -2px; }
+}
+/* 360 à 559 px : « Lien » et les flèches en 40 px de large, 44 × 44 avec leur zone */
+@media (max-width: 559px) and (min-width: 360px) {
+  .case-nav > .case-share, .case-nav [data-step] { width: 40px; }
+}
+/* 340 à 379 px : les trois liens en ligne restent sur une rangée (chasse 78, qui ne
+   s'ouvre plus au survol ni au focus : leur largeur verrouillée ne change pas).
+   Sous 340 px, deux rangées à 16 px d'écart, zones de 35 px qui ne se touchent pas.
+   Liste des travaux : la mention « en ligne » passe toujours sous le titre */
+@media (max-width: 379px) {
+  .live a, .live a:focus-visible { --mw: 78; }
+  @media (hover: hover) { .live a:hover { --mw: 78; } }
+  .work-list--thumbs .live-tag { display: flex; margin: 4px 0 0; }
+}
+@media (pointer: coarse) and (max-width: 339px) {
+  .live { row-gap: 16px; }
+  .live-label { margin-bottom: -10px; }
+  .live a::after { inset: -8px -6px; }
+}
+/* moins de 360 px au doigt, trois boutons en haut (CV, Inspecter, thème) :
+   le nom reste sur une ligne, un peu plus étroit ; zones de 40 × 44 px pour
+   que deux voisines ne se chevauchent pas avec un écart de 8 px */
+@media (max-width: 359px) {
+  .brand { font-size: 14px; font-variation-settings: "wdth" 96; }   /* aussi à la souris (zoom à 400 %) */
+}
+@media (max-width: 359px) and (hover: none) {
+  .tools { gap: var(--s-2); }
+  .tools .btn--sm { padding: 0 var(--s-2); gap: var(--s-1); }
+  .theme-btn::after, .inspect-touch::after { inset: -7px -5px; }
+}
+/* tablettes : liens du haut de 44 px au doigt, la pilule garde ses 32 px visibles
+   (26 + 2 × 9 ; 1 px sur les côtés, l'écart de 2 px partagé entre voisins) */
+@media (min-width: 761px) and (pointer: coarse) {
+  .nav a::after { content: ""; position: absolute; inset: -9px -1px; }
+}
+/* téléphone à l'horizontale : le nom est borné par la hauteur (main.js), le hero suit son
+   contenu ; sans les horloges (le nom garde la place) */
+@media (orientation: landscape) and (max-height: 520px) {
+  .hero { min-height: 0; }
+  .meta-clocks { display: none; }
+}
+/* fenêtre peu haute : la carte du CV défile avec le parcours (collante, ses liens
+   Voir et Télécharger sortiraient de l'écran) */
+@media (max-height: 520px) {
+  .cv-card { position: static; }
+}
+/* téléphone peu haut : canevas collant du playground plus bas, plus de place aux curseurs */
+@media (max-width: 760px) and (max-height: 700px) {
+  .lab-stage { min-height: 140px; }
+  .stage { min-height: 100px; }
+}
+/* même téléphone, plus large que 760 px : propriétés à gauche, canevas à droite ;
+   la scène colle sous la barre pour voir le bouton pendant qu'on règle les curseurs */
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 761px) {
+  .lab { grid-template-columns: 1fr 1fr; }
+  .lab-props { grid-column: 1; grid-row: 1; }
+  .lab-stage { grid-column: 2; grid-row: 1; }
+  .lab-code { grid-column: 1 / -1; }
+  .lab-stage .stage { position: sticky; top: calc(var(--top-h) + 8px); flex: none; min-height: 0; height: min(240px, calc(100svh - var(--top-h) - 40px)); }
+}
+/* très grands écrans : la page s'élargit, les textes mono suivent */
+@media (min-width: 1920px) {
+  :root { --max: clamp(1680px, 86vw, 2080px); --mono-s: clamp(12px, .3vw + 7px, 14px); }   /* jamais plus étroit qu'à 1919 px */
+}
+/* mono-xs à 11,5 px au téléphone et au doigt : aucun texte sous 11,5 px */
+@media (max-width: 760px), (pointer: coarse) {
+  :root { --mono-xs: 11.5px; }
+}
+/* Téléphones : pas de flou d'arrière-plan (coûteux à chaque image de scroll).
+   Fonds pleins : sans flou, un fond translucide laisse lire le texte en dessous. */
+@media (max-width: 760px) and (pointer: coarse) {
+  .topbar::before, .dock, .case-bar { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .topbar::before, .case-bar { background: var(--paper); }
+  .dock { background: var(--paper-2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* aucune transition : même à .01ms, toutes les propriétés transitionnent
+     (transition-property vaut all par défaut), font-size compris, ce qui
+     fausse la mesure du nom ajusté */
+  *, *::before, *::after { animation-duration: .01ms !important; transition: none !important; }
+  /* états finaux tout de suite, sans attendre is-named */
+  .name .ch, .reveal, .work-row, .sec-title .ln > span, .case-body > *, .case-title .ln > span, .hero-meta > * { transform: none !important; opacity: 1 !important; }
+  .hero-meta::after, .eyebrow::after { transform: scaleX(1) !important; }
+  .name-photo { clip-path: none !important; }
+  .work-row .thumb { clip-path: none !important; transform: none !important; }
+  .case-gallery .g-item, .case-next img { opacity: 1 !important; transform: none !important; }
+  .name-photo img { --ps: 1 !important; }
+}
+
+/* ============ Impression ============
+   Trois pages A4 au plus, sur fond blanc, aux couleurs du CV : le nom et sa photo, la
+   fiche candidat, les huit projets en tableau, la méthode, le parcours, la
+   boîte à outils et le contact. Rien d'interactif, tout dans son état final ;
+   les liens externes impriment leur adresse. Dernière ligne : l'adresse mail. */
+@media print {
+  @page { margin: 14mm; }
+  :root, :root[data-theme="light"] {
+    --paper: #fff; --paper-2: #fff; --paper-3: #eef1fb;
+    --ink: #14244d; --ink-2: #434f78; --ink-3: #58648b; --ink-4: #8b96b6;
+    --line: rgba(20, 36, 77, .18);
+    --accent-t: #233df4; --spec: #233df4;
+    --code-bg: #f4f6ff;
+    --mono-xs: 8.5pt; --mono-s: 8.5pt;
+    color-scheme: light;
+  }
+  html, body { background: #fff; }
+  body { font-size: 9.5pt; line-height: 1.4; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .wrap { max-width: none; padding: 0; }
+
+  /* rien d'interactif ni de flottant */
+  .topbar, .dock, .peek, .grid-overlay, .ruler, .probe, .spec-layer, .sel-box,
+  .inspect-panel, .inspect-chip, .toast, .skip, .theme-btn, .inspect-btn, .keys,
+  .case, .lab-props, .lab-stage, .cameo, .contexts button svg, .cta-row, .meta-clocks, .no-print,
+  .name-photo-tag, .work-row .thumb, .work-row::before, .work-row .yr svg, .lab-code .lab-head,
+  .lab-details > summary, .cv-card, .rail, .timeline li::before, .mail, .mail-copy,
+  .mail-hint, .foot, .live a > span, .links a > span, .live a > .ic, .links a > .ic,
+  .links li:has(a[href^="mailto:"]), .links li:has(a[href$=".pdf"]) { display: none !important; }
+
+  /* états finaux, sans attendre le script */
+  .js .hero .name { visibility: visible; }
+  .reveal, .work-row, .name .ch, .sec-title .ln > span, .brief-cell, .hero-meta > *, .name-line { opacity: 1 !important; transform: none !important; }
+  .hero-meta::after, .eyebrow::after { transform: none !important; }
+  .name-photo { clip-path: none !important; }
+
+  a { color: #233df4; }
+  a[href^="http"]:not(.live a)::after { content: " " attr(href); font-size: 8.5pt; color: var(--ink-3); }
+  .mono { font-size: 8.5pt; }
+
+  /* nom : 44 pt ; la photo carrée reste collée à LOUIS */
+  .hero { min-height: 0; padding: 0 0 3mm; }
+  .hero-meta { flex-direction: row; padding-bottom: 2mm; margin-bottom: 3mm; }
+  .name { width: max-content; font-size: 44pt; }
+  .name-photo img { --ps: 1; }
+  .brief { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3mm; margin-top: 3mm; }
+  .brief-cell, .brief-cell:first-child { grid-column: auto; padding-top: 1.5mm; }
+  .brief dd { font-size: 9.5pt; font-variation-settings: "wdth" 100; }
+  .hero-foot { display: block; margin-top: 3mm; }
+  .lede { max-width: none; margin: 0 0 2mm; font-size: 11pt; }
+  .live { display: flex; gap: 0 4mm; }
+
+  /* têtes de section */
+  .work, .method, .path, .contact { padding: 4mm 0 0; }
+  .sec-head { display: block; margin-bottom: 2.5mm; break-inside: avoid; break-after: avoid; }
+  .eyebrow { margin-bottom: 2mm; }
+  .sec-title { font-size: 18pt; line-height: 1; letter-spacing: -.02em; }
+  .sec-title br { display: none; }
+  .sec-note { max-width: none; margin-top: 1.5mm; padding: 0; font-size: 9.5pt; }
+
+  /* travaux : n°, titre, type, rôle, année */
+  .work-head, .work-row { display: grid; grid-template-columns: 8mm minmax(0, 1fr) 42mm 52mm 12mm; column-gap: 3mm; align-items: baseline; }
+  .work-head { padding-bottom: 1.5mm; }
+  .work-head span, .work-row > * { grid-column: auto !important; grid-row: auto !important; }
+  .work-head span:nth-child(4), .work-row .role { display: block; }
+  .work-row { padding: 1mm 0; break-inside: avoid; }
+  .work-row .n, .work-list--thumbs .work-row .n { padding: 0; align-self: baseline; }
+  .work-row .ttl { font-size: 12pt; font-variation-settings: "wdth" 100; }
+  .work-row .yr { padding: 0; text-align: right; }
+  .work-row .kind, .work-row .role, .work-row .yr, .work-row .n { color: var(--ink-2); opacity: 1; }
+  .live-tag { margin-top: 0; }
+  /* liste rendue pour le doigt : « type · année » sous Type et Rôle, sans en-tête (pas de rôle) */
+  .work-head:has(+ .work-list--thumbs) { display: none; }
+  .work-list--thumbs .work-row { grid-template-columns: 8mm minmax(0, 1fr) 94mm; grid-template-rows: none; }
+  .work-list--thumbs .work-row > .meta { margin: 0; }
+
+  /* méthode : la note et les trois contextes à gauche, le code généré à droite */
+  .method .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 70mm; grid-template-rows: auto auto 1fr; column-gap: 6mm; align-items: start; }
+  .method .sec-head { grid-column: 1 / -1; }
+  .lab { grid-column: 2; grid-row: 2 / span 2; display: block; border-radius: var(--r-sm); break-inside: avoid; }
+  .lab-code { padding: 3mm 4mm; background: var(--code-bg); --code-fg: #14244d; }
+  .lab-code b { color: #233df4; }
+  .lab-code pre { max-height: none; overflow: visible; font-size: 8.5pt; line-height: 1.5; }
+  .method-intro { grid-column: 1; grid-row: 2; display: block; margin: 0; }
+  .method-note { max-width: none; font-size: 9.5pt; }
+  .contexts { grid-column: 1; grid-row: 3; margin-top: 2mm; }
+  .contexts li { display: grid; grid-template-columns: 16mm minmax(0, 1fr) auto; gap: 3mm; padding: 1mm 0; break-inside: avoid; }
+  /* le projet de chaque exemple reste, en texte simple */
+  .contexts button { grid-column: auto; padding: 0; border: 0; background: none; color: var(--ink-2); font: inherit; font-size: 9pt; }
+  .contexts li > .mono, .contexts li > p { grid-column: auto; }
+  .contexts .mono { display: block; margin: 0; }
+  .contexts p { font-size: 9.5pt; margin: 0; }
+
+  /* parcours : frise sans rail, dates à gauche */
+  .path-grid { display: block; }
+  .timeline { padding: 0; }
+  .timeline li { display: grid; grid-template-columns: 22mm minmax(0, 1fr) auto; gap: 3mm; padding: 1.6mm 0; break-inside: avoid; }
+  .timeline li > div { grid-column: auto; }
+  .timeline :is(time, .when) { text-align: left; justify-self: start; }
+  .timeline .tag { grid-column: auto; grid-row: auto; }
+  .timeline h3 { font-size: 10.5pt; }
+  .timeline p { margin-top: 1mm; font-size: 9pt; max-width: none; }
+  .kit { display: block; margin-top: 5mm; }
+  .kit-title { padding: 0; margin-bottom: 2mm; }
+  .kit-table div { grid-template-columns: 38mm 1fr; gap: 3mm; padding: 1mm 0; break-inside: avoid; }
+  .kit-table { display: block; }
+  .kit-table dt { justify-self: start; text-align: left; }
+  .kit-table dd { font-size: 9.5pt; padding-left: 0; }
+
+  /* contact : les profils, puis l'adresse mail en dernière ligne ; jamais seuls sur une page */
+  .contact .wrap { break-inside: avoid; }
+  .contact .eyebrow { margin-bottom: 2mm; }
+  .contact-kicker { font-size: 12pt; }
+  .contact-row { display: flex; flex-direction: column; align-items: flex-start; gap: 1.5mm; margin-top: 3mm; padding-top: 3mm; }
+  .links { order: -1; display: block; }
+  .links a { display: inline; padding: 0; border: 0; border-radius: 0; min-height: 0; }
+  .mail-sub { display: block; }
+  .mail-addr { font-size: 11pt; border: 0; padding: 0; }
+}

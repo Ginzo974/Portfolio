@@ -1,0 +1,3 @@
+# tests Playwright : gardés dans le dépôt, pas mis en ligne
+tests/
+.gitignore
