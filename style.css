@@ -663,7 +663,7 @@ html:not(.is-inspect) .work-row:focus-visible .yr svg { opacity: 1; transform: n
    visuel grossit à peine, le titre s'élargit (--tw) et passe en accent ; sa
    taille suit la carte (cqi) pour qu'à 118 il tienne encore sur sa ligne. */
 .work-head:has(+ .work-list--grid) { display: none; }
-.work-list--grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap-group) var(--col-gap); border-top: 0; }
+.work-list--grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(40px, 5vw, 80px) var(--col-gap); border-top: 0; }
 .work-list--grid > li { min-width: 0; }
 .work-list--grid .work-row {
   display: flex; flex-direction: column; align-items: stretch; gap: var(--s-4); height: 100%;
@@ -671,7 +671,7 @@ html:not(.is-inspect) .work-row:focus-visible .yr svg { opacity: 1; transform: n
   container-type: inline-size;
 }
 .work-list--grid .work-row::before { display: none; }
-.work-list--grid .card-cover { position: relative; display: block; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; }
+.work-list--grid .card-cover { position: relative; display: block; aspect-ratio: 808 / 632; border-radius: var(--r-md); overflow: hidden; }
 .work-list--grid .card-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-3) var(--ease); }
 /* filet au-dessus du visuel, comme les vignettes : bord lisible quand la couverture a la couleur du fond */
 .work-list--grid .card-cover::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--line); pointer-events: none; }
@@ -701,9 +701,9 @@ html:not(.is-inspect) .work-list--grid .work-row:focus-visible .card-cover img {
   .work-list--grid .work-row:active .ttl, .work-list--grid .work-row:active .n { color: var(--accent-t); }
   .work-list--grid .work-row:active .live-tag { color: var(--ink-2); }
 }
-/* entrée : la couverture se découvre de haut en bas, juste après sa carte */
-.js .work-list--grid .card-cover { clip-path: inset(0 0 100% 0 round var(--r-md)); transition: clip-path var(--dur-4) var(--ease) calc(var(--d, 0ms) + 150ms); }
-.js .work-list--grid .work-row.is-in .card-cover { clip-path: inset(0 round var(--r-md)); }
+/* La carte anime déjà son opacité et sa position : pas de second masque animé. */
+.js .work-list--grid .card-cover { clip-path: none; }
+
 @media (max-width: 1100px) {
   .work-list--grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -713,30 +713,15 @@ html:not(.is-inspect) .work-list--grid .work-row:focus-visible .card-cover img {
   .work-list--grid .card-txt { grid-template-columns: 30px minmax(0, 1fr) auto; }
 }
 
-/* Résumé des trois études de cas UI/UX, dans la grille existante. */
-.work-list--ux .card-summary { grid-column: 2 / -1; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+/* Même hiérarchie pour chaque projet, indépendamment de sa discipline. */
+.work-list--grid .card-summary { grid-column: 2 / -1; margin-top: 4px; max-width: 48ch; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+.work-list--grid .card-cover { background: #141416; }
+.work-list--grid .card-cover img { object-fit: contain; transform: none !important; }
+.work-list--grid .card-cover--web { display: flex; align-items: center; }
+.work-list--grid .card-cover--web img { width: 100%; height: auto; }
+.work-list--grid .work-row .ttl { font-size: clamp(24px, 4.2cqi, 38px); }
+.work-list--grid .work-row .meta { font-size: clamp(10px, 1.8cqi, 12px); }
 
-/* Couvertures éditoriales : les captures gardent leur ratio et leurs détails.
-   Les cadres sont statiques pour ne pas ajouter de travail au scroll. */
-.showcase { --show-ink: #25382b; color: var(--show-ink); background: #dfe7d6; }
-.showcase--lezgo { --show-ink: #19334a; background: #ece3d5; }
-.showcase--quasar { --show-ink: #291c61; background: #d9d9d9; }
-.showcase-label, .showcase-foot { position: absolute; left: 7%; right: 7%; text-align: left; font-size: clamp(9px, 2.5cqi, 13px); line-height: 1.6; }
-.showcase-label { top: 7%; font-weight: 600; }
-.showcase-label > span { display: block; font-weight: 400; opacity: .7; }
-.showcase-foot { bottom: 6%; font-size: clamp(8px, 2.1cqi, 11px); }
-.showcase-browser { position: absolute; top: 26%; left: 6%; width: 88%; overflow: hidden; border-radius: 6px; background: #fff; box-shadow: 0 16px 32px -12px #18252355; }
-.showcase-toolbar { display: flex; align-items: center; gap: 3px; height: clamp(16px, 5cqi, 25px); padding: 0 3%; background: #f6f6f4; color: #596260; }
-.showcase-toolbar i { width: 3px; height: 3px; border-radius: 50%; background: #bcc3bd; }
-.showcase-toolbar > span { margin: auto; padding-right: 15px; font: 8px/1 var(--f-mono); }
-.showcase-phone { position: absolute; width: 25%; right: 9%; top: 46%; overflow: hidden; border: 3px solid #202421; border-radius: 13% / 6%; background: #202421; box-shadow: 0 12px 24px -8px #18252366; }
-.work-list--grid .card-cover.showcase img { display: block; transform: none !important; transition: none; }
-.work-list--grid .showcase-browser img, .work-list--grid .showcase-phone img { width: 100%; height: auto; object-fit: contain; }
-.showcase-apps { position: absolute; inset: 22% 7% 16%; display: flex; align-items: center; justify-content: center; gap: 7%; }
-.showcase-app { position: relative; display: block; flex: 0 0 43%; aspect-ratio: 324 / 674; border-radius: 15% / 7%; overflow: hidden; box-shadow: 0 16px 25px -12px #1f174966; }
-.showcase-app--mars { translate: 0 7%; }
-.work-list--grid .showcase-app img { position: absolute; width: 493.8272%; max-width: none; height: auto; top: -55.3412%; left: -55.5556%; }
-.work-list--grid .showcase-app--mars img { left: -338.8889%; }
 
 /* ============ Fiche projet ============ */
 .case { position: fixed; inset: 0; z-index: 80; }
@@ -837,11 +822,11 @@ html:has(> body.no-scroll) { background-color: color-mix(in srgb, var(--paper) 4
 .case-hero { position: relative; margin-top: var(--gap-group); }
 .case-hero .frame {
   position: relative; width: 100%; aspect-ratio: var(--ar, 16 / 9);
-  border-radius: var(--r-md); overflow: hidden; outline: 1px solid color-mix(in oklab, var(--spec) 40%, transparent);
+  border-radius: var(--r-md); overflow: hidden; outline: 1px solid var(--line);
   background: var(--paper-2);
 }
 .case-hero .frame > img, .case-hero .frame > .g-anim, .case-hero .frame > .g-anim > img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.frame.is-canvas { background: radial-gradient(circle, var(--line) 1px, transparent 1.2px) 0 0 / 16px 16px, var(--paper-2); }
+.frame.is-canvas { background: var(--paper-2); }
 .hero-desk { position: absolute; inset: clamp(24px, 4cqi, 64px); display: flex; justify-content: center; }
 .hero-desk .browser { height: 100%; aspect-ratio: 1.54; max-width: 100%; display: flex; flex-direction: column; }
 .hero-desk .browser > img { flex: 1; min-height: 0; height: auto; object-fit: cover; object-position: top; }
@@ -933,7 +918,7 @@ html:has(> body.no-scroll) { background-color: color-mix(in srgb, var(--paper) 4
   width: 100%; text-align: left;
 }
 .case-next-txt { grid-column: 1 / span 8; display: grid; justify-items: start; row-gap: var(--s-3); }
-.case-next-cover { grid-column: 10 / span 3; display: block; aspect-ratio: 4 / 5; border-radius: var(--r-md); overflow: hidden; }
+.case-next-cover { grid-column: 10 / span 3; display: block; aspect-ratio: 808 / 632; border-radius: var(--r-md); overflow: hidden; }
 .case-next-cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-3) var(--ease); }
 .case-next b {
   font-size: clamp(28px, 3.8vw, 64px); line-height: 1; font-weight: 780; letter-spacing: -.03em;
@@ -2059,3 +2044,22 @@ html.is-fitting .mail-txt { --wb: 100 !important; }
   .mail-sub { display: block; }
   .mail-addr { font-size: 11pt; border: 0; padding: 0; }
 }
+
+/* Fiches : des captures lisibles, sans recadrage ni décor de logiciel. */
+.frame-label { display: none; }
+.hero-desk { inset: clamp(16px, 2.4cqi, 40px); }
+.hero-desk .browser { aspect-ratio: auto; width: 100%; }
+.hero-desk .browser > img { object-fit: contain; }
+.g-canvas { background-image: none; }
+@media (min-width: 761px) { .g-inset { grid-column: 1 / -1; } }
+@media print { .work-list--grid .card-summary { display: none; } }
+
+.g-details { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; font-size: var(--mono-xs); }
+.g-details a { display: inline-flex; align-items: center; gap: 8px; text-decoration: underline; text-underline-offset: .3em; }
+.g-details a:hover { color: var(--accent-t); }
+.g-details a:focus-visible { outline: 2px solid var(--accent-t); outline-offset: 4px; }
+.g-aside .g-details { grid-column: 9 / span 4; }
+.case-next-cover { background: #141416; }
+.case-next-cover img { object-fit: contain; transform: none !important; }
+@media (max-width: 760px) { .g-aside .g-details { grid-column: 1 / -1; } }
+@media print { .g-details { display: none; } }

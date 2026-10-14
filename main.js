@@ -44,44 +44,28 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const plain = s => String(s).replace(/<[^>]*>/g, '');   // libellé HTML -> texte (aria-label)
   const dirOf = p => `${ROOT}assets/projects/${p.id}/`;
-  const srcsetOf = (p, m) => m.widths.map(w => `${dirOf(p)}${m.src}-${w}.webp ${w}w`).join(', ');
-  const srcOf = (p, m) => `${dirOf(p)}${m.src}-${m.widths[0]}.webp`;
+  const srcsetOf = (p, m) => m.file ? `${dirOf(p)}${m.file} ${m.w}w` : m.widths.map(w => `${dirOf(p)}${m.src}-${w}.webp ${w}w`).join(', ');
+  const srcOf = (p, m) => `${dirOf(p)}${m.file || m.src + '-' + m.widths[0] + '.webp'}`;
+  const fullSrc = (p, m) => `${dirOf(p)}${m.file || m.src + '-' + Math.max(...m.widths) + '.webp'}`;
   // eager : le visuel du haut de la fiche, seul chargé tout de suite ; tout le reste attend le défilement
   const pic = (p, m, sizes, eager = false) => `<img src="${srcOf(p, m)}" srcset="${srcsetOf(p, m)}" sizes="${sizes}" width="${m.w}" height="${m.h}" alt="${attr(m.alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
-  // couverture en 4:5 (aperçu, vignettes, projet suivant) : décorative, le titre est écrit à côté
-  const coverSet = p => [200, 400, p.cover.w].map(w => `${dirOf(p)}cover-${w}.webp ${w}w`).join(', ');
-  const coverImg = (p, sizes, extra = '') => `<img src="${dirOf(p)}cover-400.webp" srcset="${coverSet(p)}" sizes="${sizes}" width="800" height="1000" alt="" decoding="async" style="background-color:${p.cover.tint}"${extra}>`;
+  // Une seule couverture par projet, réutilisée partout : grille, aperçu et suite.
+  // Les miniatures Behance conservent leur cadrage original.
+  const coverImg = (p, sizes, extra = '') => p.cover.source === 'behance'
+    ? `<img src="${dirOf(p)}behance-cover.webp" width="808" height="632" alt="" decoding="async"${extra}>`
+    : `<img src="${srcOf(p, p.hero)}" srcset="${srcsetOf(p, p.hero)}" sizes="${sizes}" width="${p.hero.w}" height="${p.hero.h}" alt="" decoding="async"${extra}>`;
   const liveTag = p => p.tag === 'Live' ? '<span class="live-tag"><span aria-hidden="true"></span>en ligne</span>' : '';
-  // Compositions HTML/CSS : les interfaces originales restent intactes.
-  // Aucun canvas ni animation supplémentaire pendant le défilement.
-  const cardVisual = p => {
-    if (EDITION === 'ux' && ['wei', 'lezgo'].includes(p.id)) {
-      const mobile = p.hero.phone;
-      return `<span class="card-cover showcase showcase--${p.id}" aria-hidden="true">
-        <span class="showcase-label mono">${p.id === 'wei' ? 'Voyages étudiants' : 'Voyages en groupe'}<span>Web · Mobile</span></span>
-        <span class="showcase-browser"><span class="showcase-toolbar"><i></i><i></i><i></i><span>${p.id === 'wei' ? 'wei-go.fr' : 'lez-go.fr'}</span></span>${pic(p, p.hero, '(max-width: 760px) 85vw, 32vw')}</span>
-        <span class="showcase-phone">${pic(p, mobile, '(max-width: 760px) 25vw, 10vw')}</span>
-        <span class="showcase-foot mono">Interface responsive · ${p.year}</span>
-      </span>`;
-    }
-    if (EDITION === 'ux' && p.id === 'quasar') {
-      // Deux téléphones extraits visuellement de la planche originale :
-      // le cadrage CSS masque les annotations, sans modifier les captures.
-      const screen = side => `<span class="showcase-app showcase-app--${side}"><img src="${dirOf(p)}04-accueil-1600.webp" width="1600" height="1208" alt="" loading="lazy" decoding="async"></span>`;
-      return `<span class="card-cover showcase showcase--quasar" aria-hidden="true"><span class="showcase-label mono">Explorer le système solaire<span>Application mobile</span></span><span class="showcase-apps">${screen('earth')}${screen('mars')}</span><span class="showcase-foot mono">Progression · Mini-jeux · ${p.year}</span></span>`;
-    }
-    return `<span class="card-cover" aria-hidden="true">${coverImg(p, '(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 40px), min(calc(33vw - 40px), 540px)', ' loading="lazy"')}</span>`;
-  };
-  // carte de la grille : couverture 4:5 (décorative), numéro, titre, « type · année »,
+  const cardVisual = p => `<span class="card-cover${p.cover.source === 'behance' ? '' : ' card-cover--web'}" aria-hidden="true">${coverImg(p, '(max-width: 760px) calc(100vw - 32px), min(calc(50vw - 48px), 808px)', ' loading="lazy"')}</span>`;
+  // carte de la grille : couverture paysage (décorative), numéro, titre, « type · année »,
   // et la mention « en ligne » au bout de cette ligne (le titre garde toute la largeur)
   const card = (p, i) => `
-    <li><button class="work-row" type="button" data-i="${i}" style="--d:${(i % 3) * 80}ms">
+    <li><button class="work-row" type="button" data-i="${i}" style="--d:${(i % 2) * 60}ms">
       ${cardVisual(p)}
       <span class="card-txt">
         <span class="n mono" aria-hidden="true">${pad(i + 1)}</span>
         <span class="ttl">${glue(p.title)}</span>
         <span class="meta mono"><span>${p.kind}</span><span class="sep"> · </span><span class="meta-yr">${p.year}</span></span>${liveTag(p)}
-        ${EDITION === 'ux' && p.summary ? `<span class="card-summary">${attr(p.summary)}</span>` : ''}
+        <span class="card-summary">${attr(p.summary || p.role)}</span>
       </span>
       <span class="sr-only"> Ouvrir la fiche</span>
     </button></li>`;
@@ -665,7 +649,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
     const inner = site
       ? `<div class="hero-desk">${browserWin(p, h, SIZES.heroBrowser, !mob)}</div><div class="hero-mob">${phoneEl(p, h.phone, SIZES.heroPhone, mob)}</div>`
       : media(p, h, SIZES.hero, true);
-    return `<div class="case-hero${site ? ' is-site' : ''}" style="--ar: ${site ? '16 / 9' : h.w + ' / ' + h.h}"><div class="frame${site ? ' is-canvas' : ''}" data-spec="Frame · ${site ? 'canevas 16:9' : h.w + ' × ' + h.h}">${inner}</div><div class="frame-label mono" aria-hidden="true"><span>${linkName(p)}</span><span class="frame-size"></span></div></div>`;
+    return `<div class="case-hero${site ? ' is-site' : ''}" style="--ar: ${site ? '16 / 9' : h.w + ' / ' + h.h}"><div class="frame${site ? ' is-canvas' : ''}" data-spec="Frame · ${site ? 'canevas 16:9' : h.w + ' × ' + h.h}">${inner}</div></div>`;
   }
   /* Galerie : une figure par groupe, légendée (role figure et aria-label, RGAA 1.9.1),
      et des titres de chapitre (h4). Au téléphone, les captures mobiles défilent de
@@ -681,14 +665,10 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
       const cap = L === 'aside'
         ? `<figcaption><span class="g-cap mono">${g.caption}</span>${g.text ? `<span class="g-txt">${g.text}</span>` : ''}</figcaption>`
         : `<figcaption class="mono">${g.caption}</figcaption>`;
-      return `<figure class="g-item g-${L}" role="figure" aria-label="${attr(plain(g.caption))}">${body}${cap}</figure>`;
+      const details = `<div class="g-details mono">${it.map((m, i) => `<a href="${fullSrc(p, m)}" target="_blank" rel="noopener">${it.length === 1 ? 'Voir en grand' : 'Visuel ' + (i + 1) + ' en grand'}<span class="sr-only"> : ${attr(plain(g.caption))} (nouvel onglet)</span> ${ARROW}</a>`).join('')}</div>`;
+      return `<figure class="g-item g-${L}" role="figure" aria-label="${attr(plain(g.caption))}">${body}${cap}${details}</figure>`;
     }).join('');
   }
-  // dimensions du cadre, affichées comme dans Figma
-  const frameRO = new ResizeObserver(([e]) => {
-    const size = $('.frame-size', caseBody);
-    if (size) size.textContent = `${Math.round(e.contentRect.width)} × ${Math.round(e.contentRect.height)}`;
-  });
   // visuel du haut d'une fiche, chargé d'avance (survol ou focus d'une ligne, bloc « Projet suivant » en vue)
   const preloaded = new Set();
   function preloadHero(i) {
@@ -736,11 +716,9 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   function unwatchCase() {
     [animIO, revealIO, nextIO].forEach(o => o && o.disconnect());
     scrollRO.disconnect();
-    frameRO.disconnect();
   }
   function watchCase(next) {
     unwatchCase();
-    frameRO.observe($('.case-hero .frame', caseBody));
     animIO = new IntersectionObserver(es => es.forEach(e => {
       e.target._vis = e.isIntersecting && e.intersectionRatio >= .35;
       animSet(e.target);

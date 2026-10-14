@@ -214,9 +214,9 @@ with sync_playwright() as p:
               (() => { const r = document.querySelector('.card-cover').getBoundingClientRect(); return Math.round(r.height / r.width * 100) / 100; })(),
               document.documentElement.scrollWidth <= innerWidth]""")
             c2.close()
-        ok = out[1440][0] == 3 and out[1024][0] == 2 and out[390][0] == 1 and all(v[1] == 1 and v[2] == 1.25 and v[3] for v in out.values())
+        ok = out[1440][0] == 2 and out[1024][0] == 2 and out[390][0] == 1 and all(v[1] == 1 and v[2] == 0.78 and v[3] for v in out.values())
         return ok, f'[cols, distinct widths, cover ratio, no overflow] = {out}'
-    check('brand grid: 3 / 2 / 1 columns at 1440 / 1024 / 390, equal 4:5 covers, no horizontal scroll', columns)
+    check('brand grid: 2 / 2 / 1 columns at 1440 / 1024 / 390, equal landscape covers, no horizontal scroll', columns)
 
     # ---------------- mobile ----------------
     ctx, pg = ctx_page(b, 390, 844, mobile=True)

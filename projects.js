@@ -26,7 +26,7 @@ window.PROJECTS = [
     link: 'https://wei-go.fr',
     linkLabel: 'Voir wei-go.fr',
     cover: { w: 800, tint: '#272f22' },
-    hero: { type: 'browser', ...im('hero', 2200, 1375, [800, 1400, 2200], "Page d’accueil du site WEI & GO sur ordinateur : titre « Ton WEI, inoubliable. » sur une photo d’étudiants en rouge qui font la fête, boutons « Demander un devis » et « Voir nos séjours », bandeau de destinations."),
+    hero: { type: 'browser', ...im('hero', 1250, 695, [1250], "Page d’accueil du site WEI & GO sur ordinateur : titre « Ton WEI, inoubliable. » sur une photo d’étudiants en rouge qui font la fête, boutons « Demander un devis » et « Voir nos séjours », bandeau de destinations.", { file: 'site-current.jpg' }),
       phone: im('06-accueil-mobile', 780, 1688, M, "Accueil du site WEI & GO sur mobile : titre « Ton WEI, inoubliable » en blanc et vert, bouton vert « Demander un devis » et bouton « Voir nos séjours ».") },
     pitch: "Le site de WEI & GO, la marque du groupe LEZGO qui organise des voyages étudiants sur mesure pour les écoles depuis 2016. Le cœur du site, c’est la demande de devis : il fallait qu’un BDE puisse la faire vite, sans se perdre.",
     facts: [['Client', 'Groupe LEZGO'], ['Rôle', 'UI/UX, intégration'], ['Outils', 'Lovable, Claude, React, WordPress'], ['Contexte', 'Alternance']],
@@ -72,8 +72,8 @@ window.PROJECTS = [
     tools: 'Figma, Illustrator, Photoshop',
     link: 'https://www.behance.net/gallery/227402211/QUASAR-Application-ducative',
     linkLabel: 'Voir sur Behance',
-    cover: { w: 800, tint: '#241d47' },
-    hero: { type: 'image', ...im('hero', 1600, 1042, D, "Logo Quasar, une orbite blanche traversée par une étoile, au-dessus du nom Quasar, sur un fond spatial violet.") },
+    cover: { source: 'behance', w: 800, tint: '#241d47' },
+    hero: { type: 'image', ...im('04-accueil', 1600, 1208, D, "Trois écrans de QUASAR : la progression sur la Terre puis Mars, les niveaux verrouillés et la navigation de l’application.") },
     pitch: "Une application éducative pour les adolescents qui veulent découvrir le système solaire autrement. Chaque planète devient un terrain de jeu, avec ses niveaux à débloquer et ses mini-jeux.",
     facts: [['Contexte', 'Projet d’école, brief fictif'], ['Marque', 'Acadomia'], ['Cible', 'Adolescents'], ['Livrables', 'Logo, écrans mobiles, mini-jeux'], ['Outils', 'Figma, Illustrator, Photoshop']],
     cols: [
@@ -100,8 +100,8 @@ window.PROJECTS = [
         im('02-chargement', 1600, 1954, D, "Écran de chargement de l’application Quasar sur deux maquettes d’iPhone, avec le mot « Loading... » en très grand.")] },
       { layout: 'inset', caption: 'Le menu principal et sa barre de navigation', items: [
         im('03-menu', 1600, 1175, D, "Écran « Menu » : la Terre au centre de l’écran et la barre de navigation annotée Accueil, Progression, Cours academia et Paramètre.")] },
-      { layout: 'inset', caption: 'Une page d’accueil par planète', items: [
-        im('04-accueil', 1600, 1208, D, "Trois écrans d’accueil montrant les planètes à débloquer, la Terre puis Mars, avec des cadenas sur les niveaux fermés.")] },
+      { layout: 'inset', caption: 'L’identité de QUASAR', items: [
+        im('hero', 1600, 1042, D, "Logo QUASAR, une orbite blanche traversée par une étoile, sur un fond spatial violet.")] },
       { layout: 'inset', caption: 'La carte des niveaux à débloquer', items: [
         im('05-maps', 1600, 1525, D, "Deux écrans « Maps » : un chemin illustré au milieu d’une forêt relie les niveaux, dont « Quizz cosmique » et « Astéroïde ».")] },
       { head: 'Les mini-jeux' },
@@ -115,6 +115,7 @@ window.PROJECTS = [
   },
   {
     id: 'one-piece',
+    summary: 'Une campagne digitale et un parcours de mini-jeux dans l’univers de One Piece.',
     title: 'ONE PIECE S2',
     subtitle: '<span lang="en">The Grand Line Challenge</span>',
     kind: 'Campagne digitale',
@@ -123,7 +124,7 @@ window.PROJECTS = [
     tools: 'Figma, Photoshop, IA générative (Runway, Veo)',
     link: 'https://www.behance.net/gallery/242417537/DIGITAL-CAMPAIGN-ONE-PIECE-S2',
     linkLabel: 'Voir sur Behance',
-    cover: { w: 800, tint: '#7b807e' },
+    cover: { source: 'behance', w: 800, tint: '#7b807e' },
     hero: { type: 'image', ...im('01-key-visual', 1600, 900, D, "Affiche One Piece : Luffy seul au milieu d’un paysage de montagnes enneigées et de tours de glace, texte « Vous entrez à présent dans le pays sans nom », logo One Piece et mention « Seulement sur Netflix, le 10 mars ».") },
     pitch: "<span lang=\"en\">The Grand Line Challenge</span>, une campagne digitale imaginée pour la sortie de la saison 2 de la série One Piece en <span lang=\"en\">live action</span>. Trois activations qui s’enchaînent, de la rue jusqu’au téléphone. C’est un exercice de mastère, pas une vraie campagne Netflix.",
     facts: [['Contexte', 'Projet de mastère (M2)'], ['Livrables', 'Vidéo, affiches DOOH, application'], ['Rôle', 'DA, affiches, UI de l’application'], ['Outils', 'Figma, Photoshop, IA générative (Runway, Veo)']],
@@ -163,7 +164,7 @@ window.PROJECTS = [
     link: 'https://lez-go.fr',
     linkLabel: 'Voir lez-go.fr',
     cover: { w: 780, tint: '#9a928e' },
-    hero: { type: 'browser', ...im('hero', 2200, 1375, [800, 1400, 2200], "Page d’accueil du site LEZGO sur ordinateur : titre « Voyagez en groupe autrement... » sur une photo de groupe au bord d’une piscine, bouton orange « Contactez-nous » et trois phrases clés en bas de l’image."),
+    hero: { type: 'browser', ...im('hero', 1250, 695, [1250], "Page d’accueil du site LEZGO sur ordinateur : titre « Voyagez en groupe autrement... » sur une photo de groupe au bord d’une piscine, bouton orange « Contactez-nous » au-dessus de la photo de piscine.", { file: 'site-current.jpg' }),
       phone: im('05-accueil-mobile', 780, 1688, M, "Accueil du site LEZGO sur mobile : titre « Voyagez en groupe autrement... », bouton orange « Contactez-nous » et phrases clés sur la photo de groupe.") },
     pitch: "Le logo et le site vitrine de LEZGO, le groupe qui chapeaute plusieurs marques de voyages, dont WEI & GO et Ze Trip. J’ai commencé par le logo, puis il a fallu lui donner un endroit où vivre : le site.",
     facts: [['Client', 'Groupe LEZGO'], ['Rôle', 'Logo, maquette, intégration'], ['Délai', 'Une semaine pour le site'], ['Contexte', 'Alternance']],
@@ -199,6 +200,7 @@ window.PROJECTS = [
   },
   {
     id: 'livre-blanc',
+    summary: 'Un livre blanc interactif sur le rôle des identités visuelles dans l’esport.',
     title: 'Du logo à la scène',
     tag: 'Live',
     kind: 'Livre blanc en ligne',
@@ -236,6 +238,7 @@ window.PROJECTS = [
   },
   {
     id: 'lco',
+    summary: 'Une identité pour une compétition esport inspirée de l’océan Indien.',
     title: 'LCO',
     kind: 'Identité visuelle esport',
     role: 'DA · Identité · Motion',
@@ -243,7 +246,7 @@ window.PROJECTS = [
     tools: 'Illustrator, Photoshop, After Effects, IA générative (Midjourney, Runway)',
     link: 'https://www.behance.net/gallery/226161957/LCO-League-of-Legends-Championship-Overseas',
     linkLabel: 'Voir sur Behance',
-    cover: { w: 800, tint: '#257181' },
+    cover: { source: 'behance', w: 800, tint: '#257181' },
     hero: { type: 'image', ...im('01-logo-anime-poster', 960, 540, [800, 960], "Animation du logo LCO, un soleil stylisé à rayons, et du nom « League of Legends Championship Overseas » sur un fond de vagues sous-marines bleues en mouvement.", { anim: '01-logo-anime.anim.webp', label: 'le logo animé' }) },
     pitch: "L’identité visuelle d’une compétition de League of Legends imaginée pour les outre-mer, de La Réunion à la Martinique. Un projet de cours de trois semaines, et mon premier projet autour de l’esport.",
     facts: [['Contexte', 'Projet de cours, 3 semaines'], ['Date', 'Mai 2025'], ['Livrables', 'Logo, affiche, trophée, skins, scène'], ['Outils', 'Illustrator, Photoshop, After Effects, IA générative (Midjourney, Runway)']],
@@ -278,6 +281,7 @@ window.PROJECTS = [
   },
   {
     id: 'pop-mart-bumi',
+    summary: 'Un personnage et une collection de figurines autour des saveurs du monde.',
     title: 'POP MART X BUMI',
     subtitle: '<span lang="en">Tasty World</span>',
     kind: 'Personnage et packaging',
@@ -286,7 +290,7 @@ window.PROJECTS = [
     tools: 'Photoshop, Illustrator, After Effects, IA générative',
     link: 'https://www.behance.net/gallery/246152569/POP-MART-X-BUMI-BRANDING-2026',
     linkLabel: 'Voir sur Behance',
-    cover: { w: 800, tint: '#ceb5a8' },
+    cover: { source: 'behance', w: 800, tint: '#ceb5a8' },
     hero: { type: 'image', ...im('01-key-visual', 1600, 856, D, "Visuel principal : les figurines Bumi, un petit dragon crème, assises sur des nuages avec une part de pizza, un croissant, des sushis, des macarons, un taco et un bol de ramen.") },
     pitch: "BUMI est un petit dragon né avec des ailes trop petites pour voler, qui fait le tour du monde à pied pour goûter les spécialités de chaque pays. Un projet de branding mené en duo avec Vincent Aurillac, du personnage jusqu’au packaging de la collection « <span lang=\"en\">Tasty World</span> ».",
     facts: [['Contexte', 'Projet d’école'], ['Équipe', 'En duo avec Vincent Aurillac'], ['Livrables', 'Personnage, logo, packaging, campagne'], ['Outils', 'Photoshop, Illustrator, After Effects, IA générative']],
@@ -313,6 +317,7 @@ window.PROJECTS = [
   },
   {
     id: 'meoow',
+    summary: 'Une identité et des packagings expressifs pour une marque de nourriture pour chats.',
     title: 'MEOOW!',
     kind: 'Branding et packaging',
     role: 'DA · Logo · Packaging',
@@ -320,8 +325,8 @@ window.PROJECTS = [
     link: 'https://www.behance.net/gallery/247879525/MEOOW-CAT-FOOD-BRANDING',
     linkLabel: 'Voir sur Behance',
     tools: 'Photoshop, Illustrator, IA générative',
-    cover: { w: 800, tint: '#969378' },
-    hero: { type: 'image', ...im('01-logo', 1600, 900, D, "Logo « MEOOW! » en lettres bleu clair sur fond orange, au-dessus d’un chat noir aux grands yeux qui dépasse du bas de l’image.") },
+    cover: { source: 'behance', w: 800, tint: '#969378' },
+    hero: { type: 'image', ...im('02-gamme-studio', 1400, 1050, [800, 1400], "La gamme MEOOW! : trois sachets poulet, saumon et bœuf présentés sur un fond couleur pêche.") },
     pitch: "Une marque de croquettes pour chats, pensée comme si le chat l’avait créée lui-même : de la vraie viande locale et des ingrédients qu’on comprend. Un logo, une gamme de trois recettes et ses déclinaisons.",
     facts: [['Contexte', 'Projet d’école'], ['Gamme', 'Poulet, saumon, bœuf'], ['Livrables', 'Logo, packaging, affiche, objets'], ['Outils', 'Photoshop, Illustrator, IA générative']],
     cols: [
@@ -329,8 +334,8 @@ window.PROJECTS = [
       ['Ce que montre le projet', "Trois sachets aux couleurs franches, orange pour le poulet, rose pour le saumon, marron pour le bœuf, avec la même accroche : « Trop bon pour être ignoré. » Puis les déclinaisons : une affiche « Hmmmm... Meoow! », une gamelle, un <span lang=\"en\">tote bag</span> et une mise en rayon."]
     ],
     gallery: [
-      { layout: 'pair', caption: 'La gamme : poulet, saumon, bœuf', items: [
-        im('02-gamme-studio', 1400, 1050, [800, 1400], "Trois sachets de croquettes MEOOW! de 1 kg, au poulet en orange, au saumon en rose et au bœuf en marron, avec une fenêtre en forme de nuage et le chat noir en bas."),
+      { layout: 'pair', caption: 'L’identité et ses déclinaisons', items: [
+        im('01-logo', 1600, 900, D, "Logo MEOOW! bleu clair sur fond orange et chat noir aux grands yeux."),
         im('03-sachets-flottants', 1448, 1086, [800, 1448], "Les trois sachets MEOOW! inclinés sur fond blanc, avec les mentions « 70 % protéine naturelle » et « 100 % adoré par les chats ».")] },
       { layout: 'full', caption: 'Un sachet, trois saveurs', items: [
         im('04-saveurs-anime-poster', 1280, 720, [800, 1280], "Animation d’un sachet MEOOW! posé sur une étagère qui change de saveur, poulet, saumon puis bœuf.", { anim: '04-saveurs-anime.anim.webp', label: 'le sachet qui change de saveur' })] },
@@ -350,6 +355,7 @@ window.PROJECTS = [
   },
   {
     id: 'les-dieux',
+    summary: 'Une refonte d’identité et de packaging pour trois recettes de sardines.',
     only: 'brand',
     title: 'LES DIEUX',
     kind: 'Rebranding et packaging',
@@ -358,7 +364,7 @@ window.PROJECTS = [
     tools: 'Photoshop, Illustrator, Figma',
     link: 'https://www.behance.net/gallery/216527627/REBRANDING-LES-DIEUX',
     linkLabel: 'Voir sur Behance',
-    cover: { w: 800, tint: '#004f7f' },
+    cover: { source: 'behance', w: 800, tint: '#004f7f' },
     hero: { type: 'image', ...im('01-logo', 1600, 900, D, "Logo Les Dieux : le nom en lettres blanches hautes et étroites, avec une sardine à côté de « Les », dans une couronne de sardines bleu clair, sur un fond bleu à motif de colonnes grecques, de rameaux et d’étoiles.") },
     pitch: "Un rebranding pour Les Dieux, une marque de sardines en boîte : un nouveau logo autour d’une sardine, et des boîtes plus modernes pour ses trois recettes. Un projet d’école, en première année de mastère à l’ESD.",
     facts: [['Contexte', 'Projet d’école, 1re année de mastère à l’ESD'], ['Gamme', 'Naturel, à l’olive, au piment'], ['Livrables', 'Logo, déclinaisons, packaging'], ['Outils', 'Photoshop, Illustrator, Figma']],
