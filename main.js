@@ -52,11 +52,31 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   const coverSet = p => [200, 400, p.cover.w].map(w => `${dirOf(p)}cover-${w}.webp ${w}w`).join(', ');
   const coverImg = (p, sizes, extra = '') => `<img src="${dirOf(p)}cover-400.webp" srcset="${coverSet(p)}" sizes="${sizes}" width="800" height="1000" alt="" decoding="async" style="background-color:${p.cover.tint}"${extra}>`;
   const liveTag = p => p.tag === 'Live' ? '<span class="live-tag"><span aria-hidden="true"></span>en ligne</span>' : '';
+  // Compositions HTML/CSS : les interfaces originales restent intactes.
+  // Aucun canvas ni animation supplémentaire pendant le défilement.
+  const cardVisual = p => {
+    if (EDITION === 'ux' && ['wei', 'lezgo'].includes(p.id)) {
+      const mobile = p.hero.phone;
+      return `<span class="card-cover showcase showcase--${p.id}" aria-hidden="true">
+        <span class="showcase-label mono">${p.id === 'wei' ? 'Voyages étudiants' : 'Voyages en groupe'}<span>Web · Mobile</span></span>
+        <span class="showcase-browser"><span class="showcase-toolbar"><i></i><i></i><i></i><span>${p.id === 'wei' ? 'wei-go.fr' : 'lez-go.fr'}</span></span>${pic(p, p.hero, '(max-width: 760px) 85vw, 32vw')}</span>
+        <span class="showcase-phone">${pic(p, mobile, '(max-width: 760px) 25vw, 10vw')}</span>
+        <span class="showcase-foot mono">Interface responsive · ${p.year}</span>
+      </span>`;
+    }
+    if (EDITION === 'ux' && p.id === 'quasar') {
+      // Deux téléphones extraits visuellement de la planche originale :
+      // le cadrage CSS masque les annotations, sans modifier les captures.
+      const screen = side => `<span class="showcase-app showcase-app--${side}"><img src="${dirOf(p)}04-accueil-1600.webp" width="1600" height="1208" alt="" loading="lazy" decoding="async"></span>`;
+      return `<span class="card-cover showcase showcase--quasar" aria-hidden="true"><span class="showcase-label mono">Explorer le système solaire<span>Application mobile</span></span><span class="showcase-apps">${screen('earth')}${screen('mars')}</span><span class="showcase-foot mono">Progression · Mini-jeux · ${p.year}</span></span>`;
+    }
+    return `<span class="card-cover" aria-hidden="true">${coverImg(p, '(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 40px), min(calc(33vw - 40px), 540px)', ' loading="lazy"')}</span>`;
+  };
   // carte de la grille : couverture 4:5 (décorative), numéro, titre, « type · année »,
   // et la mention « en ligne » au bout de cette ligne (le titre garde toute la largeur)
   const card = (p, i) => `
     <li><button class="work-row" type="button" data-i="${i}" style="--d:${(i % 3) * 80}ms">
-      <span class="card-cover" aria-hidden="true">${coverImg(p, '(max-width: 760px) calc(100vw - 32px), (max-width: 1100px) calc(50vw - 40px), min(calc(33vw - 40px), 540px)', ' loading="lazy"')}</span>
+      ${cardVisual(p)}
       <span class="card-txt">
         <span class="n mono" aria-hidden="true">${pad(i + 1)}</span>
         <span class="ttl">${glue(p.title)}</span>
