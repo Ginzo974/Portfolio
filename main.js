@@ -158,6 +158,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
      La photo prend l'espace restant à gauche de LOUIS. */
   const name = $('.name');
   const line1Word = $('.name-line--1 .name-word');
+  const line2Word = $('.name-line--2 .name-word');
   const mailTxt = $('.mail-txt');
   let capRatio = .7;
   function measureCap() {
@@ -210,6 +211,9 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   // mail : faux au démarrage quand ÉCRIVEZ-MOI est hors de l'écran (ajusté juste après, voir boot)
   function fitAll(mail = true) {
     heroStretch.forEach(s => s.settle());
+    // Mesurer LOUIS au repos, puis réserver sa place : les variations des
+    // lettres ne doivent pas redistribuer l’espace occupé par le portrait.
+    line2Word.style.removeProperty('width');
     if (canFit()) {
       const b = bearings();
       fitTo(name, name.clientWidth, line1Word, landscape.matches ? landscapeCap() : Infinity, b && b.name);
@@ -222,6 +226,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
         name.style.setProperty('--l1w', w1.toFixed(1) + 'px');
       } else name.style.removeProperty('--l1w');
     }
+    line2Word.style.width = line2Word.getBoundingClientRect().width + 'px';
     heroStretch.forEach(s => s.measure());
     if (mail) fitMail();
   }

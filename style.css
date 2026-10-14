@@ -385,6 +385,9 @@ html:not(.js) .topbar::before { opacity: 1; }
 .name-line--1 { padding-right: .05em; margin-left: calc(-1 * var(--lsb, .02em)); margin-right: calc(-1 * var(--rsb, .03em) - .05em); }
 .name-line--2 { margin-right: calc(-1 * var(--rsb2, .0135em)); max-width: var(--l1w, none); }
 .name-word { display: flex; }
+/* Largeur mesurée au repos par fitAll(), recalculée au redimensionnement.
+   L’animation typographique reste à l’intérieur de cet espace réservé. */
+.name-line--2 .name-word { flex: none; }
 .name .ch { display: inline-block; font-variation-settings: "wdth" var(--w, 100); }
 /* Entrée (depuis is-named) : QUENTIN à 80 ms, LOUIS à 380 ms, 35 ms entre deux lettres.
    Départ à 100% + .3em : aucun bout de lettre ne dépasse sous le masque. */
