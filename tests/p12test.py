@@ -181,7 +181,7 @@ with sync_playwright() as p:
     cur = pg.evaluate("document.querySelector('.name-photo img').currentSrc")
     ok('1440: portrait is quentin-700.webp', cur.endswith('quentin-700.webp'), cur)
     pg.evaluate("document.querySelector('.cv-card').scrollIntoView()"); pg.wait_for_timeout(1500)
-    ok('1440: CV preview is cv-apercu-800.webp', pg.evaluate("document.querySelector('.cv-thumb img').currentSrc").endswith('cv-apercu-800.webp'))
+    ok('1440: CV preview is cv-apercu-800.webp', pg.evaluate("document.querySelector('.cv-thumb img').currentSrc").split('?')[0].endswith('cv-apercu-800.webp'))
     pg.evaluate("window.__lenis && window.__lenis.scrollTo('#travaux',{immediate:true})"); pg.wait_for_timeout(800)
     pg.hover('.work-row[data-i="4"]'); pg.wait_for_timeout(1200)
     src = pg.evaluate("[...document.querySelectorAll('.peek img')].map(i=>i.currentSrc.split('/').pop())")
