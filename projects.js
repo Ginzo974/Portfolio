@@ -16,6 +16,7 @@
 window.PROJECTS = [
   {
     id: 'wei',
+    summary: 'Concevoir un parcours de demande de devis pour les voyages étudiants.',
     title: 'WEI & GO',
     tag: 'Live',
     kind: 'Site avec demande de devis',
@@ -30,11 +31,23 @@ window.PROJECTS = [
     pitch: "Le site de WEI & GO, la marque du groupe LEZGO qui organise des voyages étudiants sur mesure pour les écoles depuis 2016. Le cœur du site, c’est la demande de devis : il fallait qu’un BDE puisse la faire vite, sans se perdre.",
     facts: [['Client', 'Groupe LEZGO'], ['Rôle', 'UI/UX, intégration'], ['Outils', 'Lovable, Claude, React, WordPress'], ['Contexte', 'Alternance']],
     cols: [
-      ['Le point de départ', "L’ancien site n’était plus récent, et il vouvoyait des étudiants de vingt ans. Il fallait aussi garder le back-office : les sites du groupe vivent dans WordPress avec Divi, qui devient vite lourd dès qu’on veut une page un peu vivante."],
-      ['Ce que j’ai fait', "J’ai refait le moodboard sans trahir les couleurs de la marque, posé les pages en wireframes, puis conçu le site et son parcours de demande de devis. Je l’ai construit avec l’aide de Lovable et de Claude, puis intégré dans le WordPress déjà en ligne via un thème enfant. Au-delà de l’accueil, il y a les pages WEI/WED, ski, city trip, animations, devis, contact et blog, avec une fiche par station, par ville et par animation."],
-      ['Les choix de design', "Le site tutoie sa cible dès le titre : « Ton WEI, inoubliable. » Deux boutons hiérarchisés en haut de page, un parcours en quatre étapes avec des délais annoncés (le devis en 2 minutes, un rappel sous 24 h), et la note Google, 4,7 sur 5 pour environ 1 900 avis, accompagnée de vrais témoignages nommés."],
-      ['Ce que j’en retiens', "J’ai appris à coder avant d’apprendre à dessiner : quand je fais une maquette, je sais déjà comment elle sera intégrée. Ce site, je l’ai conçu et codé moi-même, jusqu’au WordPress déjà en ligne, et la refonte a été validée."]
-    ],
+      [
+            "Le besoin et les utilisateurs",
+            "WEI & GO organise des voyages étudiants pour les écoles. Le parcours central est la demande de devis : un BDE doit pouvoir décrire son séjour et comprendre la suite de la démarche."
+      ],
+      [
+            "Mon rôle et les contraintes",
+            "J’ai conçu le moodboard, les wireframes, les maquettes et le parcours de demande de devis, puis intégré le site dans le WordPress du groupe via un thème enfant. Le back-office existant devait être conservé. Lovable et Claude m’ont accompagné dans la réalisation."
+      ],
+      [
+            "Les décisions d’interface",
+            "Le tutoiement adapte le ton aux étudiants. Deux actions structurent l’accueil : demander un devis ou découvrir les séjours. Le parcours est présenté en quatre étapes, avec les délais annoncés par la marque. Sur mobile, les cartes et les étapes s’empilent pour garder une lecture claire."
+      ],
+      [
+            "La réalisation et le recul",
+            "La refonte a été validée et mise en ligne. Le travail couvre l’accueil, les séjours, les animations, le devis, le contact et le blog. Les écrans ci-dessous montrent le formulaire et les déclinaisons mobiles ; les délais et avis affichés sont des informations commerciales du site, pas des mesures de performance de la refonte."
+      ]
+],
     gallery: [
       { layout: 'browser', caption: 'La demande de devis, le cœur du site', items: [
         im('05-devis-desktop', 1600, 1156, D, "Section « Devis gratuit. » : formulaire blanc sur fond vert avec les champs nom, téléphone, e-mail, école, type de séjour, ville de départ, nombre de participants, dates et budget, et un bouton « Soumettre ».")] },
@@ -51,6 +64,7 @@ window.PROJECTS = [
   },
   {
     id: 'quasar',
+    summary: 'Apprendre le système solaire à travers une progression et des mini-jeux.',
     title: 'QUASAR',
     kind: 'Application éducative',
     role: 'UI · Interaction',
@@ -63,11 +77,23 @@ window.PROJECTS = [
     pitch: "Une application éducative pour les adolescents qui veulent découvrir le système solaire autrement. Chaque planète devient un terrain de jeu, avec ses niveaux à débloquer et ses mini-jeux.",
     facts: [['Contexte', 'Projet d’école, brief fictif'], ['Marque', 'Acadomia'], ['Cible', 'Adolescents'], ['Livrables', 'Logo, écrans mobiles, mini-jeux'], ['Outils', 'Figma, Illustrator, Photoshop']],
     cols: [
-      ['Le brief', "Un brief d’école, fictif : créer une application éducative pour la marque Acadomia, sur le sujet de notre choix. J’ai choisi l’espace, d’où le badge Acadomia sur l’écran de chargement et l’onglet des cours dans la navigation."],
-      ['Ce que montre le projet', "Le logo, un Q traversé par une étoile, l’écran de chargement, la navigation (accueil, progression, cours, paramètres), un accueil par planète et une carte de niveaux à débloquer, notés en étoiles."],
-      ['Les mini-jeux', "Un QCM pour trouver la plus grosse planète, les lunes de Mars à placer sur leur orbite, des planètes à trier entre rocheuses et gazeuses. Chaque écran montre son état : réussi en vert, raté en rouge, avec un bouton pour continuer ou recommencer."],
-      ['Les choix de design', "Un univers cartoon sur un fond d’espace sombre, et des interactions à manipuler directement : toucher une réponse, glisser une planète, placer une lune."]
-    ],
+      [
+            "Le brief et la cible",
+            "Un projet d’école sur un brief fictif pour Acadomia : concevoir une application éducative sur le sujet de notre choix. J’ai choisi le système solaire, avec une expérience destinée aux adolescents."
+      ],
+      [
+            "Le parcours proposé",
+            "Depuis l’accueil, chaque planète donne accès à une progression par niveaux. La navigation sépare l’accueil, la progression, les cours et les paramètres. Des cadenas et des étoiles rendent visibles les niveaux à débloquer et l’avancement."
+      ],
+      [
+            "Les interactions et leurs états",
+            "Les exercices varient : répondre à un QCM, placer les lunes de Mars sur leur orbite ou trier les planètes. Les écrans prévoient la réussite et l’échec, avec une action pour continuer ou recommencer. L’univers cartoon et le fond spatial relient les activités au thème."
+      ],
+      [
+            "Les livrables",
+            "Le projet présente une identité, des écrans mobiles et plusieurs mini-jeux conçus avec Figma, Illustrator et Photoshop. Il s’agit d’une proposition d’interface pour un exercice scolaire, et non d’une application Acadomia en production."
+      ]
+],
     gallery: [
       { head: 'Les écrans' },
       { layout: 'inset', caption: 'L’écran de chargement', items: [
@@ -127,6 +153,7 @@ window.PROJECTS = [
   },
   {
     id: 'lezgo',
+    summary: 'Présenter un groupe de voyages et intégrer son site vitrine en une semaine.',
     title: 'LEZGO',
     tag: 'Live',
     kind: 'Site vitrine et logo',
@@ -141,10 +168,23 @@ window.PROJECTS = [
     pitch: "Le logo et le site vitrine de LEZGO, le groupe qui chapeaute plusieurs marques de voyages, dont WEI & GO et Ze Trip. J’ai commencé par le logo, puis il a fallu lui donner un endroit où vivre : le site.",
     facts: [['Client', 'Groupe LEZGO'], ['Rôle', 'Logo, maquette, intégration'], ['Délai', 'Une semaine pour le site'], ['Contexte', 'Alternance']],
     cols: [
-      ['Le point de départ', "Une de mes premières missions a été de moderniser le logo, sans trop m’éloigner de l’original, parce que mon patron y tenait. À la place du « o », il y avait une forme orange qui ne voulait rien dire et qu’on ne pouvait pas utiliser seule."],
-      ['Ce que j’ai fait', "J’ai gardé la forme et je lui ai donné un sens : un pin avec un avion dedans, légèrement incliné, et une icône qui se détache du mot. Deux semaines plus tard, j’ai monté lez-go.fr en une semaine, en m’aidant d’un template WordPress pour aller vite."],
-      ['Ce que j’en retiens', "Un logo seul ne vaut pas grand-chose, c’est tout ce qu’il y a autour qui compte : les devis imprimés, la page LinkedIn, le site. Quelques mois après, j’ai audité mon propre site et noté ce que je referais : une page plus légère, et l’orange de la marque plus présent."]
-    ],
+      [
+            "Le besoin et le contexte",
+            "LEZGO réunit plusieurs marques de voyages, dont WEI & GO et Ze Trip. La mission associe la modernisation du logo et la création du site vitrine du groupe. Le nouveau logo devait rester proche de l’identité existante."
+      ],
+      [
+            "Mon rôle et le délai",
+            "J’ai travaillé sur le logo, la maquette et l’intégration. Le site a été réalisé en une semaine, avec un template WordPress pour tenir le délai. L’identité a précédé la réalisation du site."
+      ],
+      [
+            "La traduction dans l’interface",
+            "L’accueil présente la promesse du groupe et un bouton de contact. Le savoir-faire, les partenaires, les chiffres du groupe et ses engagements structurent la suite de la page. Les captures montrent les déclinaisons sur ordinateur et téléphone."
+      ],
+      [
+            "Le résultat et les améliorations identifiées",
+            "Le site vitrine est en ligne. Quelques mois après sa réalisation, j’ai audité mon propre travail : je rendrais la page plus légère et donnerais davantage de place à l’orange de la marque. Ce recul fait partie du projet, au même titre que les écrans livrés."
+      ]
+],
     gallery: [
       { layout: 'browser', caption: 'Le savoir-faire du groupe', items: [
         im('03-savoir-faire-desktop', 1600, 1000, D, "Section « Notre savoir-faire » : photos arrondies de séjours et d’équipe, alternées avec trois textes courts sur la conception des séjours, la synergie entre les marques et l’humain.")] },
@@ -346,6 +386,7 @@ window.PROJECTS = [
    montre les projets sans « only » et ceux réservés à l’édition, dans
    l’ordre ci-dessus. Édition « brand » : /brand/index.html. */
 window.PROJECT_ORDER = {
+  ux: ['wei', 'quasar', 'lezgo', 'one-piece', 'livre-blanc', 'lco', 'pop-mart-bumi', 'meoow'],
   brand: ['lco', 'pop-mart-bumi', 'meoow', 'les-dieux', 'one-piece', 'livre-blanc', 'lezgo', 'wei', 'quasar']
 };
 

@@ -40,7 +40,7 @@
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/martian-mono-latin.woff2" crossorigin>
 <link rel="preload" as="image" type="image/webp" href="assets/quentin-band-1400.webp" imagesrcset="assets/quentin-band-800.webp 800w, assets/quentin-band-1400.webp 1400w" imagesizes="(max-width: 760px) 45vw, 48vw" fetchpriority="high">
 <link rel="stylesheet" href="assets/vendor/lenis.css">
-<link rel="stylesheet" href="style.css?v=20260928b">
+<link rel="stylesheet" href="style.css?v=20261014a">
 <script>
 // JS actif : les états de départ des animations s'appliquent. Si main.js n'a pas fini de s'initialiser en 4 s,
 // ou si une erreur survient avant l'entrée du nom (is-named), tout s'affiche dans son état final,
@@ -171,19 +171,19 @@ if (document.documentElement.dataset.theme === 'light') document.querySelector('
       <header class="sec-head grid12">
         <p class="eyebrow mono reveal"><b>01</b> Travaux</p>
         <h2 class="sec-title" data-spec="H2 · clamp(44px, 6.6vw, 112px) / .9">Huit projets</h2>
-        <p class="sec-note reveal">Trois sites en ligne et cinq projets présentés sur Behance.<span class="no-print"> Chaque fiche montre le projet en images.</span></p>
+        <p class="sec-note reveal">WEI &amp; GO, QUASAR et LEZGO ouvrent cette sélection : parcours web, interfaces mobiles et intégration. Cinq autres projets complètent mon univers.<span class="no-print"> Ouvrez une fiche pour découvrir le contexte, mes choix et les réalisations.</span></p>
       </header>
 
       <div class="work-head mono" aria-hidden="true">
         <span>N°</span><span>Projet</span><span>Type</span><span>Rôle</span><span>Année</span>
       </div>
-      <ol class="work-list" data-spec="Liste · une ligne par projet · filet 1px"></ol>
+      <ol class="work-list work-list--grid work-list--ux" data-spec="Sélection · huit projets · cartes avec aperçu"></ol>
       <noscript>
         <ol class="work-list work-list--static">
           <li class="work-row"><span class="n mono">01</span><span class="ttl"><a href="https://wei-go.fr" target="_blank" rel="noopener">WEI &amp; GO<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Site avec demande de devis</span><span class="yr mono">2026</span></li>
           <li class="work-row"><span class="n mono">02</span><span class="ttl"><a href="https://www.behance.net/gallery/227402211/QUASAR-Application-ducative" target="_blank" rel="noopener">QUASAR<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Application éducative</span><span class="yr mono">2025</span></li>
-          <li class="work-row"><span class="n mono">03</span><span class="ttl"><a href="https://www.behance.net/gallery/242417537/DIGITAL-CAMPAIGN-ONE-PIECE-S2" target="_blank" rel="noopener">ONE PIECE S2<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Campagne digitale</span><span class="yr mono">2026</span></li>
-          <li class="work-row"><span class="n mono">04</span><span class="ttl"><a href="https://lez-go.fr" target="_blank" rel="noopener">LEZGO<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Site vitrine et logo</span><span class="yr mono">2025</span></li>
+          <li class="work-row"><span class="n mono">03</span><span class="ttl"><a href="https://lez-go.fr" target="_blank" rel="noopener">LEZGO<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Site vitrine et logo</span><span class="yr mono">2025</span></li>
+          <li class="work-row"><span class="n mono">04</span><span class="ttl"><a href="https://www.behance.net/gallery/242417537/DIGITAL-CAMPAIGN-ONE-PIECE-S2" target="_blank" rel="noopener">ONE PIECE S2<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Campagne digitale</span><span class="yr mono">2026</span></li>
           <li class="work-row"><span class="n mono">05</span><span class="ttl"><a href="https://du-logo-a-la-scene.vercel.app" target="_blank" rel="noopener">Du logo à la scène<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Livre blanc en ligne</span><span class="yr mono">2026</span></li>
           <li class="work-row"><span class="n mono">06</span><span class="ttl"><a href="https://www.behance.net/gallery/226161957/LCO-League-of-Legends-Championship-Overseas" target="_blank" rel="noopener">LCO<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Identité visuelle esport</span><span class="yr mono">2025</span></li>
           <li class="work-row"><span class="n mono">07</span><span class="ttl"><a href="https://www.behance.net/gallery/246152569/POP-MART-X-BUMI-BRANDING-2026" target="_blank" rel="noopener">POP MART X BUMI<span class="sr-only"> (nouvel onglet)</span></a></span><span class="kind mono">Personnage et packaging</span><span class="yr mono">2026</span></li>
@@ -200,7 +200,7 @@ if (document.documentElement.dataset.theme === 'light') document.querySelector('
       <header class="sec-head grid12">
         <p class="eyebrow mono reveal"><b>02</b> Méthode</p>
         <h2 class="sec-title">Un composant,<br>deux langues</h2>
-        <p class="sec-note reveal">Ma formation de départ, c’est le développement. Je suis venu au design ensuite, pour pouvoir concevoir ce que j’intégrais. Du coup, dans Figma, je construis mes composants avec leurs états, un peu comme je les coderais.<span class="no-print"> Essayez :</span></p>
+        <p class="sec-note reveal">Mon expérience en développement nourrit ma façon de concevoir dans Figma : composants réutilisables, états et passage à l’intégration. Cette démonstration interactive illustre ce lien avec un bouton de réservation, en écho aux parcours de voyage de WEI &amp; GO.<span class="no-print"> Essayez :</span></p>
       </header>
 
       <div class="lab reveal" data-spec="Playground · 3 panneaux · gap 1px">
@@ -336,16 +336,16 @@ if (document.documentElement.dataset.theme === 'light') document.querySelector('
   <section class="contact" id="contact">
     <div class="wrap">
       <p class="eyebrow mono reveal"><b>04</b> Contact</p>
-      <h2 class="contact-kicker reveal">Basé à Bordeaux, je cherche un CDI sur un poste de UI/UX designer.</h2>
+      <h2 class="contact-kicker reveal">Basé à Bordeaux, je recherche un CDI en UI/UX design.</h2>
       <p class="contact-avail mono reveal">Disponibilité : <span>À la recherche d’un CDI</span></p>
-      <!-- souris : le clic copie l’adresse ; au doigt : le tap ouvre la messagerie (main.js) -->
-      <button class="mail" type="button" data-mail="quentinlouis97400@gmail.com" data-spec="CTA · copie l’adresse au clic" aria-label="Écrivez-moi : copier l’adresse quentinlouis97400@gmail.com">
+      <!-- Contact direct ; le bouton Copier reste disponible à côté de l’adresse. -->
+      <button class="mail" type="button" data-mail="quentinlouis97400@gmail.com" data-spec="CTA · ouvre la messagerie" aria-label="Écrivez-moi : écrire à quentinlouis97400@gmail.com">
         <span class="mail-txt" data-split>Écrivez-moi</span>
       </button>
       <div class="contact-row">
         <p class="mail-sub mono">
           <span class="mail-line"><a class="mail-addr" href="mailto:quentinlouis97400@gmail.com">quentinlouis97400@gmail.com</a><button class="mail-copy mono" type="button"><span>Copier</span><span class="sr-only"> l’adresse</span></button><span class="sr-only" aria-live="polite"></span></span>
-          <span class="mail-hint"><span class="only-fine">Cliquez sur le titre pour copier l’adresse</span><span class="only-touch">Touchez le titre pour écrire</span></span>
+          <span class="mail-hint">Cliquez sur Écrivez-moi pour ouvrir votre messagerie</span>
         </p>
         <ul class="links mono">
           <li><a href="https://www.linkedin.com/in/q-louis" target="_blank" rel="noopener">LinkedIn <svg class="ic out" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 11 11 3M5 3h6v6"/></svg><span class="sr-only"> (nouvel onglet)</span></a></li>
@@ -424,7 +424,7 @@ if (document.documentElement.dataset.theme === 'light') document.querySelector('
 <span class="sr-only ip-live" aria-live="polite"></span>
 
 <script src="assets/vendor/lenis.min.js"></script>
-<script src="projects.js?v=20260928b"></script>
-<script src="main.js?v=20260928b"></script>
+<script src="projects.js?v=20261014a"></script>
+<script src="main.js?v=20261014a"></script>
 </body>
 </html>

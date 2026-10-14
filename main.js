@@ -33,7 +33,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   // titres affichés : « WEI & GO » et « e-sport » ne se coupent pas (espaces
   // insécables, gluon après le trait d'union). Pas dans les noms lus ni partagés
   const glue = s => s.replace(/ & /g, '\u00a0&\u00a0').replace(/-/g, '-\u2060');
-  // grille de cartes (édition brand, classe posée dans le HTML) : ni aperçu au
+  // grille de cartes (classe posée dans le HTML) : ni aperçu au
   // curseur, ni vignettes au doigt, ni ajustement des titres
   const gridList = list.classList.contains('work-list--grid');
   list.classList.toggle('work-list--thumbs', touchList && !gridList);
@@ -61,6 +61,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
         <span class="n mono" aria-hidden="true">${pad(i + 1)}</span>
         <span class="ttl">${glue(p.title)}</span>
         <span class="meta mono"><span>${p.kind}</span><span class="sep"> · </span><span class="meta-yr">${p.year}</span></span>${liveTag(p)}
+        ${EDITION === 'ux' && p.summary ? `<span class="card-summary">${attr(p.summary)}</span>` : ''}
       </span>
       <span class="sr-only"> Ouvrir la fiche</span>
     </button></li>`;
@@ -84,8 +85,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   /* ---------- Lenis ----------
      Créé après la première image : le défilement doux n'est pas nécessaire
      pour afficher la page. Jusque-là, le scroll natif suffit.
-     La boucle d'images ne tourne que pendant un défilement doux (molette,
-     saut d'ancre) : au repos, la page ne demande aucune image. Clavier, barre
+     La boucle d'images ne tourne que pendant un saut d'ancre programmatique : au repos, la page ne demande aucune image. Clavier, barre
      de défilement et doigt restent natifs dans Lenis 1.1 : pas de boucle. */
   let lenis = null, lenisRaf = 0;
   // animate.isRunning et time : champs internes de Lenis 1.1.13, à revoir si la version change
@@ -98,16 +98,14 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   const lenisKick = () => { if (lenis && !lenisRaf) lenisRaf = requestAnimationFrame(lenisTick); };
   function initLenis() {
     if (reduce || !window.Lenis) return;
-    lenis = new Lenis({ lerp: .085, wheelMultiplier: 1 });
+    // Molette et trackpad natifs : le scroll ne dépend plus de la boucle JS.
+    // Lenis reste disponible pour les seuls sauts d’ancre programmatiques.
+    lenis = new Lenis({ lerp: .085, smoothWheel: false });
     window.__lenis = lenis;
-    // chaque molette passe par virtual-scroll avant d'être traitée
-    lenis.on('virtual-scroll', lenisKick);
     // tout défilement animé demandé à Lenis (ici ou ailleurs) relance la boucle
     const lenisScrollTo = lenis.scrollTo.bind(lenis);
     lenis.scrollTo = (...a) => { lenisScrollTo(...a); lenisKick(); };
-    // le scroll est lu dans la même image que celle où Lenis l'écrit
-    window.removeEventListener('scroll', queueScroll);
-    lenis.on('scroll', onScroll);
+    // Les événements natifs sont regroupés dans queueScroll, une fois par image.
     if (!caseEl.hidden) lenis.stop();
   }
   requestAnimationFrame(() => setTimeout(initLenis, 0));
@@ -2316,7 +2314,7 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   }, { rootMargin: `-${heroTop()}px 0px 0px 0px` });
   heroCta.forEach(el => heroIO.observe(el));
   const queueScroll = () => { if (!scrollRaf) scrollRaf = requestAnimationFrame(() => { scrollRaf = 0; onScroll(); }); };
-  // remplacé par l'événement de Lenis dès que celui-ci existe
+  // Une seule passe par image, pour le scroll natif comme pour les sauts d’ancre.
   window.addEventListener('scroll', queueScroll, { passive: true });
 
   /* ---------- Navigation : pastille qui glisse ---------- */
@@ -2402,8 +2400,8 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   themeBtn.addEventListener('click', toggleTheme);
 
   /* ---------- Contact ----------
-     ÉCRIVEZ-MOI : à la souris, le clic copie l'adresse ; au doigt, le tap
-     ouvre la messagerie. Dans les deux cas, une onde de largeur part de la
+     ÉCRIVEZ-MOI ouvre la messagerie sur tous les appareils.
+     Une onde de largeur part de la
      lettre touchée. « Copier », à côté de l'adresse : sans toast, le libellé
      devient « Copié » pendant 1,8 s. */
   const toastEl = $('.toast');
@@ -2435,14 +2433,8 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
 
   const mailBtn = $('.mail');
   // nom accessible et nom du bloc en mode Inspecter : ce que fait vraiment le clic ou le toucher
-  const mailLabel = () => {
-    mailBtn.setAttribute('aria-label', noHover.matches
-      ? `Écrivez-moi : écrire à ${MAIL}`
-      : `Écrivez-moi : copier l’adresse ${MAIL}`);
-    mailBtn.dataset.spec = noHover.matches ? 'CTA · ouvre la messagerie au toucher' : 'CTA · copie l’adresse au clic';
-  };
-  mailLabel();
-  noHover.addEventListener('change', mailLabel);
+  mailBtn.setAttribute('aria-label', `Écrivez-moi : écrire à ${MAIL}`);
+  mailBtn.dataset.spec = 'CTA · ouvre la messagerie';
 
   // lettre la plus proche du clic ; au clavier (detail 0), le milieu du mot
   function letterAt(e) {
@@ -2476,14 +2468,10 @@ document.documentElement.classList.add('booted');   // même tard (CDN lent) : l
   if (navigator.webdriver) document.addEventListener('click', e => {
     if (e.target.closest && e.target.closest('a[href^="mailto:"]')) e.preventDefault();
   }, true);
-  mailBtn.addEventListener('click', async e => {
-    const wave = ripple(letterAt(e));
-    if (noHover.matches) {
-      // vague relancée par un second toucher : c'est lui qui ouvrira le mail (une seule fois)
-      if (!(await wave)) return;
-      openMail(`mailto:${MAIL}?subject=${encodeURIComponent('Prise de contact')}`);
-    } else if (await copyText(MAIL, mailBtn)) toast('Adresse copiée');
-    else openMail('mailto:' + MAIL);
+  mailBtn.addEventListener('click', e => {
+    ripple(letterAt(e));
+    // Ouvrir immédiatement, dans le geste utilisateur, sans attendre l’animation.
+    openMail(`mailto:${MAIL}?subject=${encodeURIComponent('Prise de contact')}`);
   });
 
   // « Copier » + « l’adresse » en sr-only : le nom accessible contient toujours le texte visible

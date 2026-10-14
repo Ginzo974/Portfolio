@@ -74,7 +74,7 @@ with sync_playwright() as p:
                   q('meta[property="og:image"]').content, ld.jobTitle, ld.url, q('.status').textContent.trim(), q('.sec-title').textContent.trim()]; })()""")
         want = ['brand', 'Quentin Louis, UI/UX & Brand Designer', 'https://portfolio-quentin-louis.vercel.app/brand/', 'https://portfolio-quentin-louis.vercel.app/brand/',
                 'https://portfolio-quentin-louis.vercel.app/assets/og-brand.jpg', 'UI/UX & Brand Designer', 'https://portfolio-quentin-louis.vercel.app/brand/',
-                'Recherche CDI · Mobilité Paris']
+                'Recherche CDI · Bordeaux']
         return r[:8] == want and 'Neuf projets' in r[8], r
     check('brand: edition, title, canonical, og, JSON-LD and hero status', head)
 
@@ -258,9 +258,9 @@ with sync_playwright() as p:
         r = pg.evaluate("""[document.documentElement.dataset.edition || '', document.querySelectorAll('.work-list > li > .work-row').length,
             [...document.querySelectorAll('.work-list .ttl')].map(t => t.textContent.replace(/\\u00a0/g, ' ').replace(/\\u2060/g, '').replace('en ligne', '')),
             !!document.querySelector('.work-list--grid'), document.querySelector('.sec-title').textContent]""")
-        want = ['WEI & GO', 'QUASAR', 'ONE PIECE S2', 'LEZGO', 'Du logo à la scène', 'LCO', 'POP MART X BUMI', 'MEOOW!']
-        return r[0] == '' and r[1] == 8 and r[2] == want and not r[3] and 'Huit projets' in r[4] and not pg.errs, f'{r} errs={pg.errs[:2]}'
-    check('root: 8 projects in the UX order, no Les Dieux, list mode, "Huit projets"', root_list)
+        want = ['WEI & GO', 'QUASAR', 'LEZGO', 'ONE PIECE S2', 'Du logo à la scène', 'LCO', 'POP MART X BUMI', 'MEOOW!']
+        return r[0] == '' and r[1] == 8 and r[2] == want and r[3] and 'Huit projets' in r[4] and not pg.errs, f'{r} errs={pg.errs[:2]}'
+    check('root: 8 projects in the UX order, no Les Dieux, grid mode, "Huit projets"', root_list)
     def root_hash():
         # a fresh load (not a same-document hash change), like a shared link
         pg.goto(BASE + Q + '-fresh#les-dieux', wait_until='load'); pg.wait_for_selector('html.is-ready', state='attached'); pg.wait_for_timeout(1500)
